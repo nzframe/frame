@@ -6,7 +6,7 @@ from model.timber import CuttedTimber
 
 wall: Wall = create_wall(Wall(WallInfo(2400, 2550)))
 
-d = draw.Drawing(10000, 5000, origin='center', displayInline=False)
+d = draw.Drawing(10000, 5000, displayInline=False)
 
 for timber in wall.timbers():
     timber: CuttedTimber = timber
@@ -22,7 +22,7 @@ for timber in wall.timbers():
 
 d.setPixelScale(2)  # Set number of pixels per geometry unit
 #d.setRenderSize(400,200)  # Alternative to setPixelScale
-d.saveSvg('example.svg')
+#d.saveSvg('example.svg')
 d.savePng('example.png')
 
 d.rasterize()  # Display as PNG
