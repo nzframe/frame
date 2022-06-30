@@ -37,7 +37,7 @@ class Stud(CuttedTimber):
     def __init__(self, length, timber=Timber()) -> None:
         super().__init__(length, timber)
         self.a_cord = XYCoordinate(0, 0)
-        self.b_cord = XYCoordinate(0, self.timber.timber_size.height)
+        self.b_cord = XYCoordinate(self.timber.timber_size.height, 0)
         self.c_cord = XYCoordinate(self.timber.timber_size.height, self.length)
         self.d_cord = XYCoordinate(0, self.length)
 

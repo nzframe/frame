@@ -14,17 +14,24 @@ def add_bottom_plate(wall: Wall):
     timber = BottomPlate(wall.wall_info.width)
     timber.wall = wall
     wall.register(timber)
+    return wall
 
 def add_left_outer_stud(wall: Wall):
     timber = LeftOuterStud(wall.wall_info.height-Timber().timber_size.height*2)
+    bottom_plate: BottomPlate = wall.bottom_plate
+    timber.move_up(bottom_plate.timber.timber_size.height)
     timber.wall = wall
     wall.register(timber)
+    return wall
 
 def add_right_outer_stud(wall: Wall):
     timber = RightOuterStud(wall.wall_info.height-Timber().timber_size.height*2)
-    timber.wall = wall
+    bottom_plate: BottomPlate = wall.bottom_plate
+    timber.move_up(bottom_plate.timber.timber_size.height)
     timber.move_right((wall.b_cord - timber.b_cord).norm())
+    timber.wall = wall
     wall.register(timber)
+    return wall
 
 def move_timber(cutted_timber: CuttedTimber, value: int, orientation: Orientation):
     if orientation == Orientation.HORIZONTAL:
