@@ -34,7 +34,6 @@ class CuttedTimber(SpaceRectangle):
 class Stud(CuttedTimber):
     orientation = Orientation.VERTICAL
 
-    ## TODO: need to test the coordinate 
     def __init__(self, length, timber=Timber()) -> None:
         super().__init__(length, timber)
         self.a_cord = XYCoordinate(0, 0)
@@ -45,13 +44,12 @@ class Stud(CuttedTimber):
 class Plate(CuttedTimber):
     orientation = Orientation.HORIZONTAL
 
-    ## TODO: need to test the coordinate 
     def __init__(self, length, timber=Timber()) -> None:
         super().__init__(length, timber)
         self.a_cord = XYCoordinate(0, 0)
         self.b_cord = XYCoordinate(self.length, 0)
         self.c_cord = XYCoordinate(self.length, self.timber.timber_size.height)
-        self.d_cord = XYCoordinate(self.length, self.timber.timber_size.height)
+        self.d_cord = XYCoordinate(0, self.timber.timber_size.height)
 
 class TopPlate(Plate):
     position = Position.TOP
