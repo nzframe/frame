@@ -27,8 +27,8 @@ def add_left_outer_stud(wall: Wall):
 def add_right_outer_stud(wall: Wall):
     timber = RightOuterStud(wall.wall_info.height-Timber().timber_size.height*2)
     bottom_plate: BottomPlate = wall.bottom_plate
-    timber.move_up(bottom_plate.timber.timber_size.height)
     timber.move_right((wall.b_cord - timber.b_cord).norm())
+    timber.move_up(bottom_plate.timber.timber_size.height)
     timber.wall = wall
     wall.register(timber)
     return wall
