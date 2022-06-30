@@ -5,7 +5,6 @@ from action.actions import create_wall
 from model.timber import TopPlate, BottomPlate, LeftOuterStud, RightOuterStud
 
 
-## TODO: sort out AttributeError
 def test_create_wall():
     wall = create_wall(Wall(WallInfo(2400, 2550)))
     assert wall.get_total_timbers() == 4
@@ -17,3 +16,7 @@ def test_create_wall():
     assert wall.left_outer_stud.length == 2460
 
     assert wall.right_outer_stud.length == 2460
+
+def test_type_of_cutted_timber():
+    top_plate = TopPlate(1330)
+    assert top_plate.__class__.__name__ == "TopPlate" 

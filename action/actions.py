@@ -1,19 +1,26 @@
-import imp
 from model.wall import Wall
 from model.timber import TopPlate, BottomPlate, LeftOuterStud, RightOuterStud, Timber
 
 
 def add_top_plate(wall: Wall):
-    wall.register(TopPlate(wall.wall_info.width))
+    timber = TopPlate(wall.wall_info.width)
+    timber.wall = wall
+    wall.register(timber)
 
 def add_bottom_plate(wall: Wall):
-    wall.register(BottomPlate(wall.wall_info.width))
+    timber = BottomPlate(wall.wall_info.width)
+    timber.wall = wall
+    wall.register(timber)
 
 def add_left_outer_stud(wall: Wall):
-    wall.register(LeftOuterStud(wall.wall_info.height-Timber().timber_size.height*2))
+    timber = LeftOuterStud(wall.wall_info.height-Timber().timber_size.height*2)
+    timber.wall = wall
+    wall.register(timber)
 
 def add_right_outer_stud(wall: Wall):
-    wall.register(RightOuterStud(wall.wall_info.height-Timber().timber_size.height*2))
+    timber = RightOuterStud(wall.wall_info.height-Timber().timber_size.height*2)
+    timber.wall = wall
+    wall.register(timber)
 
 def create_wall(wall: Wall):
     add_top_plate(wall)

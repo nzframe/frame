@@ -10,6 +10,12 @@ class WallInfo:
     height: int 
 
 class Wall:
+    options = {
+        "TopPlate": "top_plate",
+        "BottomPlate": "bottom_plate",
+        "LeftOuterStud": "left_outer_stud",
+        "RightOuterStud": "right_outer_stud"
+    }
     def __init__(self, wall_info: WallInfo) -> None:
         self.wall_info = wall_info
         self.cutted_timbers: List[CuttedTimber] = []
@@ -19,6 +25,7 @@ class Wall:
         self.right_outer_stud = None
 
     def register(self, cutted_timber: CuttedTimber):
+        setattr(self, self.options[cutted_timber.__class__.__name__], cutted_timber)
         self.cutted_timbers.append(cutted_timber)        
 
     def get_total_timbers(self):
