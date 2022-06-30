@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from model.direction import Orientation, Position
 from enum import Enum
+from utility.location import SpaceRectangle, XYCoordinate
 
 class LengthLessThanZeroError(ValueError):
     def __init__(self, *args: object) -> None:
@@ -18,16 +19,12 @@ class Timber:
     timber_type: TimberType = TimberType.TWOBYFOURS
     timber_size: TimberSize = TimberSize(45, 90)
 
-class CuttedTimber:
+class CuttedTimber(SpaceRectangle):
     def __init__(self, length, timber = Timber()) -> None:
         if length < 0:
             raise LengthLessThanZeroError()
-        self.length = length
-        self.timber = timber
-        self.a_cord = None
-        self.b_cord = None
-        self.c_cord = None
-        self.d_cord = None
+        self.length: int = length
+        self.timber: Timber = timber
 
     def purpose(self):
         class_path = str(self.__class__)
@@ -36,11 +33,31 @@ class CuttedTimber:
 class Stud(CuttedTimber):
     orientation = Orientation.VERTICAL
 
+    ## TODO: need to test the coordinate 
+    def __init__(self, length, timber=Timber()) -> None:
+        super().__init__(length, timber)
+        self.a_cord = XYCoordinate(0, 0)
+        self.b_cord = XYCoordinate(0, self.timber.timber_size.height)
+        self.c_cord = XYCoordinate(self.timber.timber_size.height, self.length)
+        self.d_cord = XYCoordinate(0, self.length)
+
 class Plate(CuttedTimber):
     orientation = Orientation.HORIZONTAL
 
+    ## TODO: need to test the coordinate 
+    def __init__(self, length, timber=Timber()) -> None:
+        super().__init__(length, timber)
+        self.a_cord = XYCoordinate(0, 0)
+        self.b_cord = XYCoordinate(self.length, 0)
+        self.c_cord = XYCoordinate(self.length, self.timber.timber_size.height)
+        self.d_cord = XYCoordinate(self.length, self.timber.timber_size.height)
+
 class TopPlate(Plate):
     position = Position.TOP
+    
+    def __init__(self, length, timber=Timber()) -> None:
+        super().__init__(length, timber)
+        
 
 class BottomPlate(Plate):
     position = Position.BOTTOM
