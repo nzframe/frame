@@ -6,7 +6,7 @@ from model.timber import CuttedTimber
 
 wall: Wall = create_wall(Wall(WallInfo(2400, 2550)))
 
-d = draw.Drawing(10000, 5000, displayInline=False)
+d = draw.Drawing(10000, 5000, origin=(-200,-200), displayInline=False)
 
 for timber in wall.timbers():
     timber: CuttedTimber = timber
