@@ -25,9 +25,9 @@ class Wall(SpaceRectangle):
         self.right_outer_stud = None
 
         self.a_cord = XYCoordinate(0, 0)
-        self.b_cord = XYCoordinate(0, self.wall_info.width)
+        self.b_cord = XYCoordinate(self.wall_info.width, 0)
         self.c_cord = XYCoordinate(self.wall_info.width, self.wall_info.height)
-        self.d_cord = XYCoordinate(self.wall_info.height, 0)
+        self.d_cord = XYCoordinate(0, self.wall_info.height)
 
     def register(self, cutted_timber: CuttedTimber):
         setattr(self, self.options[cutted_timber.__class__.__name__], cutted_timber)
