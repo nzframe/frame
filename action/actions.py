@@ -1,5 +1,6 @@
+from model.direction import Orientation
 from model.wall import Wall
-from model.timber import TopPlate, BottomPlate, LeftOuterStud, RightOuterStud, Timber
+from model.timber import CuttedTimber, TopPlate, BottomPlate, LeftOuterStud, RightOuterStud, Timber
 
 
 def add_top_plate(wall: Wall):
@@ -21,6 +22,12 @@ def add_right_outer_stud(wall: Wall):
     timber = RightOuterStud(wall.wall_info.height-Timber().timber_size.height*2)
     timber.wall = wall
     wall.register(timber)
+
+def move_timber(cutted_timber: CuttedTimber, value: int, orientation: Orientation):
+    if orientation == Orientation.HORIZONTAL:
+        pass
+    elif orientation == Orientation.VERTICAL:
+        pass
 
 def create_wall(wall: Wall):
     add_top_plate(wall)
