@@ -25,6 +25,7 @@ class CuttedTimber(SpaceRectangle):
             raise LengthLessThanZeroError()
         self.length: int = length
         self.timber: Timber = timber
+        self.wall = None
 
     def purpose(self):
         class_path = str(self.__class__)
