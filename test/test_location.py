@@ -7,6 +7,10 @@ def test_XYCoordinate():
     assert XYCoordinate(1, 2).x == 1
     assert XYCoordinate(1, 2).y == 2
 
+def test_XYCoordinate_tolist():
+    assert XYCoordinate(1, 2).to_list() == [1, 2]
+    
+
 def test_XYCoordinate_property_exception():
     with pytest.raises(AttributeError):
         XYCoordinate(1,2).z

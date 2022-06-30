@@ -30,3 +30,6 @@ class Wall:
 
     def get_total_timbers(self):
         return len(self.cutted_timbers)
+    
+    def timbers(self):
+        return self.cutted_timbers
