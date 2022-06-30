@@ -4,16 +4,15 @@ from model.wall import Wall, WallInfo
 from model.timber import CuttedTimber
 
 
-wall: Wall = create_wall(Wall(WallInfo(2400, 2550)))
+wall: Wall = create_wall(Wall(WallInfo(440, 330)))
 
-d = draw.Drawing(10000, 5000, origin=(-200,-200), displayInline=False)
+d = draw.Drawing(1024, 768, origin=(0,0), displayInline=False)
 
 for timber in wall.timbers():
     timber: CuttedTimber = timber
     x, y = timber.a_cord.to_list()
     width =  (timber.b_cord - timber.a_cord).norm()
     height = (timber.c_cord - timber.b_cord).norm()
-
     # Draw a rectangle
     r = draw.Rectangle(x,y,width,height, fill='#1248ff')
     r.appendTitle("Our first rectangle")  # Add a tooltip
