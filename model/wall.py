@@ -6,8 +6,8 @@ from model.timber import BottomPlate, CuttedTimber, LeftOuterStud, RightOuterStu
 
 @dataclass
 class WallInfo:
-    width: int
-    height: int 
+    width: float
+    height: float 
 
 class Wall(XYRectangle):
     options = {

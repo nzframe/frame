@@ -44,5 +44,5 @@ def create_wall(wall: Wall):
     add_bottom_plate(wall)
     add_left_outer_stud(wall)
     add_right_outer_stud(wall)
-    #add_one_more_plate(wall)
+    add_one_more_plate(wall)
     return wall

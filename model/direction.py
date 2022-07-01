@@ -13,10 +13,10 @@ class Position(Enum):
 
 @dataclass
 class Coordination:
-    x: int
-    y: int
+    x: float
+    y: float
 
 @dataclass
 class Offset:
-    value: int
+    value: float
     direction: Position 

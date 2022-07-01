@@ -5,8 +5,8 @@ from model.direction import Coordination, Offset, Position
 
 @dataclass
 class WindowInfo:
-    width: int
-    height: int
+    width: float
+    height: float
 
 class Window:
     def __init__(self, window_info: WindowInfo) -> None:

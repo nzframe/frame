@@ -12,8 +12,8 @@ class TimberType(Enum):
 
 @dataclass
 class TimberSize:
-    height: int
-    width: int
+    height: float
+    width: float
 
 class Timber:
     timber_type: TimberType = TimberType.TWOBYFOURS
@@ -23,7 +23,7 @@ class CuttedTimber(XYRectangle):
     def __init__(self, length, timber = Timber()) -> None:
         if length < 0:
             raise LengthLessThanZeroError()
-        self.length: int = length
+        self.length: float = length
         self.timber: Timber = timber
         self.wall = None
 

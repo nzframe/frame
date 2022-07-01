@@ -4,7 +4,7 @@ from model.wall import Wall, WallInfo
 from model.timber import CuttedTimber
 
 
-wall: Wall = create_wall(Wall(WallInfo(660, 330)))
+wall: Wall = create_wall(Wall(WallInfo(800, 330)))
 
 d = draw.Drawing(1024, 768, origin=(0,0), displayInline=False)
 
