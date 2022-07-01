@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from unittest import case
-from utility.space_rect import SpaceRectangle, XYCoordinate
+from utility.space.rect import XYRectangle, XYCoordinate
 from model.timber import BottomPlate, CuttedTimber, LeftOuterStud, RightOuterStud, TopPlate
 
 @dataclass
@@ -9,7 +9,7 @@ class WallInfo:
     width: int
     height: int 
 
-class Wall(SpaceRectangle):
+class Wall(XYRectangle):
     options = {
         "TopPlate": "top_plate",
         "BottomPlate": "bottom_plate",

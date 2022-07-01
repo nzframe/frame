@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from model.direction import Orientation, Position
 from enum import Enum
-from utility.space_rect import SpaceRectangle, XYCoordinate
+from utility.space.rect import XYRectangle, XYCoordinate
 
 class LengthLessThanZeroError(ValueError):
     def __init__(self, *args: object) -> None:
@@ -19,7 +19,7 @@ class Timber:
     timber_type: TimberType = TimberType.TWOBYFOURS
     timber_size: TimberSize = TimberSize(45, 90)
 
-class CuttedTimber(SpaceRectangle):
+class CuttedTimber(XYRectangle):
     def __init__(self, length, timber = Timber()) -> None:
         if length < 0:
             raise LengthLessThanZeroError()

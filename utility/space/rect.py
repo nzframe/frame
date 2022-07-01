@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from model.direction import Orientation
-from utility.coordinates import XYCoordinate
+from utility.space.cord import XYCoordinate
 
 @dataclass
-class SpaceRectangle:
+class XYRectangle:
     a_cord: XYCoordinate = None
     b_cord: XYCoordinate = None
     c_cord: XYCoordinate = None

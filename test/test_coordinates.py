@@ -1,5 +1,4 @@
-from utility.space_rect import XYCoordinate, SpaceRectangle
-from model.direction import Orientation
+from utility.space.rect import XYCoordinate
 import pytest
 
 
