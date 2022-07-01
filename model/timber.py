@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum, auto
+from functools import total_ordering
 from typing import Set
 
 from utility.space.rect import XYCoordinate, XYRectangle
@@ -23,6 +24,7 @@ class Timber:
     timber_type: TimberType = TimberType.TWOBYFOURS
     timber_size: TimberSize = TimberSize(45, 90)
 
+@total_ordering
 class CuttedTimber(XYRectangle):
     class TimberTag(Enum):
         UNUSERD = auto()
@@ -40,6 +42,24 @@ class CuttedTimber(XYRectangle):
     def purpose(self):
         class_path = str(self.__class__)
         return class_path.split("'")[1].split(".")[-1]
+
+    def __lt__(self, other):
+        if hasattr(self, "orientation") and hasattr(other, "orientation") and self.orientation == other.orientation:
+            if self.orientation == Orientation.VERTICAL:
+                return self.a_cord.x < other.a_cord.x
+            else:
+                return self.a_cord.y < other.a_cord.y
+        else:
+            raise Exception("Timber can't compare in this space")
+    
+    def __eq__(self, other):
+        if hasattr(self, "orientation") and hasattr(other, "orientation") and self.orientation == other.orientation:
+            if self.orientation == Orientation.VERTICAL:
+                return self.a_cord.x == other.a_cord.x
+            else:
+                return self.a_cord.y == other.a_cord.y
+        else:
+            raise Exception("Timber can't compare in this space")       
 
 class Stud(CuttedTimber):
     orientation = Orientation.VERTICAL

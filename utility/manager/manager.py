@@ -1,6 +1,7 @@
 from typing import List
 
 from model.timber import CuttedTimber, Orientation
+from model.wall import Wall
 
 
 class TimberCheck:
@@ -20,4 +21,9 @@ class TimberCheck:
             self.timber.tag.add(CuttedTimber.TimberTag.UNUSERD)
 
 class Manager:
-    pass
+    def __init__(self, wall: Wall) -> None:
+        self.timbers = wall.cutted_timbers
+
+    def sort(self):
+        ''' sort the timbers '''
+        sorted(self.timbers)
