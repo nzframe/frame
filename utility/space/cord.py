@@ -7,7 +7,6 @@ class XYCoordinate(TMPCoordinate):
     def __move__(self, x_delta: float = 0, y_delta: float = 0):
         return XYCoordinate(self.x + x_delta, self.y + y_delta)
     
-    
     def move(self, value: float, orientation: Orientation):
         if orientation == Orientation.VERTICAL:
             return self.__move__(y_delta = value)
@@ -25,3 +24,6 @@ class XYCoordinate(TMPCoordinate):
     
     def move_left(self, value: float):
         return self.move(value * -1, Orientation.HORIZONTAL)
+
+    def copy(self):
+        return XYCoordinate(self.x, self.y)

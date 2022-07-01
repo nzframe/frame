@@ -10,6 +10,7 @@ class XYRectangle:
     c_cord: XYCoordinate = None
     d_cord: XYCoordinate = None
 
+    #TODO fix
     ab_line: XYLine = None if a_cord is None and b_cord is None else XYLine(a_cord, b_cord)
     bc_line: XYLine = None if b_cord is None and c_cord is None else XYLine(b_cord, c_cord)
     cd_line: XYLine = None if c_cord is None and d_cord is None else XYLine(c_cord, d_cord)
