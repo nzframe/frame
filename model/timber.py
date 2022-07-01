@@ -1,7 +1,11 @@
 from dataclasses import dataclass
+from enum import Enum, auto
+from typing import Set
+
+from utility.space.rect import XYCoordinate, XYRectangle
+
 from model.direction import Orientation, Position
-from enum import Enum
-from utility.space.rect import XYRectangle, XYCoordinate
+
 
 class LengthLessThanZeroError(ValueError):
     def __init__(self, *args: object) -> None:
@@ -20,12 +24,18 @@ class Timber:
     timber_size: TimberSize = TimberSize(45, 90)
 
 class CuttedTimber(XYRectangle):
+    class TimberTag(Enum):
+        UNUSERD = auto()
+        PLATE = auto()
+        STUD = auto()
+
     def __init__(self, length, timber = Timber()) -> None:
         if length < 0:
             raise LengthLessThanZeroError()
         self.length: float = length
         self.timber: Timber = timber
         self.wall = None
+        self.tag: Set[TimberType] = set()
 
     def purpose(self):
         class_path = str(self.__class__)
