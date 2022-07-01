@@ -1,7 +1,13 @@
 from sympy import Point, Line 
-p1, p2, p3 = Point(1, 0), Point(1, 1), Point(3, 3)
-l1 = Line(p1, p2)
+from utility.space.cord import XYCoordinate
 
-print(p3.distance(l1))
+class XYLine():
+    def __init__(self, point_a: XYCoordinate, point_b: XYCoordinate) -> None:
+        sympy_point_a = Point(point_a.x, point_a.y)
+        sympy_point_b = Point(point_b.x, point_b.y)
+        self.line = Line(sympy_point_a, sympy_point_b)
 
-
+    def distance(self, cord: XYCoordinate):
+        """ get a distance to a XYCord """
+        sympy_point = Point(cord.x, cord.y)
+        return self.line.distance(sympy_point)

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from model.direction import Orientation
 from utility.space.cord import XYCoordinate
+from utility.space.line import XYLine
 
 @dataclass
 class XYRectangle:
@@ -43,3 +44,15 @@ class XYRectangle:
     
     def move_left(self, value: int):
         self.move(value * -1, Orientation.HORIZONTAL)
+
+    def get_line_ab(self):
+        return XYLine(self.a_cord, self.b_cord)
+
+    def get_line_bc(self):
+        return XYLine(self.b_cord, self.c_cord)
+    
+    def get_line_cd(self):
+        return XYLine(self.c_cord, self.d_cord)
+
+    def get_line_da(self):
+        return XYLine(self.d_cord, self.a_cord)

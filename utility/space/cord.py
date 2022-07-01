@@ -1,5 +1,4 @@
 from coordinates import spaced_coordinate
-from dataclasses import dataclass
 
 TMPCoordinate = spaced_coordinate("TMPCoordinate", "xy", ordered=True)
 
