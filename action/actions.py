@@ -5,7 +5,7 @@ from model.timber import CuttedTimber, TopPlate, BottomPlate, LeftOuterStud, Rig
 
 def add_top_plate(wall: Wall):
     timber = TopPlate(wall.wall_info.width)
-    timber.move_up((wall.d_cord - timber.d_cord).norm())
+    timber.move_d_to(wall.d_cord)
     timber.wall = wall
     wall.register(timber)
     return wall
