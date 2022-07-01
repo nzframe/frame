@@ -33,12 +33,6 @@ def add_right_outer_stud(wall: Wall):
     wall.register(timber)
     return wall
 
-def move_timber(cutted_timber: CuttedTimber, value: int, orientation: Orientation):
-    if orientation == Orientation.HORIZONTAL:
-        pass
-    elif orientation == Orientation.VERTICAL:
-        pass
-
 def create_wall(wall: Wall):
     add_top_plate(wall)
     add_bottom_plate(wall)
