@@ -10,6 +10,11 @@ class XYRectangle:
     c_cord: XYCoordinate = None
     d_cord: XYCoordinate = None
 
+    ab_line: XYLine = None if a_cord is None and b_cord is None else XYLine(a_cord, b_cord)
+    bc_line: XYLine = None if b_cord is None and c_cord is None else XYLine(b_cord, c_cord)
+    cd_line: XYLine = None if c_cord is None and d_cord is None else XYLine(c_cord, d_cord)
+    da_line: XYLine = None if d_cord is None and a_cord is None else XYLine(d_cord, a_cord)
+
     def center(self) -> XYCoordinate: 
         """get the gravity point of the rectangle
 
@@ -44,15 +49,3 @@ class XYRectangle:
     
     def move_left(self, value: int):
         self.move(value * -1, Orientation.HORIZONTAL)
-
-    def get_line_ab(self):
-        return XYLine(self.a_cord, self.b_cord)
-
-    def get_line_bc(self):
-        return XYLine(self.b_cord, self.c_cord)
-    
-    def get_line_cd(self):
-        return XYLine(self.c_cord, self.d_cord)
-
-    def get_line_da(self):
-        return XYLine(self.d_cord, self.a_cord)
