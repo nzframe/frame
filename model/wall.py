@@ -19,10 +19,6 @@ class Wall(XYRectangle):
     def __init__(self, wall_info: WallInfo) -> None:
         self.wall_info = wall_info
         self.cutted_timbers: List[CuttedTimber] = []
-        self.top_plate = None
-        self.bottom_plate = None
-        self.left_outer_stud = None
-        self.right_outer_stud = None
 
         self.a_cord = XYCoordinate(0, 0)
         self.b_cord = XYCoordinate(self.wall_info.width, 0)
@@ -30,7 +26,8 @@ class Wall(XYRectangle):
         self.d_cord = XYCoordinate(0, self.wall_info.height)
 
     def register(self, cutted_timber: CuttedTimber):
-        setattr(self, self.options[cutted_timber.__class__.__name__], cutted_timber)
+        if cutted_timber.__class__.__name__ in self.options:
+            setattr(self, self.options[cutted_timber.__class__.__name__], cutted_timber)
         self.cutted_timbers.append(cutted_timber)        
 
     def get_total_timbers(self):

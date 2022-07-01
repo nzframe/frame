@@ -1,6 +1,6 @@
 from model.direction import Orientation
 from model.wall import Wall
-from model.timber import CuttedTimber, TopPlate, BottomPlate, LeftOuterStud, RightOuterStud, Timber
+from model.timber import Plate, TopPlate, BottomPlate, LeftOuterStud, RightOuterStud, Timber
 
 
 def add_top_plate(wall: Wall):
@@ -33,9 +33,16 @@ def add_right_outer_stud(wall: Wall):
     wall.register(timber)
     return wall
 
+def add_one_more_plate(wall: Wall):
+    plate = Plate(wall.wall_info.width - wall.left_outer_stud.timber.timber_size.height - wall.right_outer_stud.timber.timber_size.height)
+    plate.move_d_to(wall.left_outer_stud.c_cord)
+    wall.register(plate)
+    return wall
+
 def create_wall(wall: Wall):
     add_top_plate(wall)
     add_bottom_plate(wall)
     add_left_outer_stud(wall)
     add_right_outer_stud(wall)
+    #add_one_more_plate(wall)
     return wall
