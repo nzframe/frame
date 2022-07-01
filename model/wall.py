@@ -1,8 +1,12 @@
 from dataclasses import dataclass
 from typing import List
 from unittest import case
-from utility.space.rect import XYRectangle, XYCoordinate
-from model.timber import BottomPlate, CuttedTimber, LeftOuterStud, RightOuterStud, TopPlate
+
+from utility.space.rect import XYCoordinate, XYRectangle
+
+from model.timber import (BottomPlate, CuttedTimber, LeftOuterStud,
+                          RightOuterStud, TopPlate)
+
 
 @dataclass
 class WallInfo:
