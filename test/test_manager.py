@@ -5,6 +5,6 @@ from model.timber import TopPlate
 
 def test_timber_check():
     tc = TimberCheck(TopPlate(330))
-    tc.check_type()
+    tc.scan_type()
     assert TopPlate.TimberTag.PLATE in TopPlate.TimberTag
     
