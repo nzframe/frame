@@ -26,7 +26,7 @@ class XYRectangle:
     def __sub__(self, other) -> int:
         return (self.center() - other.center()).norm()
 
-    def __move(self, value: int, orientation: Orientation):
+    def __move__(self, value: int, orientation: Orientation):
         if orientation == Orientation.VERTICAL:
             self.a_cord = self.a_cord.move(y_delta = value)
             self.b_cord = self.b_cord.move(y_delta = value)
@@ -39,13 +39,13 @@ class XYRectangle:
             self.d_cord = self.d_cord.move(x_delta = value)
     
     def move_up(self, value: int):
-        self.__move(value, Orientation.VERTICAL)
+        self.__move__(value, Orientation.VERTICAL)
 
     def move_down(self, value: int):
-        self.__move(value * -1, Orientation.VERTICAL)
+        self.__move__(value * -1, Orientation.VERTICAL)
 
     def move_right(self, value: int):
-        self.__move(value, Orientation.HORIZONTAL)
+        self.__move__(value, Orientation.HORIZONTAL)
     
     def move_left(self, value: int):
-        self.__move(value * -1, Orientation.HORIZONTAL)
+        self.__move__(value * -1, Orientation.HORIZONTAL)
