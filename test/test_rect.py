@@ -2,7 +2,7 @@ import pytest
 from utility.space.cord import XYCoordinate
 from utility.space.rect import XYRectangle
 
-def test_space_rectangle_center():
+def test_rect_center():
     s = XYRectangle(
         XYCoordinate(1,1),
         XYCoordinate(3,1),
@@ -27,3 +27,11 @@ def test_center_to_center_distance():
         )
 
     assert s - d == 2
+
+def test_rect_move_based_on_cord():
+    rect = XYRectangle(XYCoordinate(0, 0), XYCoordinate(1, 0), XYCoordinate(1, 1), XYCoordinate(0, 1))
+    rect.move_a_to(XYCoordinate(1, 1))
+    assert rect.a_cord == XYCoordinate(1, 1)
+    assert rect.b_cord == XYCoordinate(2, 1)
+    assert rect.c_cord == XYCoordinate(2, 2)
+    assert rect.d_cord == XYCoordinate(1, 2)

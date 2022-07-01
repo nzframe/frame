@@ -49,3 +49,30 @@ class XYRectangle:
     
     def move_left(self, value: int):
         self.__move__(value * -1, Orientation.HORIZONTAL)
+
+    def move_a_to(self, target: XYCoordinate):
+        self.__move_rect_overlap_x_with__(self.a_cord, target)
+
+    def move_b_to(self, target: XYCoordinate):
+        self.__move_rect_overlap_x_with__(self.b_cord, target)
+
+    def move_c_to(self, target: XYCoordinate):
+        self.__move_rect_overlap_x_with__(self.c_cord, target)
+
+    def move_d_to(self, target: XYCoordinate):
+        self.__move_rect_overlap_x_with__(self.d_cord, target)
+
+    def __move_rect_overlap_x_with__(self, based_on_cord: XYCoordinate, target: XYCoordinate):
+        distanct = target - based_on_cord 
+        
+        new = self.a_cord + distanct
+        self.a_cord = XYCoordinate(new.x, new.y)
+
+        new = self.b_cord + distanct
+        self.b_cord = XYCoordinate(new.x, new.y)       
+
+        new = self.c_cord + distanct
+        self.c_cord = XYCoordinate(new.x, new.y)   
+
+        new = self.d_cord + distanct
+        self.d_cord = XYCoordinate(new.x, new.y)           
