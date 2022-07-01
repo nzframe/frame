@@ -8,12 +8,12 @@ def test_XYCoordinate_init():
 
 def test_XYCoordinate_change_value_x():
     cord = XYCoordinate(1, 2)
-    cord = cord.move(x_delta = 1)
+    cord = cord.move_right(1)
     assert cord == XYCoordinate(2, 2)
 
 def test_XYCoordinate_change_value_y():
     cord = XYCoordinate(1, 2)
-    cord = cord.move(y_delta = 1)
+    cord = cord.move_up(1)
     assert cord == XYCoordinate(1, 3)
 
 def test_XYCoordinate_tolist():

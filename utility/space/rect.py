@@ -25,30 +25,30 @@ class XYRectangle:
             
     def __sub__(self, other) -> int:
         return (self.center() - other.center()).norm()
-
-    def __move__(self, value: int, orientation: Orientation):
-        if orientation == Orientation.VERTICAL:
-            self.a_cord = self.a_cord.move(y_delta = value)
-            self.b_cord = self.b_cord.move(y_delta = value)
-            self.c_cord = self.c_cord.move(y_delta = value)
-            self.d_cord = self.d_cord.move(y_delta = value)
-        elif orientation == Orientation.HORIZONTAL:
-            self.a_cord = self.a_cord.move(x_delta = value)
-            self.b_cord = self.b_cord.move(x_delta = value)
-            self.c_cord = self.c_cord.move(x_delta = value)
-            self.d_cord = self.d_cord.move(x_delta = value)
     
     def move_up(self, value: int):
-        self.__move__(value, Orientation.VERTICAL)
+        self.a_cord = self.a_cord.move_up(value)
+        self.b_cord = self.b_cord.move_up(value)
+        self.c_cord = self.c_cord.move_up(value)
+        self.d_cord = self.d_cord.move_up(value)
 
     def move_down(self, value: int):
-        self.__move__(value * -1, Orientation.VERTICAL)
+        self.a_cord = self.a_cord.move_down(value)
+        self.b_cord = self.b_cord.move_down(value)
+        self.c_cord = self.c_cord.move_down(value)
+        self.d_cord = self.d_cord.move_down(value)
 
     def move_right(self, value: int):
-        self.__move__(value, Orientation.HORIZONTAL)
+        self.a_cord = self.a_cord.move_right(value)
+        self.b_cord = self.b_cord.move_right(value)
+        self.c_cord = self.c_cord.move_right(value)
+        self.d_cord = self.d_cord.move_right(value)
     
     def move_left(self, value: int):
-        self.__move__(value * -1, Orientation.HORIZONTAL)
+        self.a_cord = self.a_cord.move_left(value)
+        self.b_cord = self.b_cord.move_left(value)
+        self.c_cord = self.c_cord.move_left(value)
+        self.d_cord = self.d_cord.move_left(value)
 
     def move_a_to(self, target: XYCoordinate):
         self.__move_rect_overlap_x_with__(self.a_cord, target)
