@@ -3,7 +3,7 @@ import pytest
 from model.wall import Wall, WallInfo
 from action.actions import add_bottom_plate, create_wall, add_top_plate, add_left_outer_stud, add_right_outer_stud
 from model.timber import BottomPlate, LeftOuterStud, TopPlate, Plate, RightOuterStud
-from utility.location import XYCoordinate
+from utility.space_rect import XYCoordinate
 
 
 def test_create_wall():

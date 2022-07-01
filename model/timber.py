@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from model.direction import Orientation, Position
 from enum import Enum
-from utility.location import SpaceRectangle, XYCoordinate
+from utility.space_rect import SpaceRectangle, XYCoordinate
 
 class LengthLessThanZeroError(ValueError):
     def __init__(self, *args: object) -> None:

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 from unittest import case
-from utility.location import SpaceRectangle, XYCoordinate
+from utility.space_rect import SpaceRectangle, XYCoordinate
 from model.timber import BottomPlate, CuttedTimber, LeftOuterStud, RightOuterStud, TopPlate
 
 @dataclass

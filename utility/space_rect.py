@@ -1,14 +1,6 @@
-from coordinates import spaced_coordinate
 from dataclasses import dataclass
 from model.direction import Orientation
-import logging
-
-XYCoordinate = spaced_coordinate("XYCoordinate", "xy", ordered=True)
-
-def move(self, x_delta: int = 0, y_delta: int = 0):
-    return XYCoordinate(self.x + x_delta, self.y + y_delta)
-
-setattr(XYCoordinate, "move", move)
+from utility.coordinates import XYCoordinate
 
 @dataclass
 class SpaceRectangle:
