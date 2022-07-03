@@ -1,4 +1,3 @@
-from model.door import DoorComponents
 from model.wall_part import WallPart
 from dataclasses import dataclass
 from model.direction import Coordination, Offset, Position
@@ -8,11 +7,17 @@ from model.wall import WallInfo
 
 
 @dataclass
-class WindowComponents(DoorComponents):
-    bottom_cripples: List[CuttedTimber]
-    still: CuttedTimber
+class DoorComponents:
+    left_trimmer_stud: CuttedTimber
+    right_trimmer_stud: CuttedTimber
+    left_king_stud: CuttedTimber
+    right_king_stud: CuttedTimber
+    header: CuttedTimber
+    top_plate: CuttedTimber
+    bottom_plate: CuttedTimber
+    top_cripples: List[CuttedTimber] 
 
-class Window(WallPart):
+class Door(WallPart):
     def __init__(self, wall_info: WallInfo) -> None:
         self.wall_info = wall_info
     
