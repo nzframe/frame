@@ -30,8 +30,7 @@ class TimberTag(Enum):
     STUD = auto()
 @total_ordering
 class CuttedTimber(XYRectangle):
-
-
+    """ cutted timber used to represent the materials used in door, window and retaining studs"""
     def __init__(self, length, timber = Timber()) -> None:
         if length < 0:
             raise LengthLessThanZeroError()
@@ -39,10 +38,6 @@ class CuttedTimber(XYRectangle):
         self.timber: Timber = timber
         self.wall = None
         self.tag: Set[TimberType] = set()
-
-    def purpose(self):
-        class_path = str(self.__class__)
-        return class_path.split("'")[1].split(".")[-1]
 
     def __lt__(self, other):
         if hasattr(self, "orientation") and hasattr(other, "orientation") and self.orientation == other.orientation:

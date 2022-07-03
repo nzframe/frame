@@ -11,7 +11,8 @@ class WallInfo:
     width: float
     height: float 
 
-class Wall(XYRectangle):
+class WallPart(XYRectangle):
+    """ WallPart will be a combination of wall, window and retailing studs and common structure. """
     def __init__(self, wall_info: WallInfo) -> None:
         self.wall_info = wall_info
         self.cutted_timbers: List[CuttedTimber] = []

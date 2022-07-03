@@ -1,4 +1,4 @@
-from model.wall import Wall
+from model.wall_part import WallPart
 from dataclasses import dataclass
 from model.direction import Coordination, Offset, Position
 
@@ -16,5 +16,5 @@ class Window:
         self.coordinate = coordinate
         return self
 
-    def get_offset(self, wall: Wall, position: Position):
+    def get_offset(self, wall: WallPart, position: Position):
         pass
