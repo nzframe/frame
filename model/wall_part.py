@@ -6,11 +6,6 @@ from utility.space.rect import XYCoordinate, XYRectangle
 
 from model.timber import CuttedTimber
 
-@dataclass
-class WallInfo:
-    width: float
-    height: float 
-
 class WallPart(XYRectangle):
     """ WallPart will be a combination of wall, window and retailing studs and common structure. """
     def __init__(self, timbers: List[CuttedTimber] = []) -> None:
