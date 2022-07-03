@@ -26,8 +26,8 @@ class Timber:
 
 class TimberTag(Enum):
     UNUSERD = auto()
-    PLATE = auto()
-    STUD = auto()
+    USED = auto()
+
 @total_ordering
 class CuttedTimber(XYRectangle):
     """ cutted timber used to represent the materials used in door, window and retaining studs"""
