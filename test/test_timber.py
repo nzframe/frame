@@ -1,6 +1,5 @@
 import pytest
-from model.timber import CuttedTimber, Orientation, LengthLessThanZeroError
-from utility.space.rect import XYCoordinate
+from model.timber.timber import CuttedTimber
 
 
 def test_cutted_timber_default_value():

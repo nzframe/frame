@@ -1,7 +1,7 @@
 from typing import List
 
-from model.timber import CuttedTimber, Orientation, TimberTag
-from model.wall_part import WallPart
+from model.timber.timber import CuttedTimber, Orientation, TimberTag
+from model.components.wall_part import WallPart
 
 
 class TimberCheck:

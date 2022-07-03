@@ -4,7 +4,7 @@ from unittest import case
 
 from utility.space.rect import XYCoordinate, XYRectangle
 
-from model.timber import CuttedTimber
+from model.timber.timber import CuttedTimber
 
 class WallPart(XYRectangle):
     """ wall is a combination of WallPart, window and retailing studs and common structure. """
