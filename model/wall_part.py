@@ -7,7 +7,7 @@ from utility.space.rect import XYCoordinate, XYRectangle
 from model.timber import CuttedTimber
 
 class WallPart(XYRectangle):
-    """ WallPart will be a combination of wall, window and retailing studs and common structure. """
+    """ wall is a combination of WallPart, window and retailing studs and common structure. """
     def __init__(self, timbers: List[CuttedTimber] = []) -> None:
         self.cutted_timbers = timbers
 
