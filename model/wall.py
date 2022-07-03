@@ -4,9 +4,7 @@ from unittest import case
 
 from utility.space.rect import XYCoordinate, XYRectangle
 
-from model.timber import (BottomPlate, CuttedTimber, LeftOuterStud,
-                          RightOuterStud, TopPlate)
-
+from model.timber import CuttedTimber
 
 @dataclass
 class WallInfo:
@@ -14,12 +12,6 @@ class WallInfo:
     height: float 
 
 class Wall(XYRectangle):
-    options = {
-        "TopPlate": "top_plate",
-        "BottomPlate": "bottom_plate",
-        "LeftOuterStud": "left_outer_stud",
-        "RightOuterStud": "right_outer_stud"
-    }
     def __init__(self, wall_info: WallInfo) -> None:
         self.wall_info = wall_info
         self.cutted_timbers: List[CuttedTimber] = []

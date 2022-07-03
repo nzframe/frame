@@ -61,39 +61,3 @@ class CuttedTimber(XYRectangle):
                 return self.a_cord.y == other.a_cord.y
         else:
             raise Exception("Timber can't compare in this space")       
-
-class Stud(CuttedTimber):
-    orientation = Orientation.VERTICAL
-
-    def __init__(self, length, timber=Timber()) -> None:
-        super().__init__(length, timber)
-        self.a_cord = XYCoordinate(0, 0)
-        self.b_cord = XYCoordinate(self.timber.timber_size.height, 0)
-        self.c_cord = XYCoordinate(self.timber.timber_size.height, self.length)
-        self.d_cord = XYCoordinate(0, self.length)
-
-class Plate(CuttedTimber):
-    orientation = Orientation.HORIZONTAL
-
-    def __init__(self, length, timber=Timber()) -> None:
-        super().__init__(length, timber)
-        self.a_cord = XYCoordinate(0, 0)
-        self.b_cord = XYCoordinate(self.length, 0)
-        self.c_cord = XYCoordinate(self.length, self.timber.timber_size.height)
-        self.d_cord = XYCoordinate(0, self.timber.timber_size.height)
-
-class TopPlate(Plate):
-    position = Position.TOP
-    
-    def __init__(self, length, timber=Timber()) -> None:
-        super().__init__(length, timber)
-        
-
-class BottomPlate(Plate):
-    position = Position.BOTTOM
-
-class LeftOuterStud(Stud):
-    position = Position.LEFT
-
-class RightOuterStud(Stud):
-    position = Position.RIGHT
