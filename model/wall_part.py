@@ -13,18 +13,15 @@ class WallInfo:
 
 class WallPart(XYRectangle):
     """ WallPart will be a combination of wall, window and retailing studs and common structure. """
-    def __init__(self, wall_info: WallInfo) -> None:
-        self.wall_info = wall_info
-        self.cutted_timbers: List[CuttedTimber] = []
+    def __init__(self, timbers: List[CuttedTimber] = []) -> None:
+        self.cutted_timbers = timbers
 
         self.a_cord = XYCoordinate(0, 0)
-        self.b_cord = XYCoordinate(self.wall_info.width, 0)
-        self.c_cord = XYCoordinate(self.wall_info.width, self.wall_info.height)
-        self.d_cord = XYCoordinate(0, self.wall_info.height)
+        self.b_cord = XYCoordinate(0, 0)
+        self.c_cord = XYCoordinate(0, 0)
+        self.d_cord = XYCoordinate(0, 0)
 
     def register(self, cutted_timber: CuttedTimber):
-        if cutted_timber.__class__.__name__ in self.options:
-            setattr(self, self.options[cutted_timber.__class__.__name__], cutted_timber)
         self.cutted_timbers.append(cutted_timber)        
 
     def get_total_timbers(self):
