@@ -24,12 +24,13 @@ class Timber:
     timber_type: TimberType = TimberType.TWOBYFOURS
     timber_size: TimberSize = TimberSize(45, 90)
 
+class TimberTag(Enum):
+    UNUSERD = auto()
+    PLATE = auto()
+    STUD = auto()
 @total_ordering
 class CuttedTimber(XYRectangle):
-    class TimberTag(Enum):
-        UNUSERD = auto()
-        PLATE = auto()
-        STUD = auto()
+
 
     def __init__(self, length, timber = Timber()) -> None:
         if length < 0:
