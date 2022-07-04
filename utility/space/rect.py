@@ -16,6 +16,24 @@ class XYRectangle:
     cd_line: XYLine = None if c_cord is None and d_cord is None else XYLine(c_cord, d_cord)
     da_line: XYLine = None if d_cord is None and a_cord is None else XYLine(d_cord, a_cord)
 
+    def __lt__(self, other):
+        if hasattr(self, "orientation") and hasattr(other, "orientation") and self.orientation == other.orientation:
+            if self.orientation == Orientation.VERTICAL:
+                return self.a_cord.x < other.a_cord.x
+            else:
+                return self.a_cord.y < other.a_cord.y
+        else:
+            raise Exception("Timber can't compare in this space")
+    
+    def __eq__(self, other):
+        if hasattr(self, "orientation") and hasattr(other, "orientation") and self.orientation == other.orientation:
+            if self.orientation == Orientation.VERTICAL:
+                return self.a_cord.x == other.a_cord.x
+            else:
+                return self.a_cord.y == other.a_cord.y
+        else:
+            raise Exception("Timber can't compare in this space")       
+
     def center(self) -> XYCoordinate: 
         """get the gravity point of the rectangle
 

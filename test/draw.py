@@ -1,6 +1,5 @@
 import drawSvg as draw
-from model.components.wall_part import WallPart, WallInfo
-from model.timber.timber import CuttedTimber
+from model.timber import CuttedTimber
 
 d = draw.Drawing(1024, 768, origin=(0,0), displayInline=False)
 
