@@ -38,3 +38,7 @@ def test_XYCoordinate_add():
     assert a + b == XYCoordinate(2, 5)
     assert c + a == XYCoordinate(5, 4)
 
+def test_XYCoordinate_compare():
+    a = XYCoordinate(1, 2)
+    b = XYCoordinate(1, 3)    
+    assert a < b

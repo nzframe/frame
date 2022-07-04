@@ -25,5 +25,5 @@ class XYCoordinate(TMPCoordinate):
     def move_left(self, value: float):
         return self.move(value * -1, Orientation.HORIZONTAL)
 
-    def copy(self):
-        return XYCoordinate(self.x, self.y)
+    def __lt__(self, other):
+        return self.x < other.x or self.y < other.y

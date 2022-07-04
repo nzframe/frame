@@ -1,7 +1,17 @@
 import pytest
-from model.timber import CuttedTimber
+from model.timber import Cutted2BY4
+from model.direction import Orientation
+from utility.space.cord import XYCoordinate
 
 
 def test_cutted_timber_default_value():
-    cutted_timber = CuttedTimber(2330)
+    door_width = 1830
+    timber = Cutted2BY4(door_width + Cutted2BY4.HEIGHT*4, Orientation.HORIZONTAL)
+    assert timber.a_cord == XYCoordinate(0, 0)
+    assert timber.b_cord == XYCoordinate(2010, 0)
+    assert timber.c_cord == XYCoordinate(2010, 45)
+    assert timber.d_cord == XYCoordinate(0, 45)
 
+    timber.move_up(45)
+
+    assert timber.a_cord == XYCoordinate(0, 45)
