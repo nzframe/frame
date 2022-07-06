@@ -1,12 +1,6 @@
 from model.door import LintelDoor, LintelDoorComponents
 
 
-def test_lintel_door_create():
-    door = LintelDoor(1830, 2170, 2630)
-    assert door is not None
-    assert door.door_components.lintel.length == 1920
-    assert door.door_components.top_plate.length == 2010
-
 def test_draw_lintel_door():
     door = LintelDoor(1830, 2170, 2630)
     from utility.draw import TestDraw
@@ -15,10 +9,10 @@ def test_draw_lintel_door():
     td = TestDraw(file_path.as_posix())
     
     door_cpnt: LintelDoorComponents = door.door_components
-    td.prepare(door_cpnt.top_plate)
-    td.prepare(door_cpnt.bottom_plate)
-    td.prepare(door_cpnt.left_king_stud)
-    td.prepare(door_cpnt.right_king_stud)
+    td.prepare(door.top_plate)
+    td.prepare(door.bottom_plate)
+    td.prepare(door.left_king_stud)
+    td.prepare(door.right_king_stud)
     td.prepare(door_cpnt.left_trimmer_stud)
     td.prepare(door_cpnt.right_trimmer_stud)
     td.prepare(door_cpnt.lintel)

@@ -46,58 +46,9 @@ def add_top_cripple(door_width: float, door_height: float, distant_to_header: fl
     
     return top_cripples
 
-def add_top_plate(door_width: float, floor_height: float) -> CuttedTimber:
-    """_summary_
-
-    Args:
-        door_width (float): the width of the door
-        floor_height (float): the height of the floor 
-    """    """ """
-    timber = Cutted2BY4(door_width + Cutted2BY4.HEIGHT*2, Orientation.HORIZONTAL)
-    timber.move_up(floor_height + Cutted2BY4.HEIGHT)
-    return timber
-    
-
-def add_bottom_plate(door_width: float) -> CuttedTimber:
-    """_summary_
-
-    Args:
-        door_width (float): the width of the door
-    """    """ """
-    timber = Cutted2BY4(door_width + Cutted2BY4.HEIGHT*2, Orientation.HORIZONTAL)
-    return timber
-
-def add_left_kind_stud(floor_height: float):
-    """_summary_
-
-    Args:
-        door_width (float): the width of the door
-        floor_height (float): the height of the floor 
-    """    """ """
-    timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
-    timber.move_up(Cutted2BY4.HEIGHT)
-    return timber
-
-def add_right_kind_stud(floor_height: float, door_width: float):
-    """_summary_
-
-    Args:
-        door_width (float): the width of the door
-        floor_height (float): the height of the floor 
-    """    """ """
-    timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
-    timber.move_up(Cutted2BY4.HEIGHT)
-    timber.move_right(door_width + Cutted2BY4.HEIGHT)
-    return timber
 
 @dataclass
 class DryDoorComponents():
-    top_plate: CuttedTimber
-    bottom_plate: CuttedTimber
-
-    left_king_stud: CuttedTimber
-    right_king_stud: CuttedTimber
-
     linter: CuttedTimber
     top_cripples: List[CuttedTimber] 
 
@@ -105,17 +56,11 @@ class DryDoorComponents():
 DryDoorCreateFactory = Callable[[float, float, float], DryDoorComponents]
 
 def create_dry_door(door_width: float, door_height: float, floor_height: float):
-    top_plate = add_top_plate(door_width, floor_height)
-    bottom_plate = add_bottom_plate(door_width)
-
-    left_king_stud = add_left_kind_stud(floor_height)
-    right_king_stud = add_right_kind_stud(floor_height, door_width)
-
     lintel = add_lintel(door_width, door_height)
 
     top_cripples = add_top_cripple(door_width, door_height)
 
-    return DryDoorComponents(top_plate, bottom_plate, left_king_stud, right_king_stud, lintel, top_cripples)
+    return DryDoorComponents(lintel, top_cripples)
 
 
 class DryDoor(GenericWall): 
@@ -135,6 +80,54 @@ class DryDoor(GenericWall):
         self.floor_height: float = floor_height
         self.door_components: DryDoorComponents = None
         self.create()
+        self.add_top_plate(door_width, floor_height)
+        self.add_bottom_plate(door_width)
+        self.add_left_king_stud(floor_height)
+        self.add_right_king_stud(floor_height, door_width)
 
     def create(self, door_create_factory: DryDoorCreateFactory = create_dry_door):
         self.door_components = door_create_factory(self.door_width, self.door_height, self.floor_height)
+
+    def add_top_plate(self, door_width: float, floor_height: float) -> CuttedTimber:
+        """_summary_
+
+        Args:
+            door_width (float): the width of the door
+            floor_height (float): the height of the floor 
+        """    """ """
+        timber = Cutted2BY4(door_width + Cutted2BY4.HEIGHT*2, Orientation.HORIZONTAL)
+        timber.move_up(floor_height + Cutted2BY4.HEIGHT)
+        self.top_plate = timber
+        
+
+    def add_bottom_plate(self, door_width: float) -> CuttedTimber:
+        """_summary_
+
+        Args:
+            door_width (float): the width of the door
+        """    """ """
+        timber = Cutted2BY4(door_width + Cutted2BY4.HEIGHT*2, Orientation.HORIZONTAL)
+        self.bottom_plate = timber
+
+    def add_left_king_stud(self, floor_height: float):
+        """_summary_
+
+        Args:
+            door_width (float): the width of the door
+            floor_height (float): the height of the floor 
+        """    """ """
+        timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
+        timber.move_up(Cutted2BY4.HEIGHT)
+        self.left_king_stud = timber
+
+    def add_right_king_stud(self, floor_height: float, door_width: float):
+        """_summary_
+
+        Args:
+            door_width (float): the width of the door
+            floor_height (float): the height of the floor 
+        """    """ """
+        timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
+        timber.move_up(Cutted2BY4.HEIGHT)
+        timber.move_right(door_width + Cutted2BY4.HEIGHT)
+        self.right_king_stud = timber

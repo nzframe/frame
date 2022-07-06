@@ -9,10 +9,10 @@ def test_draw_header_door():
     td = TestDraw(file_path.as_posix())
     
     door_cpnt: HeaderDoorComponents = door.door_components
-    td.prepare(door_cpnt.top_plate)
-    td.prepare(door_cpnt.bottom_plate)
-    td.prepare(door_cpnt.left_king_stud)
-    td.prepare(door_cpnt.right_king_stud)
+    td.prepare(door.top_plate)
+    td.prepare(door.bottom_plate)
+    td.prepare(door.left_king_stud)
+    td.prepare(door.right_king_stud)
     td.prepare(door_cpnt.left_trimmer_stud)
     td.prepare(door_cpnt.right_trimmer_stud)
     td.prepare(door_cpnt.header)

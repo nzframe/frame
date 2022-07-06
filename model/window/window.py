@@ -92,59 +92,9 @@ def add_right_trimmer_stud(lintel_height: float, window_width: float):
     timber.move_right(Cutted2BY4.HEIGHT * 2 + window_width)
     return timber
 
-def add_top_plate(window_width: float, floor_height: float) -> CuttedTimber:
-    """_summary_
-
-    Args:
-        window_width (float): the width of the door
-        floor_height (float): the height of the floor 
-    """    """ """
-    timber = Cutted2BY4(window_width + Cutted2BY4.HEIGHT*4, Orientation.HORIZONTAL)
-    timber.move_up(floor_height + Cutted2BY4.HEIGHT)
-    return timber
-    
-
-def add_bottom_plate(window_width: float) -> CuttedTimber:
-    """_summary_
-
-    Args:
-        window_width (float): the width of the door
-    """    """ """
-    timber = Cutted2BY4(window_width + Cutted2BY4.HEIGHT*4, Orientation.HORIZONTAL)
-    return timber
-
-def add_left_kind_stud(floor_height: float):
-    """_summary_
-
-    Args:
-        door_width (float): the width of the door
-        floor_height (float): the height of the floor 
-    """    """ """
-    timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
-    timber.move_up(Cutted2BY4.HEIGHT)
-    return timber
-
-def add_right_kind_stud(floor_height: float, window_width: float):
-    """_summary_
-
-    Args:
-        door_width (float): the width of the door
-        floor_height (float): the height of the floor 
-    """    """ """
-    timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
-    timber.move_up(Cutted2BY4.HEIGHT)
-    timber.move_right(window_width + Cutted2BY4.HEIGHT * 3)
-    return timber
-
 
 @dataclass
 class WindowComponents():
-    top_plate: CuttedTimber
-    bottom_plate: CuttedTimber
-
-    left_king_stud: CuttedTimber
-    right_king_stud: CuttedTimber
-
     left_trimmer_stud: CuttedTimber
     right_trimmer_stud: CuttedTimber
 
@@ -159,12 +109,6 @@ class WindowComponents():
 WindowCreateFactory = Callable[[float, float, float], WindowComponents]
 
 def create_window(lintel_height: float, still_height: float, window_width: float, floor_height:float):
-    top_plate = add_top_plate(window_width, floor_height)
-    bottom_plate = add_bottom_plate(window_width)
-
-    left_king_stud = add_left_kind_stud(floor_height)
-    right_king_stud = add_right_kind_stud(floor_height, window_width)
-
     left_trimmer_stud = add_left_trimmer_stud(lintel_height)
     right_trimmer_stud = add_right_trimmer_stud(lintel_height, window_width)
 
@@ -176,7 +120,7 @@ def create_window(lintel_height: float, still_height: float, window_width: float
 
     bottom_jack_studs = add_bottom_jack_studs(window_width, still_height)
 
-    return WindowComponents(top_plate, bottom_plate, left_king_stud, right_king_stud, left_trimmer_stud, right_trimmer_stud, lintel, top_cripples, still, bottom_jack_studs)
+    return WindowComponents(left_trimmer_stud, right_trimmer_stud, lintel, top_cripples, still, bottom_jack_studs)
 
 
 class Window(GenericWall):
@@ -187,8 +131,56 @@ class Window(GenericWall):
         self.floor_height: float = floor_height
         self.components: WindowComponents = None
         self.create()
+        self.add_top_plate(self.window_width, self.floor_height)
+        self.add_bottom_plate(self.window_width)
+        self.add_left_king_stud(self.floor_height)
+        self.add_right_king_stud(self.floor_height, self.window_width)
 
     
     def create(self, window_create_factory: WindowCreateFactory = create_window):
         self.components = window_create_factory(self.lintel_height, self.till_height, self.window_width, self.floor_height)
 
+
+    def add_top_plate(self, window_width: float, floor_height: float) -> CuttedTimber:
+        """_summary_
+
+        Args:
+            window_width (float): the width of the door
+            floor_height (float): the height of the floor 
+        """    """ """
+        timber = Cutted2BY4(window_width + Cutted2BY4.HEIGHT*4, Orientation.HORIZONTAL)
+        timber.move_up(floor_height + Cutted2BY4.HEIGHT)
+        self.top_plate = timber
+        
+
+    def add_bottom_plate(self, window_width: float) -> CuttedTimber:
+        """_summary_
+
+        Args:
+            window_width (float): the width of the door
+        """    """ """
+        timber = Cutted2BY4(window_width + Cutted2BY4.HEIGHT*4, Orientation.HORIZONTAL)
+        self.bottom_plate = timber
+
+    def add_left_king_stud(self, floor_height: float):
+        """_summary_
+
+        Args:
+            door_width (float): the width of the door
+            floor_height (float): the height of the floor 
+        """    """ """
+        timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
+        timber.move_up(Cutted2BY4.HEIGHT)
+        self.left_king_stud = timber
+
+    def add_right_king_stud(self, floor_height: float, window_width: float):
+        """_summary_
+
+        Args:
+            door_width (float): the width of the door
+            floor_height (float): the height of the floor 
+        """    """ """
+        timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
+        timber.move_up(Cutted2BY4.HEIGHT)
+        timber.move_right(window_width + Cutted2BY4.HEIGHT * 3)
+        self.right_king_stud = timber

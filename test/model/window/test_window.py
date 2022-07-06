@@ -9,10 +9,10 @@ def test_draw_dry_door():
     td = TestDraw(file_path.as_posix())
     
     componenet: WindowComponents = window.components
-    td.prepare(componenet.top_plate)
-    td.prepare(componenet.bottom_plate)
-    td.prepare(componenet.left_king_stud)
-    td.prepare(componenet.right_king_stud)
+    td.prepare(window.top_plate)
+    td.prepare(window.bottom_plate)
+    td.prepare(window.left_king_stud)
+    td.prepare(window.right_king_stud)
     td.prepare(componenet.lintel)
     td.prepare(componenet.still)
     td.prepare(componenet.left_trimmer_stud)
