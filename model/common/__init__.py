@@ -1,1 +1,1 @@
-from .connection_wall import ConnectionWall, ConnectionWallComponents
+from .common_wall import CommonWall, CommonWallComponents
