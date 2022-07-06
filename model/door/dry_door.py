@@ -1,4 +1,4 @@
-from model.component import Component
+from model.generic_wall import GenericWall
 from dataclasses import dataclass
 from model.timber import CuttedLintel, CuttedTimber
 from typing import List, Callable
@@ -118,7 +118,7 @@ def create_dry_door(door_width: float, door_height: float, floor_height: float):
     return DryDoorComponents(top_plate, bottom_plate, left_king_stud, right_king_stud, lintel, top_cripples)
 
 
-class DryDoor(Component): 
+class DryDoor(GenericWall): 
     """
         ___________
         |~~~~~~~~~|

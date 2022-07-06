@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from model.timber import Cutted2BY4, CuttedTimber, Orientation
-from model.component import Component
+from model.generic_wall import GenericWall
 from typing import List, Callable
 import copy
 
@@ -24,7 +24,7 @@ def create_load_point(floor_height, number_of_stud):
 
     return timbers
 
-class LoadPoint(Component):
+class LoadPoint(GenericWall):
     def __init__(self, floor_height: float, number_of_stud: int = 5):
         self.floor_height = floor_height
         self.number_of_stud = number_of_stud

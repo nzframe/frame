@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from model.timber import CuttedTimber, Cutted2BY4, CuttedLintel
 from typing import List, Callable
-from model.component import Component
+from model.generic_wall import GenericWall
 from model.timber import Orientation
 import copy
 
@@ -179,7 +179,7 @@ def create_window(lintel_height: float, still_height: float, window_width: float
     return WindowComponents(top_plate, bottom_plate, left_king_stud, right_king_stud, left_trimmer_stud, right_trimmer_stud, lintel, top_cripples, still, bottom_jack_studs)
 
 
-class Window(Component):
+class Window(GenericWall):
     def __init__(self, lintel_height: float, till_height: float, window_width: float, floor_height: float):
         self.lintel_height: float = lintel_height
         self.till_height: float = till_height

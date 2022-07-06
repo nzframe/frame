@@ -1,4 +1,4 @@
-from model.component import Component
+from model.generic_wall import GenericWall
 from dataclasses import dataclass
 from model.timber import CuttedTimber
 from typing import List, Callable
@@ -143,7 +143,7 @@ def create_lintel_door(door_width: float, door_height: float, floor_height: floa
     return LintelDoorComponents(top_plate, bottom_plate, left_king_stud, right_king_stud, left_trimmer_stud, right_trimmer_stud, header, top_cripples)
 
 
-class LintelDoor(Component):  
+class LintelDoor(GenericWall):  
     """
     The door structure
         ___________

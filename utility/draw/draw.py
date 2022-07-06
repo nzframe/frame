@@ -1,7 +1,7 @@
 import drawSvg as draw
 from model.door import HeaderDoor
 from model.timber import CuttedTimber
-from model.component import Component
+from model.generic_wall import GenericWall
 
 
 class TestDraw:

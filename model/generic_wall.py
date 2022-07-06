@@ -1,7 +1,7 @@
 from utility.space.rect import XYRectangle
 from model.timber import CuttedTimber
 
-class Component(XYRectangle):
+class GenericWall(XYRectangle):
     """ wall is a combination of Components, window and retailing studs and common structure. """
 
     def register(self, cutted_timber: CuttedTimber):
