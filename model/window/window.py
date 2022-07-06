@@ -6,7 +6,7 @@ from model.timber import Orientation
 import copy
 
 
-TRIPPLE_GAP: float = 400
+TRIPPLE_GAP: float = 200
 
 def add_lintel(lintel_height: float, window_width: float):
     timber = CuttedLintel(window_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
