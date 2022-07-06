@@ -1,10 +1,10 @@
 import drawSvg as draw
-from model.door import Door
+from model.door import LintelDoor
 from model.timber import CuttedTimber
 
 d = draw.Drawing(2400, 3000, origin=(0,0), displayInline=False)
 
-door: Door = Door(1830, 2170, 2630)
+door: LintelDoor = LintelDoor(1830, 2170, 2630)
 door.create()
 
 def draw_timber(timber: CuttedTimber):

@@ -1,4 +1,4 @@
-from model.door import DoorComponents, create_door, Door
+from model.door import DoorComponents, create_door, LintelDoor
 
 
 def test_door_init():

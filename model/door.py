@@ -40,7 +40,7 @@ def create_door(door_width: float, door_height: float, floor_height: float):
     return DoorComponents(top_plate, bottom_plate, left_king_stud, right_king_stud, left_trimmer_stud, right_trimmer_stud, header, top_cripples)
 
 
-class Door(Component):  
+class LintelDoor(Component):  
     def __init__(self, door_width: float, door_height: float, floor_height: float):
         self.door_width: float = door_width
         self.door_height: float = door_height
