@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from model.direction import Coordination, Position
 from model.timber import CuttedTimber
-from model.door import DoorComponents
+from model.door import LintelDoorComponents
 from typing import List
 from model.wall import WallInfo
 
 
 @dataclass
-class WindowComponents(DoorComponents):
+class WindowComponents(LintelDoorComponents):
     bottom_cripples: List[CuttedTimber]
     still: CuttedTimber
 

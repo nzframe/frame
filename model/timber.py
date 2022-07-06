@@ -43,7 +43,12 @@ class Cutted2BY4(CuttedTimber):
     HEIGHT: float = 45
     WIDTH: float = 90
 
+class CuttedLintel(CuttedTimber):
+    NAME: str = "Lintel"
+    HEIGHT: float = 240
+    WIDTH: float = 90    
+
 class CuttedHeader(CuttedTimber):
     NAME: str = "Header"
-    HEIGHT: float = 240
+    HEIGHT: float = 90
     WIDTH: float = 90    

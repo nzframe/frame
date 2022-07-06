@@ -1,7 +1,7 @@
-from model.door import DoorComponents, create_door, LintelDoor
+from model.door import LintelDoorComponents, create_lintel_door, LintelDoor
 
 
 def test_door_init():
-    d: DoorComponents = create_door(1830, 2170, 2630)
+    d: LintelDoorComponents = create_lintel_door(1830, 2170, 2630)
     assert d.top_plate is not None
 

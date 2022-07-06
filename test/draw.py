@@ -1,10 +1,10 @@
 import drawSvg as draw
-from model.door import LintelDoor
+from model.door import HeaderDoor
 from model.timber import CuttedTimber
 
 d = draw.Drawing(2400, 3000, origin=(0,0), displayInline=False)
 
-door: LintelDoor = LintelDoor(1830, 2170, 2630)
+door: HeaderDoor = HeaderDoor(800, 2220, 2310)
 door.create()
 
 def draw_timber(timber: CuttedTimber):
@@ -27,6 +27,7 @@ draw_timber(door.door_components.right_king_stud)
 draw_timber(door.door_components.left_trimmer_stud)
 draw_timber(door.door_components.right_trimmer_stud)
 draw_timber(door.door_components.header)
+draw_timber(door.door_components.linter)
 
 for timber in door.door_components.top_cripples:
     draw_timber(timber)
