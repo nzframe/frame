@@ -9,8 +9,6 @@ import copy
 
 TRIPPLE_GAP: float = 400
 
-def move_components():
-    pass
 
 def add_lintel(door_width: float, door_height: float):
     timber = CuttedLintel(door_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
