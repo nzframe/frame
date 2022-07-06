@@ -171,6 +171,7 @@ class HeaderDoor(Component):
         self.door_height: float = door_height
         self.floor_height: float = floor_height
         self.door_components: HeaderDoorComponents = None
+        self.create()
 
     def create(self, door_create_factory: HeaderDoorCreateFactory = create_header_door):
         self.door_components = door_create_factory(self.door_width, self.door_height, self.floor_height)

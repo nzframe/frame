@@ -1,17 +1,15 @@
 from dataclasses import dataclass
-from model.direction import Coordination, Position
 from model.timber import CuttedTimber
-from model.door import LintelDoorComponents
 from typing import List
-from model.wall import WallInfo
+from model.component import Component
 
 
 @dataclass
-class WindowComponents(LintelDoorComponents):
+class WindowComponents():
     bottom_cripples: List[CuttedTimber]
     still: CuttedTimber
 
-class Window():
+class Window(Component):
     def __init__(self, header_height: float, till_height: float, window_width: float, floor_height: float):
         pass
     
