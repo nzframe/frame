@@ -4,7 +4,7 @@ from model.timber import Cutted2BY4, Orientation
 from model.generic_wall import GenericWall
 from typing import List
 import copy
-
+from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 from utility.draw import DrawIT
 
 BLOCKER_SIZE = 250
@@ -28,7 +28,7 @@ class Junction(GenericWall):
     def create(self):
         self.components = self.__create_blockers(self.floor_height, self.number_of_blocks)
 
-    def __create_blockers(self, floor_height, column_of_blockers) -> List[Cutted2BY4]:
+    def __create_blockers(self, floor_height, column_of_blockers, gap_stratey: GAP_STRATEGY = gap_strategy_avg) -> List[Cutted2BY4]:
         """_summary_
 
         Args:
@@ -52,10 +52,11 @@ class Junction(GenericWall):
 
         middle_blocker = bottom_blocker
 
+        block_gap = gap_stratey(BLOCKER_GAP, top_blocker - bottom_blocker)
         ## add initial row of blockers
         while True:
             middle_blocker = copy.copy(middle_blocker)
-            middle_blocker.move_up(BLOCKER_GAP)
+            middle_blocker.move_up(block_gap)
 
             print(top_blocker)
             print(middle_blocker)

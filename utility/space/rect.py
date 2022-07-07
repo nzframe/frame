@@ -43,7 +43,7 @@ class XYRectangle:
         return XYCoordinate((self.a_cord.x + self.c_cord.x)/2, (self.a_cord.y + self.c_cord.y)/2)
             
     def __sub__(self, other) -> float:
-        """_summary_
+        """Two Rect Substract get a distance of two rect's center's point
 
         Args:
             other (_type_): _description_
