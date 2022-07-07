@@ -167,3 +167,16 @@ class HeaderDoor(GenericWall):
         timber.move_up(Cutted2BY4.HEIGHT)
         timber.move_right(door_width + Cutted2BY4.HEIGHT * 3)
         self.right_king_stud = timber
+
+    def move_right(self, value: float):
+        super().move_right(value)
+        door_cpnt = self.components
+        door_cpnt.left_trimmer_stud.move_right(value)
+        door_cpnt.right_trimmer_stud.move_right(value)
+        door_cpnt.header.move_right(value)
+        door_cpnt.linter.move_right(value)
+
+        for cripple in door_cpnt.top_cripples:
+            cripple.move_right(value)
+
+        return self

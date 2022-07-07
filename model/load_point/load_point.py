@@ -83,3 +83,11 @@ class LoadPoint(GenericWall):
         timber.move_up(Cutted2BY4.HEIGHT)
         timber.move_right(Cutted2BY4.HEIGHT * self.number_of_stud - Cutted2BY4.HEIGHT)
         self.right_king_stud = timber
+    
+    def move_right(self, value: float):
+        super().move_right(value)
+        components = self.components
+        for component in components:
+            component.move(value)
+
+        return self

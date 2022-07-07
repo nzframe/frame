@@ -219,3 +219,22 @@ class Window(GenericWall):
             nogging_gap = NOGGING_GAP
         for left_stud, right_stud in pairwise(self.components.bottom_jack_studs):
             self.noggings.extend(self.__add_noggings(left_stud, right_stud, nogging_gap))
+
+    def move_right(self, value: float):
+        super().move_right(value)
+        components = self.components
+
+        components.lintel.move_right(value)
+        components.still.move_right(value)
+        components.left_trimmer_stud.move_right(value)
+        components.right_trimmer_stud.move_right(value)
+
+        for cripple in components.top_cripples:
+            cripple.move_right(value)
+
+        for jack_stud in components.bottom_jack_studs:
+            jack_stud.move_right(value)
+
+        for nogging in self.noggings:
+            nogging.move_right(value)
+        return self

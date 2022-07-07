@@ -156,3 +156,15 @@ class LintelDoor(GenericWall):
         timber.move_right(door_width + Cutted2BY4.HEIGHT * 3)
         self.right_king_stud = timber
 
+    def move_right(self, value: float):
+        super().move_right(value)
+        door_cpnt: LintelDoorComponents = self.components
+        door_cpnt.left_trimmer_stud.move_right(value)
+        door_cpnt.right_trimmer_stud.move_right(value)
+        door_cpnt.lintel.move_right(value)
+
+        for cripple in door_cpnt.top_cripples:
+            cripple.move_right(value)
+
+        return self
+

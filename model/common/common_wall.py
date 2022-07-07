@@ -134,3 +134,13 @@ class CommonWall(GenericWall):
             nogging_gap = gap_strategy(nogging_gap, self.components.studs[-1]-self.components.studs[0])
         for left_stud, right_stud in pairwise(self.components.studs):
             self.noggings.extend(self.__add_noggings(left_stud, right_stud, nogging_gap))
+
+    def move_right(self, value: float):
+        super().move_right(value)
+        for stud in self.components.studs:
+            stud.move_right(value)
+
+        for nogging in self.noggings:
+            nogging.move_right(value)
+
+        return self

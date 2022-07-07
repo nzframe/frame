@@ -130,3 +130,12 @@ class DryDoor(GenericWall):
         timber.move_up(Cutted2BY4.HEIGHT)
         timber.move_right(door_width + Cutted2BY4.HEIGHT)
         self.right_king_stud = timber
+
+    def move_right(self, value: float):
+        super().move_right(value)
+        self.components.linter.move_right(value)
+
+        for cripple in self.components.top_cripples:
+            cripple.move_right(value)
+
+        return self

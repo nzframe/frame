@@ -26,4 +26,9 @@ class GenericWall():
             raise ValueError("top_plate and bottom_plate doesn't exist so can't build the area")
         self.area = XYRectangle(self.bottom_plate.a_cord, self.bottom_plate.b_cord, self.top_plate.c_cord, self.top_plate.d_cord)        
         
-
+    def move_right(self, value: float):
+        self.top_plate.move_right(value)
+        self.bottom_plate.move_right(value)
+        self.left_king_stud.move_right(value)
+        self.right_king_stud.move_right(value)
+        return self

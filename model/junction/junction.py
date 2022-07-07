@@ -102,3 +102,13 @@ class Junction(GenericWall):
         """ Junction Wall doesn't have right_king_stud
         """        
         self.right_king_stud = None
+
+    def move_right(self, value: float):
+        super().move_right(value)
+        components: JunctionComponents = self.components
+        for component in components:
+            component.move_right(value)
+
+        return self
+
+
