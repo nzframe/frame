@@ -1,7 +1,7 @@
 from model.junction import Junction, JunctionComponents
 
 
-def test_draw_load_point():
+def test_draw_junction():
     junction = Junction(2310, 5)
     from utility.draw import TestDraw
     from pathlib import Path
