@@ -10,7 +10,7 @@ from more_itertools import pairwise
 from utility.draw import DrawIT
 
 STUD_GAP = 355
-NOGGING_GAP = 480
+NOGGING_GAP = 800
 
 @dataclass
 class CommonWallComponents:
