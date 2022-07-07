@@ -1,9 +1,8 @@
 from model.generic_wall import GenericWall
 from dataclasses import dataclass
-from model.timber import CuttedLintel, CuttedTimber
 from typing import List, Callable
 
-from model.timber import Cutted2BY4, CuttedTimber, CuttedHeader
+from model.timber import Cutted2BY4
 from model.direction import Orientation
 import copy
 
@@ -88,7 +87,7 @@ class DryDoor(GenericWall):
     def create(self, door_create_factory: DryDoorCreateFactory = create_dry_door):
         self.components = door_create_factory(self.door_width, self.door_height, self.floor_height)
 
-    def add_top_plate(self, door_width: float, floor_height: float) -> CuttedTimber:
+    def add_top_plate(self, door_width: float, floor_height: float) -> Cutted2BY4:
         """_summary_
 
         Args:
@@ -100,7 +99,7 @@ class DryDoor(GenericWall):
         self.top_plate = timber
         
 
-    def add_bottom_plate(self, door_width: float) -> CuttedTimber:
+    def add_bottom_plate(self, door_width: float) -> Cutted2BY4:
         """_summary_
 
         Args:
