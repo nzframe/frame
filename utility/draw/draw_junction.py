@@ -11,10 +11,3 @@ def draw_junction(td: DrawIT, junction: Junction):
 
     td.draw_it()
 
-def draw_junction_without(td: DrawIT, junction: Junction):    
-    components: JunctionComponents = junction.components
-    for component in components:
-        td.prepare(component)
-
-    td.draw_it()
- 

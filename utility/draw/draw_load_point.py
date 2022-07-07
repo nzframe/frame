@@ -12,12 +12,3 @@ def draw_load_point(td: DrawIT, load_point: LoadPoint):
         td.prepare(component)
 
     td.draw_it()
-
-def draw_load_point_without(td: DrawIT, load_point: LoadPoint):    
-    td.prepare(load_point.left_king_stud)
-    td.prepare(load_point.right_king_stud)
-    components: LoadPointComponents = load_point.components
-    for component in components:
-        td.prepare(component)
-
-    td.draw_it()

@@ -14,14 +14,3 @@ def draw_dry_door(td: DrawIT, door: DryDoor):
         td.prepare(cripple)
 
     td.draw_it()
-
-def draw_dry_door_without(td: DrawIT, door: DryDoor):    
-    door_cpnt: DryDoorComponents = door.components
-    td.prepare(door.left_king_stud)
-    td.prepare(door.right_king_stud)
-    td.prepare(door_cpnt.linter)
-
-    for cripple in door_cpnt.top_cripples:
-        td.prepare(cripple)
-
-    td.draw_it()
