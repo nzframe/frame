@@ -3,10 +3,10 @@ from model.door import LintelDoor, LintelDoorComponents
 
 def test_draw_lintel_door():
     door = LintelDoor(1830, 2170, 2630)
-    from utility.draw import TestDraw
+    from utility.draw import DrawIT
     from pathlib import Path
     file_path = Path(__file__).parent / "litel_door.png" 
-    td = TestDraw(file_path.as_posix())
+    td = DrawIT(file_path.as_posix())
     
     door_cpnt: LintelDoorComponents = door.components
     td.prepare(door.top_plate)
