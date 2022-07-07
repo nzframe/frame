@@ -7,8 +7,8 @@ import copy
 
 from utility.draw import DrawIT
 
-BLOCKER_SIZE = 150
-BLOCKER_GAP = 250
+BLOCKER_SIZE = 250
+BLOCKER_GAP = 700
 
 @dataclass
 class JunctionComponents:
@@ -42,12 +42,15 @@ class Junction(GenericWall):
         ## TODO: whether using floor_height or top_plate.a.cord as a criteria?
         timbers = []
 
-        blocker = Cutted2BY4(BLOCKER_SIZE, Orientation.VERTICAL)
-        blocker.move_up(Cutted2BY4.HEIGHT)
-        blocker.move_up(BLOCKER_GAP)
-        timbers.append(blocker)
+        bottom_blocker = Cutted2BY4(BLOCKER_SIZE, Orientation.VERTICAL)
+        bottom_blocker.move_up(Cutted2BY4.HEIGHT)
+        timbers.append(bottom_blocker)
 
-        middle_blocker = blocker
+        top_blocker = Cutted2BY4(BLOCKER_SIZE, Orientation.VERTICAL)
+        top_blocker.move_up(Cutted2BY4.HEIGHT + floor_height - BLOCKER_SIZE)
+        timbers.append(top_blocker)
+
+        middle_blocker = bottom_blocker
 
         ## add initial row of blockers
         while True:
