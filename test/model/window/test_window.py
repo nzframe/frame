@@ -25,3 +25,8 @@ def test_draw_dry_door():
         td.prepare(jack_stud)
 
     td.draw_it()
+
+def test_pairwise():
+    from more_itertools import pairwise
+    a = [1,2,3]
+    assert [(x, y) for x, y in pairwise(a)] == [(1, 2), (2, 3)]
