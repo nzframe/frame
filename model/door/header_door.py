@@ -6,7 +6,6 @@ from model.timber import Cutted2BY4, CuttedHeader
 from model.direction import Orientation
 import copy
 
-from utility.draw.draw_header_door import draw_header_door_without
 from utility.draw import DrawIT
 
 
@@ -186,4 +185,14 @@ class HeaderDoor(GenericWall):
         return self
 
     def draw(self, td: DrawIT):
-        draw_header_door_without(td, self)
+        door_cpnt: HeaderDoorComponents = self.components
+        td.prepare(self.left_king_stud)
+        td.prepare(self.right_king_stud)
+        td.prepare(door_cpnt.left_trimmer_stud)
+        td.prepare(door_cpnt.right_trimmer_stud)
+        td.prepare(door_cpnt.header)
+        td.prepare(door_cpnt.linter)
+
+        for cripple in door_cpnt.top_cripples:
+            td.prepare(cripple)
+

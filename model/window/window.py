@@ -8,7 +8,6 @@ from more_itertools import pairwise
 
 from utility.strategy import GAP_STRATEGY, gap_strategy_avg
 
-from utility.draw.draw_window import draw_window_without
 from utility.draw import DrawIT
 
 TRIPPLE_GAP: float = 200
@@ -241,5 +240,21 @@ class Window(GenericWall):
             nogging.move_right(value)
         return self
 
-    def draw(self, td: DrawIT):
-        draw_window_without(td, self)        
+    def draw(self, td: DrawIT):    
+        componenet: WindowComponents = self.components
+        td.prepare(self.left_king_stud)
+        td.prepare(self.right_king_stud)
+        td.prepare(componenet.lintel)
+        td.prepare(componenet.still)
+        td.prepare(componenet.left_trimmer_stud)
+        td.prepare(componenet.right_trimmer_stud)
+
+        for cripple in componenet.top_cripples:
+            td.prepare(cripple)
+
+        for jack_stud in componenet.bottom_jack_studs:
+            td.prepare(jack_stud)
+
+        for nogging in self.noggings:
+            td.prepare(nogging)
+

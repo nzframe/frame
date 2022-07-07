@@ -1,0 +1,16 @@
+title: E1
+floor_height: 2630
+parts:
+  - type: CommonWall
+    wall_width: 785
+
+  - type: Junction
+    number_of_blocks: 2
+
+  - type: LintelDoor
+    door_width: 930
+    door_height: 2170
+
+  - type: CommonWall
+    wall_width: 785
+

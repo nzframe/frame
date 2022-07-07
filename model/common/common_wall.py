@@ -7,11 +7,10 @@ import  copy
 from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 from more_itertools import pairwise
 
-from utility.draw.draw_common_wall import draw_common_wall_without
 from utility.draw import DrawIT
 
 STUD_GAP = 355
-NOGGING_GAP = 800
+NOGGING_GAP = 480
 
 @dataclass
 class CommonWallComponents:
@@ -147,5 +146,13 @@ class CommonWall(GenericWall):
 
         return self
 
-    def draw(self, td: DrawIT):
-        draw_common_wall_without(td, self)        
+    def draw(self, td: DrawIT):    
+        common_wall_cpnt: CommonWallComponents = self.components
+        td.prepare(self.left_king_stud)
+        td.prepare(self.right_king_stud)
+
+        for stud in common_wall_cpnt.studs:
+            td.prepare(stud)
+
+        for nogging in self.noggings:
+            td.prepare(nogging)

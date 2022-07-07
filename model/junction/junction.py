@@ -1,12 +1,10 @@
 from dataclasses import dataclass, field
 
-from numpy import block
 from model.timber import Cutted2BY4, Orientation
 from model.generic_wall import GenericWall
-from typing import List, Callable
+from typing import List
 import copy
 
-from utility.draw.draw_junction import draw_junction_without
 from utility.draw import DrawIT
 
 BLOCKER_SIZE = 150
@@ -96,14 +94,15 @@ class Junction(GenericWall):
         self.bottom_plate = timber
 
     def add_left_kind_stud(self):
-        """ Junction Wall doesn't have left_king_stud
-        """        
-        self.left_king_stud = None
+        timber = Cutted2BY4(self.floor_height, Orientation.VERTICAL)
+        timber.move_up(Cutted2BY4.HEIGHT)
+        self.left_king_stud = timber
 
     def add_right_kind_stud(self, floor_height: float):
-        """ Junction Wall doesn't have right_king_stud
-        """        
-        self.right_king_stud = None
+        timber = Cutted2BY4(self.floor_height, Orientation.VERTICAL)
+        timber.move_up(Cutted2BY4.HEIGHT)
+        timber.move_right(self.number_of_blocks*(Cutted2BY4.HEIGHT+1))
+        self.right_king_stud = timber
 
     def move_right(self, value: float):
         super().move_right(value)
@@ -113,5 +112,9 @@ class Junction(GenericWall):
 
         return self
 
-    def draw(self, td: DrawIT):
-        draw_junction_without(td, self)
+    def draw(self, td: DrawIT):    
+        components: JunctionComponents = self.components
+        for component in components:
+            td.prepare(component)
+ 
+

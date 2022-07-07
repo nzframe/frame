@@ -4,7 +4,6 @@ from model.generic_wall import GenericWall
 from typing import List, Callable
 import copy
 
-from utility.draw.draw_load_point import draw_load_point_without
 from utility.draw import DrawIT
 
 @dataclass
@@ -94,5 +93,10 @@ class LoadPoint(GenericWall):
 
         return self
 
-    def draw(self, td: DrawIT):
-        draw_load_point_without(td, self)        
+    def draw(self, td: DrawIT):    
+        td.prepare(self.left_king_stud)
+        td.prepare(self.right_king_stud)
+        components: LoadPointComponents = self.components
+        for component in components:
+            td.prepare(component)
+

@@ -5,7 +5,6 @@ from typing import List, Callable
 from model.timber import Cutted2BY4
 from model.direction import Orientation
 import copy
-from utility.draw.draw_dry_door import draw_dry_door
 from utility.draw import DrawIT
 
 
@@ -142,5 +141,12 @@ class DryDoor(GenericWall):
 
         return self
     
-    def draw(self, td: DrawIT):
-        draw_dry_door(td, self)
+    def draw(self, td: DrawIT):    
+        door_cpnt: DryDoorComponents = self.components
+        td.prepare(self.left_king_stud)
+        td.prepare(self.right_king_stud)
+        td.prepare(door_cpnt.linter)
+
+        for cripple in door_cpnt.top_cripples:
+            td.prepare(cripple)
+

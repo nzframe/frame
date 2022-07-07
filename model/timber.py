@@ -40,6 +40,7 @@ class CuttedTimber(XYRectangle):
     def __repr__(self) -> str:
         return super().__repr__()
 
+
 class Cutted2BY4(CuttedTimber):
     NAME: str = "TwoByFour"
     HEIGHT: float = 45

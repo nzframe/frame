@@ -1,8 +1,5 @@
 import drawSvg as draw
-from model.door import HeaderDoor
 from model.timber import CuttedTimber
-from model.generic_wall import GenericWall
-
 
 class DrawIT:
     def __init__(self, file_name: str) -> None:

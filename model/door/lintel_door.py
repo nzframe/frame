@@ -7,8 +7,8 @@ from model.timber import Cutted2BY4, CuttedTimber, CuttedLintel
 from model.direction import Orientation
 import copy
 
-from utility.draw.draw_lintel_door import draw_lintel_door_without
 from utility.draw import DrawIT
+import logging
 
 TRIPPLE_GAP: float = 400
 
@@ -43,9 +43,10 @@ def add_top_cripple(door_width: float, door_height: float, floor_height: float):
         else:
             break
 
-        top_cripples.append(middle_timber)
         middle_timber = copy.copy(middle_timber)
     
+    for cripple in top_cripples:
+        logging.debug(f"{id(cripple)} is added")
     return top_cripples
 
 def add_left_trimmer_stud(door_height: float):
@@ -160,17 +161,26 @@ class LintelDoor(GenericWall):
         self.right_king_stud = timber
 
     def move_right(self, value: float):
-        super().move_right(value)
         door_cpnt: LintelDoorComponents = self.components
         door_cpnt.left_trimmer_stud.move_right(value)
         door_cpnt.right_trimmer_stud.move_right(value)
         door_cpnt.lintel.move_right(value)
 
         for cripple in door_cpnt.top_cripples:
+            logging.debug(f"cripple: {id(cripple)} move right {value}")
             cripple.move_right(value)
+        super().move_right(value)
 
         return self
 
 
-    def draw(self, td: DrawIT):
-        draw_lintel_door_without(td, self)
+    def draw(self, td: DrawIT):    
+        door_cpnt: LintelDoorComponents = self.components
+        td.prepare(self.left_king_stud)
+        td.prepare(self.right_king_stud)
+        td.prepare(door_cpnt.left_trimmer_stud)
+        td.prepare(door_cpnt.right_trimmer_stud)
+        td.prepare(door_cpnt.lintel)
+
+        for cripple in door_cpnt.top_cripples:
+            td.prepare(cripple)

@@ -21,10 +21,12 @@ class GenericWall():
         """ get the number of timbers belonging to this component"""
         return len(self.cutted_timbers)
     
+    @property
     def get_area(self):
         if self.top_plate is None or self.bottom_plate is None:
             raise ValueError("top_plate and bottom_plate doesn't exist so can't build the area")
         self.area = XYRectangle(self.bottom_plate.a_cord, self.bottom_plate.b_cord, self.top_plate.c_cord, self.top_plate.d_cord)        
+        return self.area
         
     def move_right(self, value: float):
         self.top_plate.move_right(value)
