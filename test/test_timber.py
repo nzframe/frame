@@ -15,3 +15,12 @@ def test_cutted_timber_default_value():
     timber.move_up(45)
 
     assert timber.a_cord == XYCoordinate(0, 45)
+
+def test_cutted_timber_less_compare():
+    bottom_blocker = Cutted2BY4(250, Orientation.VERTICAL)
+    top_blocker = Cutted2BY4(250, Orientation.VERTICAL)
+    top_blocker.move_up(100)
+
+    bottom_blocker.move_up(200)
+    assert top_blocker.a_cord < bottom_blocker.a_cord 
+
