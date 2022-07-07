@@ -1,5 +1,5 @@
 from model.junction import Junction, JunctionComponents
-
+from utility.draw.draw_junction import draw_junction
 
 def test_draw_junction():
     junction = Junction(2310, 2)
@@ -7,10 +7,6 @@ def test_draw_junction():
     from pathlib import Path
     file_path = Path(__file__).parent / "junction.png" 
     td = DrawIT(file_path.as_posix())
-    td.prepare(junction.top_plate)
-    td.prepare(junction.bottom_plate)
-    components: JunctionComponents = junction.components
-    for component in components:
-        td.prepare(component)
+    draw_junction(td, junction)
 
     td.draw_it()
