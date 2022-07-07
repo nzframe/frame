@@ -6,6 +6,10 @@ from model.timber import Cutted2BY4, CuttedHeader
 from model.direction import Orientation
 import copy
 
+from utility.draw.draw_header_door import draw_header_door_without
+from utility.draw import DrawIT
+
+
 TRIPPLE_GAP: float = 400
 
 ##TODO Fix this hard code
@@ -180,3 +184,6 @@ class HeaderDoor(GenericWall):
             cripple.move_right(value)
 
         return self
+
+    def draw(self, td: DrawIT):
+        draw_header_door_without(td, self)

@@ -5,6 +5,8 @@ from typing import List, Callable
 from model.timber import Cutted2BY4
 from model.direction import Orientation
 import copy
+from utility.draw.draw_dry_door import draw_dry_door
+from utility.draw import DrawIT
 
 
 ##TODO Fix this hard code
@@ -139,3 +141,6 @@ class DryDoor(GenericWall):
             cripple.move_right(value)
 
         return self
+    
+    def draw(self, td: DrawIT):
+        draw_dry_door(td, self)

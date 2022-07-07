@@ -7,6 +7,8 @@ import  copy
 from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 from more_itertools import pairwise
 
+from utility.draw.draw_common_wall import draw_common_wall_without
+from utility.draw import DrawIT
 
 STUD_GAP = 355
 NOGGING_GAP = 800
@@ -144,3 +146,6 @@ class CommonWall(GenericWall):
             nogging.move_right(value)
 
         return self
+
+    def draw(self, td: DrawIT):
+        draw_common_wall_without(td, self)        

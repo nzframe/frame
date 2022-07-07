@@ -7,6 +7,9 @@ from model.timber import Cutted2BY4, CuttedTimber, CuttedLintel
 from model.direction import Orientation
 import copy
 
+from utility.draw.draw_lintel_door import draw_lintel_door_without
+from utility.draw import DrawIT
+
 TRIPPLE_GAP: float = 400
 
 
@@ -168,3 +171,6 @@ class LintelDoor(GenericWall):
 
         return self
 
+
+    def draw(self, td: DrawIT):
+        draw_lintel_door_without(td, self)

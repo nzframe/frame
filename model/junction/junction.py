@@ -6,6 +6,8 @@ from model.generic_wall import GenericWall
 from typing import List, Callable
 import copy
 
+from utility.draw.draw_junction import draw_junction_without
+from utility.draw import DrawIT
 
 BLOCKER_SIZE = 150
 BLOCKER_GAP = 250
@@ -111,4 +113,5 @@ class Junction(GenericWall):
 
         return self
 
-
+    def draw(self, td: DrawIT):
+        draw_junction_without(td, self)
