@@ -6,6 +6,8 @@ from model.timber import Orientation
 import copy
 from more_itertools import pairwise
 
+from utility.strategy import GAP_STRATEGY, gap_strategy_avg
+
 
 TRIPPLE_GAP: float = 200
 NOGGING_GAP: float = 250
@@ -192,7 +194,7 @@ class Window(GenericWall):
         timber.move_right(window_width + Cutted2BY4.HEIGHT * 3)
         self.right_king_stud = timber
     
-    def __add_noggings(self, left_stud: Cutted2BY4, right_stud: Cutted2BY4, nogging_gap: float = NOGGING_GAP):        
+    def __add_noggings(self, left_stud: Cutted2BY4, right_stud: Cutted2BY4, nogging_gap: float = NOGGING_GAP):                
         nogging_size  = right_stud - left_stud
         
         first_nogging = Cutted2BY4(nogging_size - Cutted2BY4.HEIGHT, Orientation.HORIZONTAL)
@@ -203,19 +205,17 @@ class Window(GenericWall):
 
         tmp_noggings = []
         while True:
-            tmp_nogging.move_up(NOGGING_GAP)
+            tmp_nogging.move_up(nogging_gap)
             if left_stud.c_cord < tmp_nogging.d_cord:
                 break
             tmp_noggings.append(tmp_nogging)
             tmp_nogging = copy.copy(tmp_nogging)   
         return tmp_noggings      
             
-    def add_noggings(self):
+    def add_noggings(self, gap_strategy: GAP_STRATEGY = gap_strategy_avg):
+        if len(self.components.bottom_jack_studs) >= 2:
+            nogging_gap = gap_strategy(NOGGING_GAP, self.components.bottom_jack_studs[-1]-self.components.bottom_jack_studs[0])
+        else:
+            nogging_gap = NOGGING_GAP
         for left_stud, right_stud in pairwise(self.components.bottom_jack_studs):
-            
-            
-            tmp_noggings = self.__add_noggings(left_stud, right_stud, NOGGING_GAP)
-
-            
-            logging.info(f"current number of noggings {len(tmp_noggings)}")
-            self.noggings.extend(self.__add_noggings(left_stud, right_stud, NOGGING_GAP))
+            self.noggings.extend(self.__add_noggings(left_stud, right_stud, nogging_gap))
