@@ -1,3 +1,4 @@
+from cmath import log
 from utility.space.rect import XYCoordinate
 import pytest
 
@@ -42,3 +43,7 @@ def test_XYCoordinate_compare():
     a = XYCoordinate(1, 2)
     b = XYCoordinate(1, 3)    
     assert a < b
+
+def test_XYCoordinate_repr():
+    a = XYCoordinate(1, 2)
+    assert a.__repr__() == "XYCoordinate({'x': 1, 'y': 2})"

@@ -42,7 +42,15 @@ class XYRectangle:
         """
         return XYCoordinate((self.a_cord.x + self.c_cord.x)/2, (self.a_cord.y + self.c_cord.y)/2)
             
-    def __sub__(self, other) -> int:
+    def __sub__(self, other) -> float:
+        """_summary_
+
+        Args:
+            other (_type_): _description_
+
+        Returns:
+            float: the distance between two center of the rect.
+        """        
         return (self.center() - other.center()).norm()
     
     def move_up(self, value: int):
@@ -102,4 +110,7 @@ class XYRectangle:
         self.c_cord = XYCoordinate(new.x, new.y)   
 
         new = self.d_cord + distanct
-        self.d_cord = XYCoordinate(new.x, new.y)           
+        self.d_cord = XYCoordinate(new.x, new.y) 
+
+    def __repr__(self) -> str:
+        return f"{self.a_cord}, {self.b_cord}, {self.c_cord}, {self.d_cord}"        

@@ -24,6 +24,9 @@ def test_draw_dry_door():
     for jack_stud in componenet.bottom_jack_studs:
         td.prepare(jack_stud)
 
+    for nogging in window.noggings:
+        td.prepare(nogging)
+
     td.draw_it()
 
 def test_pairwise():

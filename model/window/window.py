@@ -4,9 +4,11 @@ from typing import List, Callable
 from model.generic_wall import GenericWall
 from model.timber import Orientation
 import copy
+from more_itertools import pairwise
 
 
 TRIPPLE_GAP: float = 200
+NOGGING_GAP: float = 250
 
 def add_lintel(lintel_height: float, window_width: float):
     timber = CuttedLintel(window_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
@@ -25,12 +27,13 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
     left_timber = Cutted2BY4(still_height, Orientation.VERTICAL)
     left_timber.move_up(Cutted2BY4.HEIGHT)
     left_timber.move_right(Cutted2BY4.HEIGHT * 2)
+
+    # left jack stud needs to be added into list first
     jack_studs.append(left_timber)
 
     right_timber = Cutted2BY4(still_height, Orientation.VERTICAL)
     right_timber.move_up(Cutted2BY4.HEIGHT)
     right_timber.move_right(window_width + Cutted2BY4.HEIGHT)
-    jack_studs.append(right_timber)
     
     middle_timber = copy.copy(left_timber)
     while True:
@@ -41,9 +44,11 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
         else:
             break
 
-        jack_studs.append(middle_timber)
         middle_timber = copy.copy(middle_timber)
     
+    # right jack stud needs to be added into list last
+    jack_studs.append(right_timber)
+
     return jack_studs
 
 def add_top_cripple(window_width: float, lintel_height: float, floor_height: float):
@@ -130,11 +135,13 @@ class Window(GenericWall):
         self.window_width: float = window_width
         self.floor_height: float = floor_height
         self.components: WindowComponents = None
+        self.noggings: List[Cutted2BY4] = []
         self.create()
         self.add_top_plate(self.window_width, self.floor_height)
         self.add_bottom_plate(self.window_width)
         self.add_left_king_stud(self.floor_height)
         self.add_right_king_stud(self.floor_height, self.window_width)
+        self.add_noggings()
 
     
     def create(self, window_create_factory: WindowCreateFactory = create_window):
@@ -184,3 +191,31 @@ class Window(GenericWall):
         timber.move_up(Cutted2BY4.HEIGHT)
         timber.move_right(window_width + Cutted2BY4.HEIGHT * 3)
         self.right_king_stud = timber
+    
+    def __add_noggings(self, left_stud: Cutted2BY4, right_stud: Cutted2BY4, nogging_gap: float = NOGGING_GAP):        
+        nogging_size  = right_stud - left_stud
+        
+        first_nogging = Cutted2BY4(nogging_size - Cutted2BY4.HEIGHT, Orientation.HORIZONTAL)
+        
+        first_nogging.move_a_to(left_stud.b_cord)
+
+        tmp_nogging: Cutted2BY4 = first_nogging
+
+        tmp_noggings = []
+        while True:
+            tmp_nogging.move_up(NOGGING_GAP)
+            if left_stud.c_cord < tmp_nogging.d_cord:
+                break
+            tmp_noggings.append(tmp_nogging)
+            tmp_nogging = copy.copy(tmp_nogging)   
+        return tmp_noggings      
+            
+    def add_noggings(self):
+        for left_stud, right_stud in pairwise(self.components.bottom_jack_studs):
+            
+            
+            tmp_noggings = self.__add_noggings(left_stud, right_stud, NOGGING_GAP)
+
+            
+            logging.info(f"current number of noggings {len(tmp_noggings)}")
+            self.noggings.extend(self.__add_noggings(left_stud, right_stud, NOGGING_GAP))

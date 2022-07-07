@@ -35,3 +35,20 @@ def test_rect_move_based_on_cord():
     assert rect.b_cord == XYCoordinate(2, 1)
     assert rect.c_cord == XYCoordinate(2, 2)
     assert rect.d_cord == XYCoordinate(1, 2)
+
+def test_center_to_center_distance_2():
+    s = XYRectangle(
+        XYCoordinate(1,1),
+        XYCoordinate(3,1),
+        XYCoordinate(3,3),
+        XYCoordinate(1,3)
+        )
+
+    d = XYRectangle(
+        XYCoordinate(3,1),
+        XYCoordinate(5,1),
+        XYCoordinate(5,3),
+        XYCoordinate(3,3)
+        )
+
+    assert d - s == 2

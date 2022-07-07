@@ -37,6 +37,8 @@ class CuttedTimber(XYRectangle):
             cd_line: XYLine = XYLine(self.c_cord, self.d_cord)
             da_line: XYLine = XYLine(self.d_cord, self.a_cord)
 
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 class Cutted2BY4(CuttedTimber):
     NAME: str = "TwoByFour"
