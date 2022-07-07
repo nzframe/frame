@@ -49,8 +49,8 @@ def add_top_cripple(door_width: float, door_height: float, distant_to_header: fl
 
 @dataclass
 class DryDoorComponents():
-    linter: CuttedTimber
-    top_cripples: List[CuttedTimber] 
+    linter: Cutted2BY4
+    top_cripples: List[Cutted2BY4] 
 
 
 DryDoorCreateFactory = Callable[[float, float, float], DryDoorComponents]
@@ -78,7 +78,7 @@ class DryDoor(GenericWall):
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
-        self.door_components: DryDoorComponents = None
+        self.components: DryDoorComponents = None
         self.create()
         self.add_top_plate(door_width, floor_height)
         self.add_bottom_plate(door_width)
@@ -86,7 +86,7 @@ class DryDoor(GenericWall):
         self.add_right_king_stud(floor_height, door_width)
 
     def create(self, door_create_factory: DryDoorCreateFactory = create_dry_door):
-        self.door_components = door_create_factory(self.door_width, self.door_height, self.floor_height)
+        self.components = door_create_factory(self.door_width, self.door_height, self.floor_height)
 
     def add_top_plate(self, door_width: float, floor_height: float) -> CuttedTimber:
         """_summary_

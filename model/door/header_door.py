@@ -1,9 +1,8 @@
 from model.generic_wall import GenericWall
 from dataclasses import dataclass
-from model.timber import CuttedLintel, CuttedTimber
 from typing import List, Callable
 
-from model.timber import Cutted2BY4, CuttedTimber, CuttedHeader
+from model.timber import Cutted2BY4, CuttedHeader
 from model.direction import Orientation
 import copy
 
@@ -78,12 +77,12 @@ def add_right_trimmer_stud(door_height: float, door_width: float):
 
 @dataclass
 class HeaderDoorComponents():
-    left_trimmer_stud: CuttedTimber
-    right_trimmer_stud: CuttedTimber
+    left_trimmer_stud: Cutted2BY4
+    right_trimmer_stud: Cutted2BY4
 
-    header: CuttedTimber
-    linter: CuttedTimber
-    top_cripples: List[CuttedTimber] 
+    header: CuttedHeader
+    linter: Cutted2BY4
+    top_cripples: List[Cutted2BY4] 
 
 
 HeaderDoorCreateFactory = Callable[[float, float, float], HeaderDoorComponents]
@@ -115,7 +114,7 @@ class HeaderDoor(GenericWall):
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
-        self.door_components: HeaderDoorComponents = None
+        self.components: HeaderDoorComponents = None
         self.create()
         self.add_top_plate(door_width, floor_height)
         self.add_bottom_plate(door_width)
@@ -123,9 +122,9 @@ class HeaderDoor(GenericWall):
         self.add_right_king_stud(floor_height, door_width)
 
     def create(self, door_create_factory: HeaderDoorCreateFactory = create_header_door):
-        self.door_components = door_create_factory(self.door_width, self.door_height, self.floor_height)
+        self.components = door_create_factory(self.door_width, self.door_height, self.floor_height)
 
-    def add_top_plate(self, door_width: float, floor_height: float) -> CuttedTimber:
+    def add_top_plate(self, door_width: float, floor_height: float) -> Cutted2BY4:
         """_summary_
 
         Args:
@@ -137,7 +136,7 @@ class HeaderDoor(GenericWall):
         self.top_plate = timber
         
 
-    def add_bottom_plate(self, door_width: float) -> CuttedTimber:
+    def add_bottom_plate(self, door_width: float) -> Cutted2BY4:
         """_summary_
 
         Args:
@@ -146,7 +145,7 @@ class HeaderDoor(GenericWall):
         timber = Cutted2BY4(door_width + Cutted2BY4.HEIGHT*4, Orientation.HORIZONTAL)
         self.bottom_plate = timber
 
-    def add_left_king_stud(self, floor_height: float):
+    def add_left_king_stud(self, floor_height: float) -> Cutted2BY4:
         """_summary_
 
         Args:
@@ -157,7 +156,7 @@ class HeaderDoor(GenericWall):
         timber.move_up(Cutted2BY4.HEIGHT)
         self.left_king_stud = timber
 
-    def add_right_king_stud(self, floor_height: float, door_width: float):
+    def add_right_king_stud(self, floor_height: float, door_width: float) -> Cutted2BY4:
         """_summary_
 
         Args:
