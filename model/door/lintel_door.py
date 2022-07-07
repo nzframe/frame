@@ -6,6 +6,7 @@ from typing import List, Callable
 from model.timber import Cutted2BY4, CuttedTimber, CuttedLintel
 from model.direction import Orientation
 import copy
+from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 
 from utility.draw import DrawIT
 import logging
@@ -22,7 +23,7 @@ def add_lintel(door_width: float, door_height: float):
 def add_still():
     pass
 
-def add_top_cripple(door_width: float, door_height: float, floor_height: float):
+def add_top_cripple(door_width: float, door_height: float, floor_height: float, gap_stragety: GAP_STRATEGY = gap_strategy_avg):
     top_cripples = []
     left_timber = Cutted2BY4(floor_height - door_height - CuttedLintel.HEIGHT, Orientation.VERTICAL)
     left_timber.move_up(door_height + Cutted2BY4.HEIGHT + CuttedLintel.HEIGHT)
@@ -33,10 +34,13 @@ def add_top_cripple(door_width: float, door_height: float, floor_height: float):
     right_timber.move_up(door_height + Cutted2BY4.HEIGHT + CuttedLintel.HEIGHT)
     right_timber.move_right(door_width + Cutted2BY4.HEIGHT * 2)
     top_cripples.append(right_timber)
+
+    tripple_gap = gap_stragety(TRIPPLE_GAP, right_timber - left_timber)
+    
     
     middle_timber = copy.copy(left_timber)
     while True:
-        middle_timber.move_right(TRIPPLE_GAP)
+        middle_timber.move_right(tripple_gap)
 
         if middle_timber.a_cord < right_timber.a_cord:
             top_cripples.append(middle_timber)
