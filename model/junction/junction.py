@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from model.timber import Cutted2BY4, CuttedTimber, Orientation
+from model.timber import Cutted2BY4, Orientation
 from model.generic_wall import GenericWall
 from typing import List, Callable
 import copy
@@ -40,7 +40,7 @@ class Junction(GenericWall):
     def create(self, junction_factory: JunctionCreateFactory = create_junction):
         self.components = junction_factory(self.floor_height, self.number_of_blocks)
 
-    def add_top_plate(self, floor_height: float) -> CuttedTimber:
+    def add_top_plate(self, floor_height: float) -> Cutted2BY4:
         """_summary_
 
         Args:
@@ -52,7 +52,7 @@ class Junction(GenericWall):
         self.top_plate = timber
         
 
-    def add_bottom_plate(self) -> CuttedTimber:
+    def add_bottom_plate(self) -> Cutted2BY4:
         """_summary_
 
         Args:
