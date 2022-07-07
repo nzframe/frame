@@ -1,5 +1,6 @@
 from utility.space.rect import XYRectangle
 from model.timber import CuttedTimber
+from typing import Set
 
 class GenericWall():
     """ wall is a combination of Components, window and retailing studs and common structure. """
@@ -19,4 +20,10 @@ class GenericWall():
     def get_total_timbers(self):
         """ get the number of timbers belonging to this component"""
         return len(self.cutted_timbers)
+    
+    def get_area(self):
+        if self.top_plate is None or self.bottom_plate is None:
+            raise ValueError("top_plate and bottom_plate doesn't exist so can't build the area")
+        self.area = XYRectangle(self.bottom_plate.a_cord, self.bottom_plate.b_cord, self.top_plate.c_cord, self.top_plate.d_cord)        
+        
 
