@@ -26,9 +26,20 @@ class Junction(GenericWall):
         self.create()
 
     def create(self):
-        self.components = self.__create_junction(self.floor_height, self.number_of_blocks)
+        self.components = self.__create_blockers(self.floor_height, self.number_of_blocks)
 
-    def __create_junction(self, floor_height, number_of_stud):
+    def __create_blockers(self, floor_height, column_of_blockers) -> List[Cutted2BY4]:
+        """_summary_
+
+        Args:
+            floor_height (_type_): whether using floor_height or top_plate.a.cord as a criteria?
+            number_of_stud (_type_): how many columns of blockers to use
+
+        Returns:
+            Cutted2BY4: _description_
+        """        
+
+        ## TODO: whether using floor_height or top_plate.a.cord as a criteria?
         timbers = []
 
         blocker = Cutted2BY4(BLOCKER_SIZE, Orientation.VERTICAL)
@@ -38,14 +49,27 @@ class Junction(GenericWall):
 
         middle_blocker = blocker
 
+        ## add initial row of blockers
         while True:
             middle_blocker = copy.copy(middle_blocker)
             middle_blocker.move_up(BLOCKER_GAP)
-            
+
             if self.top_plate.a_cord < middle_blocker.d_cord: 
                 break
             
             timbers.append(middle_blocker)
+
+        ## add the leftovers
+
+        # replicate a list as the reference
+        tmp_timbers = copy.copy(timbers)
+
+        for i in range(1, column_of_blockers):
+            for timber in tmp_timbers:
+                tmp_timber: Cutted2BY4 = copy.copy(timber)
+                tmp_timber.move_right(Cutted2BY4.HEIGHT * i)
+                timbers.append(tmp_timber)
+
         return timbers
 
     def add_top_plate(self, floor_height: float) -> Cutted2BY4:

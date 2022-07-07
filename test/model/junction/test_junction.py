@@ -2,7 +2,7 @@ from model.junction import Junction, JunctionComponents
 
 
 def test_draw_junction():
-    junction = Junction(2310, 5)
+    junction = Junction(2310, 4)
     from utility.draw import TestDraw
     from pathlib import Path
     file_path = Path(__file__).parent / "junction.png" 
