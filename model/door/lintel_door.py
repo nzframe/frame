@@ -102,7 +102,7 @@ class LintelDoor(GenericWall):
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
-        self.door_components: LintelDoorComponents = None
+        self.components: LintelDoorComponents = None
         self.create()
         self.add_top_plate(door_width, floor_height)
         self.add_bottom_plate(door_width)
@@ -110,7 +110,7 @@ class LintelDoor(GenericWall):
         self.add_right_kind_stud(floor_height, door_width)
 
     def create(self, door_create_factory: LintelDoorCreateFactory = create_lintel_door):
-        self.door_components = door_create_factory(self.door_width, self.door_height, self.floor_height)
+        self.components = door_create_factory(self.door_width, self.door_height, self.floor_height)
 
     def add_top_plate(self, door_width: float, floor_height: float) -> CuttedTimber:
         """_summary_

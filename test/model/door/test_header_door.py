@@ -8,7 +8,7 @@ def test_draw_header_door():
     file_path = Path(__file__).parent / "header_door.png" 
     td = TestDraw(file_path.as_posix())
     
-    door_cpnt: HeaderDoorComponents = door.door_components
+    door_cpnt: HeaderDoorComponents = door.components
     td.prepare(door.top_plate)
     td.prepare(door.bottom_plate)
     td.prepare(door.left_king_stud)

@@ -8,7 +8,7 @@ def test_draw_lintel_door():
     file_path = Path(__file__).parent / "litel_door.png" 
     td = TestDraw(file_path.as_posix())
     
-    door_cpnt: LintelDoorComponents = door.door_components
+    door_cpnt: LintelDoorComponents = door.components
     td.prepare(door.top_plate)
     td.prepare(door.bottom_plate)
     td.prepare(door.left_king_stud)

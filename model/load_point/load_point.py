@@ -38,7 +38,7 @@ class LoadPoint(GenericWall):
 
 
     def create(self, load_point_factory: LoadPointCreateFactory = create_load_point):
-        self.components = create_load_point(self.floor_height, self.number_of_stud)
+        self.components = load_point_factory(self.floor_height, self.number_of_stud)
 
     def add_top_plate(self, floor_height: float) -> CuttedTimber:
         """_summary_
