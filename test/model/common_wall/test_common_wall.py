@@ -2,7 +2,7 @@ from model.common import CommonWall, CommonWallComponents
 
 
 def test_common_draw_it():
-    common_wall = CommonWall(800, 2310)
+    common_wall = CommonWall(2330, 2310)
     from utility.draw import TestDraw
     from pathlib import Path
     file_path = Path(__file__).parent / "common_wall.png" 
@@ -17,4 +17,6 @@ def test_common_draw_it():
     for stud in common_wall_cpnt.studs:
         td.prepare(stud)
 
+    for nogging in common_wall.noggings:
+        td.prepare(nogging)
     td.draw_it()
