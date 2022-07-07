@@ -4,7 +4,7 @@ from model.timber import CuttedTimber
 from model.generic_wall import GenericWall
 
 
-class TestDraw:
+class DrawIT:
     def __init__(self, file_name: str) -> None:
         ##TODO fix hard code
         self.d = draw.Drawing(3000, 3000, origin=(0,0), displayInline=False)

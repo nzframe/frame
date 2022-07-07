@@ -3,10 +3,10 @@ from model.window import Window, WindowComponents
 
 def test_draw_dry_door():
     window = Window(2170, 1095, 630, 2630)
-    from utility.draw import TestDraw
+    from utility.draw import DrawIT
     from pathlib import Path
     file_path = Path(__file__).parent / "window_door.png" 
-    td = TestDraw(file_path.as_posix())
+    td = DrawIT(file_path.as_posix())
     
     componenet: WindowComponents = window.components
     td.prepare(window.top_plate)

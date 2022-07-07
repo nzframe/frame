@@ -1,21 +1,20 @@
-from model.common import CommonWall, CommonWallComponents
-
+from model.common import CommonWall
+from utility.draw.draw_common_wall import draw_common_wall
+from utility.draw import DrawIT
+from pathlib import Path
 
 def test_common_draw_it():
     common_wall = CommonWall(2330, 2310)
-    from utility.draw import TestDraw
-    from pathlib import Path
     file_path = Path(__file__).parent / "common_wall.png" 
-    td = TestDraw(file_path.as_posix())
-    
-    common_wall_cpnt: CommonWallComponents = common_wall.components
-    td.prepare(common_wall.top_plate)
-    td.prepare(common_wall.bottom_plate)
-    td.prepare(common_wall.left_king_stud)
-    td.prepare(common_wall.right_king_stud)
+    td = DrawIT(file_path.as_posix())
+    draw_common_wall(td, common_wall)
 
-    for stud in common_wall_cpnt.studs:
-        td.prepare(stud)
+def test_common_wall_move_right():
+    common_wall = CommonWall(2330, 2310)
+    common_wall.move_right(200)
+    file_path = Path(__file__).parent / "common_wall_move_right.png" 
+    td = DrawIT(file_path.as_posix())
+    draw_common_wall(td, common_wall)
 
     for nogging in common_wall.noggings:
         td.prepare(nogging)
