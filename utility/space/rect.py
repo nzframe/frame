@@ -50,36 +50,44 @@ class XYRectangle:
         self.b_cord = self.b_cord.move_up(value)
         self.c_cord = self.c_cord.move_up(value)
         self.d_cord = self.d_cord.move_up(value)
+        return self
 
     def move_down(self, value: int):
         self.a_cord = self.a_cord.move_down(value)
         self.b_cord = self.b_cord.move_down(value)
         self.c_cord = self.c_cord.move_down(value)
         self.d_cord = self.d_cord.move_down(value)
+        return self
 
     def move_right(self, value: int):
         self.a_cord = self.a_cord.move_right(value)
         self.b_cord = self.b_cord.move_right(value)
         self.c_cord = self.c_cord.move_right(value)
         self.d_cord = self.d_cord.move_right(value)
+        return self
     
     def move_left(self, value: int):
         self.a_cord = self.a_cord.move_left(value)
         self.b_cord = self.b_cord.move_left(value)
         self.c_cord = self.c_cord.move_left(value)
         self.d_cord = self.d_cord.move_left(value)
+        return self
 
     def move_a_to(self, target: XYCoordinate):
         self.__move_rect_overlap_x_with__(self.a_cord, target)
+        return self
 
     def move_b_to(self, target: XYCoordinate):
         self.__move_rect_overlap_x_with__(self.b_cord, target)
+        return self
 
     def move_c_to(self, target: XYCoordinate):
         self.__move_rect_overlap_x_with__(self.c_cord, target)
+        return self
 
     def move_d_to(self, target: XYCoordinate):
         self.__move_rect_overlap_x_with__(self.d_cord, target)
+        return self
 
     def __move_rect_overlap_x_with__(self, based_on_cord: XYCoordinate, target: XYCoordinate):
         distanct = target - based_on_cord 

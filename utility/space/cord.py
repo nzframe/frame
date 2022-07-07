@@ -12,6 +12,7 @@ class XYCoordinate(TMPCoordinate):
             return self.__move__(y_delta = value)
         elif orientation == Orientation.HORIZONTAL:
             return self.__move__(x_delta = value)
+        return self
 
     def move_up(self, value: float):
         return self.move(value, Orientation.VERTICAL)
