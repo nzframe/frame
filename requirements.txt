@@ -68,6 +68,7 @@ pytest==7.1.2
 python-dateutil==2.8.2
 pytk==0.0.2.1
 pytoolconfig==1.1.2
+PyYAML==6.0
 pyzmq==23.2.0
 rope==1.2.0
 scmpy==0.1.2
