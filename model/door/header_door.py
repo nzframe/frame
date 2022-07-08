@@ -7,45 +7,43 @@ from model.direction import Orientation
 import copy
 
 from utility.draw import DrawIT
-
+from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 
 TRIPPLE_GAP: float = 400
-
-##TODO Fix this hard code
-DISTANT_TO_HEADER: float = 170
 
 def move_components():
     pass
 
-def add_header(door_width: float, door_height: float):
+def add_header(door_width: float, floor_height: float):
     timber = CuttedHeader(door_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
-    timber.move_up(door_height + Cutted2BY4.HEIGHT)
+    timber.move_up(floor_height + Cutted2BY4.HEIGHT - CuttedHeader.HEIGHT)
     timber.move_right(Cutted2BY4.HEIGHT)
     return timber
 
-def add_lintel(door_width: float, door_height:float, distant_to_header: float = DISTANT_TO_HEADER):
+def add_lintel(door_width: float, door_height:float):
     timber = Cutted2BY4(door_width, Orientation.HORIZONTAL)
     timber.move_right(Cutted2BY4.HEIGHT * 2)
-    timber.move_up(door_height - distant_to_header)
+    timber.move_up(door_height + Cutted2BY4.HEIGHT)
     return timber
 
-## TODO: need the terms 
-def add_top_cripple(door_width: float, door_height: float, distant_to_header: float = DISTANT_TO_HEADER):
+def add_top_cripple(door_width: float, door_height: float, floor_height: float, gap_strategy: GAP_STRATEGY = gap_strategy_avg):
     top_cripples = []
 
-    left_timber = Cutted2BY4(distant_to_header, Orientation.VERTICAL)
+    left_timber = Cutted2BY4(floor_height - door_height - CuttedHeader.HEIGHT - Cutted2BY4.HEIGHT, Orientation.VERTICAL)
     left_timber.move_right(Cutted2BY4.HEIGHT * 2)
-    left_timber.move_up(door_height - distant_to_header + Cutted2BY4.HEIGHT)
+    left_timber.move_up(door_height + 2 * Cutted2BY4.HEIGHT)
     top_cripples.append(left_timber)
 
-    right_timber = Cutted2BY4(distant_to_header, Orientation.VERTICAL)
+    right_timber = Cutted2BY4(floor_height - door_height - CuttedHeader.HEIGHT - Cutted2BY4.HEIGHT, Orientation.VERTICAL)
     right_timber.move_right(door_width + Cutted2BY4.HEIGHT)
-    right_timber.move_up(door_height - distant_to_header + Cutted2BY4.HEIGHT)
+    right_timber.move_up(door_height + 2 * Cutted2BY4.HEIGHT)
     top_cripples.append(right_timber)
     
+    tripple_gap = gap_strategy(TRIPPLE_GAP, right_timber - left_timber)
+
     middle_timber = copy.copy(left_timber)
     while True:
-        middle_timber.move_right(TRIPPLE_GAP)
+        middle_timber.move_right(tripple_gap)
 
         if middle_timber.a_cord < right_timber.a_cord:
             top_cripples.append(middle_timber)
@@ -56,7 +54,7 @@ def add_top_cripple(door_width: float, door_height: float, distant_to_header: fl
     
     return top_cripples
 
-def add_left_trimmer_stud(door_height: float):
+def add_left_trimmer_stud(foor_height: float):
     """_summary_
 
     Args:
@@ -65,13 +63,13 @@ def add_left_trimmer_stud(door_height: float):
     Returns:
         _type_: _description_
     """    
-    timber = Cutted2BY4(door_height, Orientation.VERTICAL)
+    timber = Cutted2BY4(foor_height - CuttedHeader.HEIGHT, Orientation.VERTICAL)
     timber.move_up(Cutted2BY4.HEIGHT)
     timber.move_right(Cutted2BY4.HEIGHT)
     return timber
 
-def add_right_trimmer_stud(door_height: float, door_width: float):
-    timber = Cutted2BY4(door_height, Orientation.VERTICAL)
+def add_right_trimmer_stud(floor_height: float, door_width: float):
+    timber = Cutted2BY4(floor_height - CuttedHeader.HEIGHT, Orientation.VERTICAL)
     timber.move_up(Cutted2BY4.HEIGHT)
     timber.move_right(Cutted2BY4.HEIGHT * 2 + door_width)
     return timber
@@ -90,13 +88,13 @@ class HeaderDoorComponents():
 HeaderDoorCreateFactory = Callable[[float, float, float], HeaderDoorComponents]
 
 def create_header_door(door_width: float, door_height: float, floor_height: float):
-    left_trimmer_stud = add_left_trimmer_stud(door_height)
-    right_trimmer_stud = add_right_trimmer_stud(door_height, door_width)
+    left_trimmer_stud = add_left_trimmer_stud(floor_height)
+    right_trimmer_stud = add_right_trimmer_stud(floor_height, door_width)
 
-    header = add_header(door_width, door_height)
+    header = add_header(door_width, floor_height)
     lintel = add_lintel(door_width, door_height)
 
-    top_cripples = add_top_cripple(door_width, door_height)
+    top_cripples = add_top_cripple(door_width, door_height, floor_height)
 
     return HeaderDoorComponents(left_trimmer_stud, right_trimmer_stud, header, lintel, top_cripples)
 
