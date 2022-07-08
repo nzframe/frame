@@ -12,3 +12,13 @@ def test_draw_load_point():
 
 def test_python_range():
     assert [i for i in range(1, 4)] == [1, 2, 3]
+
+def test_draw_load_point_move_right():
+    load_point = LoadPoint(2310, 5)
+    load_point.move_right(300)
+    from utility.draw import DrawIT
+    from pathlib import Path
+    file_path = Path(__file__).parent / "load_point_move_right.png" 
+    td = DrawIT(file_path.as_posix())
+
+    draw_load_point(td, load_point)
