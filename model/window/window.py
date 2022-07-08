@@ -75,7 +75,6 @@ def add_top_cripple(window_width: float, lintel_height: float, floor_height: flo
         else:
             break
 
-        top_cripples.append(middle_timber)
         middle_timber = copy.copy(middle_timber)
     
     return top_cripples
