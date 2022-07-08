@@ -10,26 +10,25 @@ from utility.draw import DrawIT
 
 ##TODO Fix this hard code
 TRIPPLE_GAP: float = 400
-DISTANT_TO_HEADER: float = 260
 
-def add_lintel(door_width: float, door_height:float, distant_to_header: float = DISTANT_TO_HEADER):
+def add_lintel(door_width: float, door_height:float):
     timber = Cutted2BY4(door_width, Orientation.HORIZONTAL)
     timber.move_right(Cutted2BY4.HEIGHT)
-    timber.move_up(door_height - distant_to_header)
+    timber.move_up(door_height + Cutted2BY4.HEIGHT)
     return timber
 
 ## TODO: need the terms 
-def add_top_cripple(door_width: float, door_height: float, distant_to_header: float = DISTANT_TO_HEADER):
+def add_top_cripple(door_width: float, door_height: float, floor_height: float):
     top_cripples = []
 
-    left_timber = Cutted2BY4(distant_to_header, Orientation.VERTICAL)
+    left_timber = Cutted2BY4(floor_height - door_height - Cutted2BY4.HEIGHT, Orientation.VERTICAL)
     left_timber.move_right(Cutted2BY4.HEIGHT)
-    left_timber.move_up(door_height - distant_to_header + Cutted2BY4.HEIGHT)
+    left_timber.move_up(door_height + 2 * Cutted2BY4.HEIGHT)
     top_cripples.append(left_timber)
 
-    right_timber = Cutted2BY4(distant_to_header, Orientation.VERTICAL)
+    right_timber = Cutted2BY4(floor_height - door_height - Cutted2BY4.HEIGHT, Orientation.VERTICAL)
     right_timber.move_right(door_width)
-    right_timber.move_up(door_height - distant_to_header + Cutted2BY4.HEIGHT)
+    right_timber.move_up(door_height + 2 * Cutted2BY4.HEIGHT)
     top_cripples.append(right_timber)
     
     middle_timber = copy.copy(left_timber)
@@ -57,7 +56,7 @@ DryDoorCreateFactory = Callable[[float, float, float], DryDoorComponents]
 def create_dry_door(door_width: float, door_height: float, floor_height: float):
     lintel = add_lintel(door_width, door_height)
 
-    top_cripples = add_top_cripple(door_width, door_height)
+    top_cripples = add_top_cripple(door_width, door_height, floor_height)
 
     return DryDoorComponents(lintel, top_cripples)
 
