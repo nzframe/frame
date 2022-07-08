@@ -52,7 +52,6 @@ def add_top_cripple(door_width: float, door_height: float, distant_to_header: fl
         else:
             break
 
-        top_cripples.append(middle_timber)
         middle_timber = copy.copy(middle_timber)
     
     return top_cripples
@@ -180,6 +179,8 @@ class HeaderDoor(GenericWall):
         door_cpnt.linter.move_right(value)
 
         for cripple in door_cpnt.top_cripples:
+            import logging
+            logging.debug(f"{id(cripple)} is moving right")
             cripple.move_right(value)
 
         return self
