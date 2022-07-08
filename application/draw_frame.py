@@ -17,9 +17,13 @@ config_path = Path(__file__).parent / "config.yml"
 td = DrawIT(frame_photo_path.as_posix())
 
 config = {
+    "LintelDoor": "model.door",
+    "HeaderDoor": "model.door",
+    "DryDoor": "model.door",
     "CommonWall": "model.common",
     "Junction": "model.junction",
-    "LintelDoor": "model.door"
+    "Window": "model.window",
+    "LoadPoint": "model.load_point"
 }
 
 def load_yaml(file_path: str):

@@ -4,7 +4,7 @@ from model.timber import CuttedTimber
 class DrawIT:
     def __init__(self, file_name: str) -> None:
         ##TODO fix hard code
-        self.d = draw.Drawing(3000, 3000, origin=(0,0), displayInline=False)
+        self.d = draw.Drawing(6000, 3000, origin=(0,0), displayInline=False)
         self.file_name = file_name
     
     def prepare(self, timber: CuttedTimber):

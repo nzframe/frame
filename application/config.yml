@@ -14,3 +14,19 @@ parts:
   - type: CommonWall
     wall_width: 785
 
+  - type: HeaderDoor
+    door_width: 930
+    door_height: 2170
+
+  - type: LoadPoint
+    number_of_stud: 5
+
+  - type: Window
+    lintel_height: 2170
+    till_height: 1095
+    window_width: 630
+
+  - type: DryDoor
+    door_width: 800
+    door_height: 2170
+    
