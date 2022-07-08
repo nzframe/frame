@@ -89,7 +89,7 @@ class LoadPoint(GenericWall):
         super().move_right(value)
         components = self.components
         for component in components:
-            component.move(value)
+            component.move_right(value)
 
         return self
 
