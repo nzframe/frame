@@ -59,15 +59,12 @@ def main():
         instance.draw(td)
 
         rect: XYRectangle = instance.get_area
-        print(f"the size of the current object: {total_right_move}")
         total_right_move += (rect.b_cord.x - rect.a_cord.x)
 
         if index == 0:
             start_point = rect.a_cord.x
-            print(f"start point cord: {rect.a_cord}")
         elif index == (len(rt["parts"]) - 1):
             end_point = rect.b_cord.x
-            print(f"end point cord: {rect.b_cord}")
             # load_point = LoadPoint(2630, 1)
             # junction = Junction(2630, 3)
             # common_wall = CommonWall(600, 2630)
@@ -75,12 +72,6 @@ def main():
             # common_wall2 = CommonWall(600, 2630)
         index = index + 1
 
-    # build the top plate and bottom plate
-    print(f"""
-            start_point is: {start_point},
-            end_point is: {end_point},
-            total length of the wall is {end_point - start_point}
-        """)
     plate_size = end_point - start_point
     bottom_plate = Cutted2BY4(plate_size, Orientation.HORIZONTAL)
     prepare_cutted_timber(bottom_plate, td)

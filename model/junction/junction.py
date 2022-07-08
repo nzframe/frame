@@ -58,8 +58,6 @@ class Junction(GenericWall):
             middle_blocker = copy.copy(middle_blocker)
             middle_blocker.move_up(block_gap)
 
-            print(top_blocker)
-            print(middle_blocker)
             if top_blocker.a_cord < middle_blocker.a_cord: 
                 break
             
