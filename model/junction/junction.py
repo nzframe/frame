@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from model.timber import Cutted2BY4, Orientation
+from model.timber import Cutted2BY4, Orientation, distribute_timbers
 from model.generic_wall import GenericWall
 from typing import List
 import copy
@@ -50,17 +50,9 @@ class Junction(GenericWall):
         top_blocker.move_up(Cutted2BY4.HEIGHT + floor_height - BLOCKER_SIZE)
         timbers.append(top_blocker)
 
-        middle_blocker = bottom_blocker
-
         block_gap = gap_stratey(BLOCKER_GAP, top_blocker - bottom_blocker)
-        ## add initial row of blockers
-        while True:
-            middle_blocker = copy.copy(middle_blocker)
-            middle_blocker.move_up(block_gap)
 
-            if top_blocker.a_cord < middle_blocker.a_cord: 
-                break
-            
+        for middle_blocker in distribute_timbers(bottom_blocker, top_blocker, block_gap, True):            
             timbers.append(middle_blocker)
 
         ## add the leftovers

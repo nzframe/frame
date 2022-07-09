@@ -2,9 +2,8 @@ from model.generic_wall import GenericWall
 from dataclasses import dataclass
 from typing import List, Callable
 
-from model.timber import Cutted2BY4, CuttedHeader
+from model.timber import Cutted2BY4, CuttedHeader, distribute_timbers
 from model.direction import Orientation
-import copy
 
 from utility.draw import DrawIT
 from utility.strategy import gap_strategy_avg, GAP_STRATEGY
@@ -41,16 +40,8 @@ def add_top_cripple(door_width: float, door_height: float, floor_height: float, 
     
     tripple_gap = gap_strategy(TRIPPLE_GAP, right_timber - left_timber)
 
-    middle_timber = copy.copy(left_timber)
-    while True:
-        middle_timber.move_right(tripple_gap)
-
-        if middle_timber.a_cord < right_timber.a_cord:
-            top_cripples.append(middle_timber)
-        else:
-            break
-
-        middle_timber = copy.copy(middle_timber)
+    for middle_timber in distribute_timbers(left_timber, right_timber, tripple_gap):
+        top_cripples.append(middle_timber)
     
     return top_cripples
 

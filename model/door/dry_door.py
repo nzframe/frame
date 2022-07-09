@@ -2,9 +2,8 @@ from model.generic_wall import GenericWall
 from dataclasses import dataclass
 from typing import List, Callable
 
-from model.timber import Cutted2BY4
-from model.direction import Orientation
-import copy
+from model.timber import Cutted2BY4, distribute_timbers
+from model.direction import Orientation 
 from utility.draw import DrawIT
 
 
@@ -31,16 +30,8 @@ def add_top_cripple(door_width: float, door_height: float, floor_height: float):
     right_timber.move_up(door_height + 2 * Cutted2BY4.HEIGHT)
     top_cripples.append(right_timber)
     
-    middle_timber = copy.copy(left_timber)
-    while True:
-        middle_timber.move_right(TRIPPLE_GAP)
-
-        if middle_timber < right_timber:
-            top_cripples.append(middle_timber)
-        else:
-            break
-
-        middle_timber = copy.copy(middle_timber)
+    for middle_timber in distribute_timbers(left_timber, right_timber, TRIPPLE_GAP):
+        top_cripples.append(middle_timber)
     
     return top_cripples
 

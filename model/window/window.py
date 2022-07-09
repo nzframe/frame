@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from model.timber import CuttedTimber, Cutted2BY4, CuttedLintel
+from model.timber import CuttedTimber, Cutted2BY4, CuttedLintel, distribute_timbers
 from typing import List, Callable
 from model.generic_wall import GenericWall
 from model.timber import Orientation
@@ -38,16 +38,8 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
     right_timber.move_up(Cutted2BY4.HEIGHT)
     right_timber.move_right(window_width + Cutted2BY4.HEIGHT)
     
-    middle_timber = copy.copy(left_timber)
-    while True:
-        middle_timber.move_right(TRIPPLE_GAP)
-
-        if middle_timber.a_cord < right_timber.a_cord:
-            jack_studs.append(middle_timber)
-        else:
-            break
-
-        middle_timber = copy.copy(middle_timber)
+    for middle_timber in distribute_timbers(left_timber, right_timber, TRIPPLE_GAP):
+        jack_studs.append(middle_timber)
     
     # right jack stud needs to be added into list last
     jack_studs.append(right_timber)
@@ -66,17 +58,8 @@ def add_top_cripple(window_width: float, lintel_height: float, floor_height: flo
     right_timber.move_right(window_width + Cutted2BY4.HEIGHT * 2)
     top_cripples.append(right_timber)
     
-    middle_timber = copy.copy(left_timber)
-    while True:
-        middle_timber.move_right(TRIPPLE_GAP)
-
-        if middle_timber.a_cord < right_timber.a_cord:
-            top_cripples.append(middle_timber)
-        else:
-            break
-
-        middle_timber = copy.copy(middle_timber)
-    
+    for middle_timber in distribute_timbers(left_timber, right_timber, TRIPPLE_GAP):
+        top_cripples.append(middle_timber)
     return top_cripples
 
 def add_left_trimmer_stud(lintel_height: float):

@@ -1,7 +1,6 @@
-from ast import Call
 from dataclasses import dataclass, field
 from model.generic_wall import GenericWall
-from model.timber import Cutted2BY4, Orientation
+from model.timber import Cutted2BY4, Orientation, distribute_timbers
 from typing import List, Callable
 import  copy
 from utility.strategy import gap_strategy_avg, GAP_STRATEGY
@@ -30,16 +29,9 @@ def add_studs(wall_width: float, floor_height: float, stud_gap: float = STUD_GAP
     right_timber.move_up(Cutted2BY4.HEIGHT)
     right_timber.move_right(wall_width - Cutted2BY4.HEIGHT)
     
-    middle_timber = copy.copy(left_timber)
-    while True:
-        middle_timber.move_right(stud_gap)
 
-        if middle_timber.a_cord < right_timber.a_cord:
-            studs.append(middle_timber)
-        else:
-            break
-
-        middle_timber = copy.copy(middle_timber)
+    for middle_timber in distribute_timbers(left_timber, right_timber, stud_gap):
+        studs.append(middle_timber)
     
     # right jack stud needs to be added into list last
     studs.append(right_timber)

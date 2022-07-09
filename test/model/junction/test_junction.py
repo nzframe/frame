@@ -1,4 +1,4 @@
-from model.junction import Junction, JunctionComponents
+from model.junction import Junction
 from utility.draw.draw_junction import draw_junction
 
 def test_draw_junction():

@@ -58,12 +58,17 @@ class CuttedHeader(CuttedTimber):
     HEIGHT: float = 90
     WIDTH: float = 90    
 
-def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap: float):
+def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap: float, is_blocker: bool = False):
     middle_timber = copy.copy(begin_timber)
     while True:
-        middle_timber.move_right(gap)
+        if is_blocker:
+            middle_timber.move_up(gap)
+        elif begin_timber.orientation == Orientation.VERTICAL:
+            middle_timber.move_right(gap)
+        else:
+            middle_timber.move_up(gap)
 
-        if middle_timber.a_cord < end_timber.a_cord:
+        if middle_timber < end_timber:
             yield middle_timber
         else:
             break
