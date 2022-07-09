@@ -4,7 +4,7 @@ import pytest
 
 
 def test_draw_window_door():
-    window = Window(2170, 1095, 90, 2630)
+    window = Window(2170, 1095, 91, 2630)
     from utility.draw import DrawIT
     from pathlib import Path
     file_path = Path(__file__).parent / "window_door.png" 
