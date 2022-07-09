@@ -42,39 +42,12 @@ class App:
         self.wall_global_info = self.__get_wall_global_info(file_path)
         self.wall_detailed_info = self.__get_wall_detailed_info(file_path)
 
-        self.current_move = 0
         self.instances = []
 
-    def get_start_point(self):
-        return self.instances[0].get_area.a_cord.x
 
-    def get_end_point(self):
-        return self.instances[-1].get_area.b_cord.x
-
-    def main(self):
+    def execute(self):
         self.init_each_instance()
 
-        # move first
-        for instance in self.instances:
-            instance.move_right(self.current_move)
-            self.current_move = self.current_move + instance.get_area.b_cord.x - instance.get_area.a_cord.x
-        
-        # after move, then get the location and get the end point
-        plate_size = self.get_end_point() - self.get_start_point()
-        plates = self.add_plates(plate_size, self.wall_global_info.floor_height)
-
-        #draw
-        self.draw(td, plates)
-
-
-    def draw(self, td: DrawIT, plates):
-        for instance in self.instances:
-            instance.draw(td)
-        # draw plates
-        for plate in plates:
-            td.prepare(plate)
-
-        td.draw_it()
 
     def init_each_instance(self):
         for config in self.wall_detailed_info:
@@ -84,7 +57,6 @@ class App:
 
     def get_wall_instance(self, type_name, args):
         class_dict = get_class_dict()
-        assert len(class_dict) == 7
         wall = class_dict[type_name](**args)
         
         return wall
@@ -99,6 +71,42 @@ class App:
         rt = load_config(file_path)
         return rt["parts"]
 
+
+
+class DrawAPP(App):
+    def __init__(self, file_path) -> None:
+        super().__init__(file_path)
+        self.current_move = 0
+
+    def draw(self, td: DrawIT, plates):
+        for instance in self.instances:
+            instance.draw(td)
+        # draw plates
+        for plate in plates:
+            td.prepare(plate)
+
+        td.draw_it()
+
+    def get_start_point(self):
+        return self.instances[0].get_area.a_cord.x
+
+    def get_end_point(self):
+        return self.instances[-1].get_area.b_cord.x
+
+    def execute(self):
+        super().execute()
+        # move first
+        for instance in self.instances:
+            instance.move_right(self.current_move)
+            self.current_move = self.current_move + instance.get_area.b_cord.x - instance.get_area.a_cord.x
+        
+        # after move, then get the location and get the end point
+        plate_size = self.get_end_point() - self.get_start_point()
+        plates = self.add_plates(plate_size, self.wall_global_info.floor_height)
+
+        #draw
+        self.draw(td, plates)
+
     def add_plates(self, plate_size, floor_height):
         bottom_plate = Cutted2BY4(plate_size, Orientation.HORIZONTAL)
 
@@ -107,9 +115,10 @@ class App:
         
         return [top_plate, bottom_plate]
 
+
 def main():
-    app = App(config_path)
-    app.main()
+    app = DrawAPP(config_path)
+    app.execute()
     
 if __name__ == "__main__":
     main()
