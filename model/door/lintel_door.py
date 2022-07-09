@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from model.generic_wall import GenericWall
 from dataclasses import dataclass
 from model.timber import CuttedTimber, distribute_timbers
@@ -98,6 +99,8 @@ class LintelDoor(GenericWall):
         ___________
     """ 
     def __init__(self, door_width: float, door_height: float, floor_height: float):
+        if door_width <= 0:
+            raise ValueError("Lintel Door Width must be greater than 0")
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
