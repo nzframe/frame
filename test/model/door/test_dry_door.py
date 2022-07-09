@@ -2,7 +2,7 @@ from model.door import DryDoor, DryDoorComponents
 
 
 def test_draw_dry_door():
-    door = DryDoor(800, 2310, 2310)
+    door = DryDoor(800, 2170, 2630)
     from utility.draw import DrawIT
     from pathlib import Path
     file_path = Path(__file__).parent / "dry_door.png" 

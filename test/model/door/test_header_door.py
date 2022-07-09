@@ -3,7 +3,7 @@ from utility.draw.draw_header_door import draw_header_door
 
 
 def test_draw_header_door():
-    door = HeaderDoor(800, 2220, 2310)
+    door = HeaderDoor(930, 2170, 2630)
     from utility.draw import DrawIT
     from pathlib import Path
     file_path = Path(__file__).parent / "header_door.png" 
@@ -12,7 +12,7 @@ def test_draw_header_door():
     draw_header_door(td, door)
 
 def test_draw_header_door_move_right():
-    door = HeaderDoor(800, 2220, 2310)
+    door = HeaderDoor(930, 2170, 2630)
     door.move_right(300)
     from utility.draw import DrawIT
     from pathlib import Path
