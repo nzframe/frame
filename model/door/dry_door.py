@@ -35,7 +35,7 @@ def add_top_cripple(door_width: float, door_height: float, floor_height: float):
     while True:
         middle_timber.move_right(TRIPPLE_GAP)
 
-        if middle_timber.a_cord < right_timber.a_cord:
+        if middle_timber < right_timber:
             top_cripples.append(middle_timber)
         else:
             break
