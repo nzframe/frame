@@ -18,10 +18,7 @@ class XYRectangle:
 
     def __lt__(self, other):
         if hasattr(self, "orientation") and hasattr(other, "orientation") and self.orientation == other.orientation:
-            if self.orientation == Orientation.VERTICAL:
-                return self.a_cord.x < other.a_cord.x
-            else:
-                return self.a_cord.y < other.a_cord.y
+            return self.a_cord < other.a_cord
         else:
             raise Exception("Timber can't compare in this space")
     
