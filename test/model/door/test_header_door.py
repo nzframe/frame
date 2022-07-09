@@ -1,5 +1,7 @@
+from multiprocessing.sharedctypes import Value
 from model.door import HeaderDoor, HeaderDoorComponents
 from utility.draw.draw_header_door import draw_header_door
+import pytest 
 
 
 def test_draw_header_door():
@@ -20,3 +22,7 @@ def test_draw_header_door_move_right():
     td = DrawIT(file_path.as_posix())
     
     draw_header_door(td, door)
+
+def test_draw_header_door_init():
+    with pytest.raises(ValueError):
+        HeaderDoor(90, 2170, 2630)

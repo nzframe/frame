@@ -102,6 +102,8 @@ class HeaderDoor(GenericWall):
     """ 
 
     def __init__(self, door_width: float, door_height: float, floor_height: float):
+        if door_width <= Cutted2BY4.HEIGHT * 2:
+            raise ValueError("Header Door Size should be greater than 90")
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
