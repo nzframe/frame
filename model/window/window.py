@@ -5,12 +5,13 @@ from model.generic_wall import GenericWall
 from model.timber import Orientation
 import copy
 from more_itertools import pairwise
+import logging
 
 from utility.strategy import GAP_STRATEGY, gap_strategy_avg
 
 from utility.draw import DrawIT
 
-TRIPPLE_GAP: float = 200
+CRIPPLE_GAP: float = 200
 NOGGING_GAP: float = 250
 
 def add_lintel(lintel_height: float, window_width: float):
@@ -38,7 +39,7 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
     right_timber.move_up(Cutted2BY4.HEIGHT)
     right_timber.move_right(window_width + Cutted2BY4.HEIGHT)
     
-    for middle_timber in distribute_timbers(left_timber, right_timber, TRIPPLE_GAP):
+    for middle_timber in distribute_timbers(left_timber, right_timber, CRIPPLE_GAP):
         jack_studs.append(middle_timber)
     
     # right jack stud needs to be added into list last
@@ -47,6 +48,7 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
     return jack_studs
 
 def add_top_cripple(window_width: float, lintel_height: float, floor_height: float):
+    logging.debug(f"{window_width} {lintel_height} {floor_height}")
     top_cripples = []
     left_timber = Cutted2BY4(floor_height - lintel_height - CuttedLintel.HEIGHT, Orientation.VERTICAL)
     left_timber.move_up(lintel_height + Cutted2BY4.HEIGHT + CuttedLintel.HEIGHT)
@@ -58,8 +60,10 @@ def add_top_cripple(window_width: float, lintel_height: float, floor_height: flo
     right_timber.move_right(window_width + Cutted2BY4.HEIGHT * 2)
     top_cripples.append(right_timber)
     
-    for middle_timber in distribute_timbers(left_timber, right_timber, TRIPPLE_GAP):
+    for middle_timber in distribute_timbers(left_timber, right_timber, CRIPPLE_GAP):
         top_cripples.append(middle_timber)
+    
+    logging.debug(f"{top_cripples}")
     return top_cripples
 
 def add_left_trimmer_stud(lintel_height: float):
@@ -115,6 +119,8 @@ def create_window(lintel_height: float, still_height: float, window_width: float
 
 class Window(GenericWall):
     def __init__(self, lintel_height: float, till_height: float, window_width: float, floor_height: float):
+        if window_width <= 90:
+            raise ValueError("WindowDoor width must be greater than 91")
         self.lintel_height: float = lintel_height
         self.till_height: float = till_height
         self.window_width: float = window_width
