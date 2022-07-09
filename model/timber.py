@@ -3,6 +3,8 @@ from utility.space.rect import XYRectangle
 from utility.space.cord import XYCoordinate
 from model.direction import Orientation
 from utility.space.line import XYLine
+import copy
+
 
 @total_ordering
 class CuttedTimber(XYRectangle):
@@ -55,3 +57,15 @@ class CuttedHeader(CuttedTimber):
     NAME: str = "Header"
     HEIGHT: float = 90
     WIDTH: float = 90    
+
+def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap: float):
+    middle_timber = copy.copy(begin_timber)
+    while True:
+        middle_timber.move_right(gap)
+
+        if middle_timber.a_cord < end_timber.a_cord:
+            yield middle_timber
+        else:
+            break
+
+        middle_timber = copy.copy(middle_timber)
