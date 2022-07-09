@@ -170,8 +170,6 @@ class HeaderDoor(GenericWall):
         door_cpnt.linter.move_right(value)
 
         for cripple in door_cpnt.top_cripples:
-            import logging
-            logging.debug(f"{id(cripple)} is moving right")
             cripple.move_right(value)
 
         return self

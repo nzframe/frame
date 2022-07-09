@@ -5,7 +5,6 @@ from model.generic_wall import GenericWall
 from model.timber import Orientation
 import copy
 from more_itertools import pairwise
-import logging
 
 from utility.strategy import GAP_STRATEGY, gap_strategy_avg
 
@@ -48,7 +47,6 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
     return jack_studs
 
 def add_top_cripple(window_width: float, lintel_height: float, floor_height: float):
-    logging.debug(f"{window_width} {lintel_height} {floor_height}")
     top_cripples = []
     left_timber = Cutted2BY4(floor_height - lintel_height - CuttedLintel.HEIGHT, Orientation.VERTICAL)
     left_timber.move_up(lintel_height + Cutted2BY4.HEIGHT + CuttedLintel.HEIGHT)
@@ -63,7 +61,6 @@ def add_top_cripple(window_width: float, lintel_height: float, floor_height: flo
     for middle_timber in distribute_timbers(left_timber, right_timber, CRIPPLE_GAP):
         top_cripples.append(middle_timber)
     
-    logging.debug(f"{top_cripples}")
     return top_cripples
 
 def add_left_trimmer_stud(lintel_height: float):

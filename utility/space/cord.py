@@ -27,4 +27,10 @@ class XYCoordinate(TMPCoordinate):
         return self.move(value * -1, Orientation.HORIZONTAL)
 
     def __lt__(self, other):
-        return self.x < other.x or self.y < other.y
+        if self.x != other.x and self.y != other.y:
+            raise ArithmeticError("Two Cores are not comparable, other x axis and y axis are not equal")
+
+        elif self.x < other.x or self.y < other.y:
+            return True
+        else: 
+            return False

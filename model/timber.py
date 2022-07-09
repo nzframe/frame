@@ -41,7 +41,21 @@ class CuttedTimber(XYRectangle):
 
     def __repr__(self) -> str:
         return super().__repr__()
+    
+    def __lt__(self, other):
+        if not hasattr(self, "orientation") or not hasattr(other, "orientation"):
+            raise ArithmeticError("Timber can't compare in this space")
+        
+        if self.orientation != other.orientation:
+            raise ArithmeticError("Timber can't compare in this space")
 
+        self_center: XYCoordinate = self.center()
+        other_center: XYCoordinate = other.center()
+
+        if self_center.x == other_center.x:
+            return self.d_cord < other.a_cord
+        elif self_center.y == other_center.y:
+            return self.b_cord < other.a_cord
 
 class Cutted2BY4(CuttedTimber):
     NAME: str = "TwoByFour"
@@ -67,6 +81,7 @@ def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap
             middle_timber.move_right(gap)
         else:
             middle_timber.move_up(gap)
+
 
         if middle_timber < end_timber:
             yield middle_timber

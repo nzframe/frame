@@ -39,10 +39,21 @@ def test_XYCoordinate_add():
     assert a + b == XYCoordinate(2, 5)
     assert c + a == XYCoordinate(5, 4)
 
-def test_XYCoordinate_compare():
+def test_XYCoordinate_compare_x_axis():
+    a = XYCoordinate(1, 3)
+    b = XYCoordinate(2, 3)    
+    assert a < b
+
+def test_XYCoordinate_compare_y_axis():
     a = XYCoordinate(1, 2)
     b = XYCoordinate(1, 3)    
     assert a < b
+
+def test_XYCoordinate_compare_arithmeticError():
+    with pytest.raises(ArithmeticError):
+        a = XYCoordinate(1, 2)
+        b = XYCoordinate(3, 3)    
+        a < b
 
 def test_XYCoordinate_repr():
     a = XYCoordinate(1, 2)

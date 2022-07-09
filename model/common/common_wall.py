@@ -5,7 +5,7 @@ from typing import List, Callable
 import  copy
 from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 from more_itertools import pairwise
-import logging
+
 
 from utility.draw import DrawIT
 
@@ -103,7 +103,6 @@ class CommonWall(GenericWall):
             tmp_nogging.move_up(nogging_gap)
             if left_stud.c_cord < tmp_nogging.d_cord:
                 break
-            logging.debug(f"{tmp_nogging}")
             tmp_noggings.append(tmp_nogging)
             tmp_nogging = copy.copy(tmp_nogging)   
         return tmp_noggings      
@@ -116,7 +115,6 @@ class CommonWall(GenericWall):
 
         if len(studs) >= 2:
             nogging_gap = gap_strategy(nogging_gap, studs[-1]- studs[0])
-        logging.debug(f"{nogging_gap} {studs[-1] - studs[0]}")
         for left_stud, right_stud in pairwise(studs):
             self.noggings.extend(self.__add_noggings(left_stud, right_stud, nogging_gap))
 
