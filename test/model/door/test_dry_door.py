@@ -1,8 +1,9 @@
 from model.door import DryDoor, DryDoorComponents
+import pytest
 
 
 def test_draw_dry_door():
-    door = DryDoor(800, 2170, 2630)
+    door = DryDoor(91, 2170, 2630)
     from utility.draw import DrawIT
     from pathlib import Path
     file_path = Path(__file__).parent / "dry_door.png" 
@@ -39,3 +40,7 @@ def test_draw_dry_door_move_right():
         td.prepare(cripple)
 
     td.draw_it()
+
+def test_draw_dry_door_init():
+    with pytest.raises(ValueError):
+        door = DryDoor(90, 2170, 2630)
