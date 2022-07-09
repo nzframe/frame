@@ -63,18 +63,12 @@ def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap
     while True:
         if is_blocker:
             middle_timber.move_up(gap)
-            tmp_timber = copy.copy(middle_timber)
-            tmp_timber.move_up(gap)            
         elif begin_timber.orientation == Orientation.VERTICAL:
             middle_timber.move_right(gap)
-            tmp_timber = copy.copy(middle_timber)
-            tmp_timber.move_right(gap)            
         else:
             middle_timber.move_up(gap)
-            tmp_timber = copy.copy(middle_timber)
-            tmp_timber.move_up(gap)            
 
-        if tmp_timber < end_timber:
+        if middle_timber < end_timber:
             yield middle_timber
         else:
             break
