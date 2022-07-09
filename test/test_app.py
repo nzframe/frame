@@ -1,5 +1,5 @@
 import pytest
-from draw_frame import get_class_dict
+from application import get_class_dict
 
 
 def test_func_params():
@@ -16,22 +16,6 @@ def test_function_pass():
     def fun(wall_width):
         return wall_width
     assert fun(**config) == 785 
-
-def get_class_dict():
-    import importlib
-    configs = {
-        "LintelDoor": "model.door",
-        "HeaderDoor": "model.door",
-        "DryDoor": "model.door",
-        "CommonWall": "model.common",
-        "Junction": "model.junction",
-        "Window": "model.window",
-        "LoadPoint": "model.load_point"
-    }
-    class_dict = {}
-    for class_name, module_name in configs.items():
-        class_dict[class_name] = getattr(importlib.import_module(module_name), class_name)
-    return class_dict
 
 def get_wall_instance(type_name, args):
     class_dict = get_class_dict()
