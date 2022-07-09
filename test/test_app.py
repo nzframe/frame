@@ -1,5 +1,4 @@
-import pytest
-from application import get_class_dict
+from application.app import get_class_dict
 
 
 def test_func_params():
