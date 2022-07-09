@@ -7,7 +7,7 @@ import pytest
 
 
 def test_common_draw_it():
-    common_wall = CommonWall(91, 2310)
+    common_wall = CommonWall(785, 2310)
     file_path = Path(__file__).parent / "common_wall.png" 
     td = DrawIT(file_path.as_posix())
     draw_common_wall(td, common_wall)
