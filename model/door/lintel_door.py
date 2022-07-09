@@ -10,7 +10,7 @@ import copy
 from utility.strategy import gap_strategy_avg, GAP_STRATEGY
 
 from utility.draw import DrawIT
-import logging
+
 
 TRIPPLE_GAP: float = 400
 
@@ -40,9 +40,6 @@ def add_top_cripple(door_width: float, door_height: float, floor_height: float, 
 
     for middle_timber in distribute_timbers(left_timber, right_timber, tripple_gap):
         top_cripples.append(middle_timber)
-    
-    for cripple in top_cripples:
-        logging.debug(f"{id(cripple)} is added")
     return top_cripples
 
 def add_left_trimmer_stud(door_height: float):
@@ -165,7 +162,6 @@ class LintelDoor(GenericWall):
         door_cpnt.lintel.move_right(value)
 
         for cripple in door_cpnt.top_cripples:
-            logging.debug(f"cripple: {id(cripple)} move right {value}")
             cripple.move_right(value)
         super().move_right(value)
 
