@@ -19,6 +19,8 @@ class CommonWallComponents:
 
 class CommonWall(GenericWall):
     def __init__(self, wall_width: float, floor_height: float, stud_gap: float = STUD_GAP, strategy: GAP_STRATEGY = gap_strategy_avg):
+        if wall_width <= Cutted2BY4.HEIGHT * 2:
+            raise ValueError("Common Wall Width must be greater than 90")
         super().__init__()
         self.wall_width = wall_width
         self.components: CommonWallComponents = []
@@ -50,7 +52,7 @@ class CommonWall(GenericWall):
             wall_width (float): the width of the door
             floor_height (float): the height of the floor 
         """    """ """
-        timber = Cutted2BY4(wall_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
+        timber = Cutted2BY4(wall_width, Orientation.HORIZONTAL)
         timber.move_up(floor_height + Cutted2BY4.HEIGHT)
         self.top_plate = timber
         
@@ -61,7 +63,7 @@ class CommonWall(GenericWall):
         Args:
             door_width (float): the width of the door
         """    """ """
-        timber = Cutted2BY4(wall_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
+        timber = Cutted2BY4(wall_width, Orientation.HORIZONTAL)
         self.bottom_plate = timber
 
     def add_left_king_stud(self, floor_height: float):
@@ -84,7 +86,7 @@ class CommonWall(GenericWall):
         """    """ """
         timber = Cutted2BY4(floor_height, Orientation.VERTICAL)
         timber.move_up(Cutted2BY4.HEIGHT)
-        timber.move_right(wall_width + Cutted2BY4.HEIGHT)
+        timber.move_right(wall_width - Cutted2BY4.HEIGHT)
         self.right_king_stud = timber
 
     def __add_noggings(self, left_stud: Cutted2BY4, right_stud: Cutted2BY4, nogging_gap: float = NOGGING_GAP):                
