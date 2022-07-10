@@ -6,7 +6,7 @@ from model.timber import Orientation
 import copy
 from more_itertools import pairwise
 
-from utility.strategy import GAP_STRATEGY, gap_strategy_avg
+from utility.strategy import GAP_STRATEGY, gap_strategy_default
 
 from utility.draw import DrawIT
 
@@ -198,7 +198,7 @@ class Window(GenericWall):
             tmp_nogging = copy.copy(tmp_nogging)   
         return tmp_noggings      
             
-    def add_noggings(self, gap_strategy: GAP_STRATEGY = gap_strategy_avg):
+    def add_noggings(self, gap_strategy: GAP_STRATEGY = gap_strategy_default):
         if len(self.components.bottom_jack_studs) >= 2:
             nogging_gap = gap_strategy(NOGGING_GAP, self.components.bottom_jack_studs[-1]-self.components.bottom_jack_studs[0])
         else:

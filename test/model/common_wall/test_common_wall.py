@@ -12,6 +12,12 @@ def test_common_draw_it():
     td = DrawIT(file_path.as_posix())
     draw_common_wall(td, common_wall)
 
+def test_common_draw_it():
+    common_wall = CommonWall(1000, 2310)
+    file_path = Path(__file__).parent / "common_wall_1100.png" 
+    td = DrawIT(file_path.as_posix())
+    draw_common_wall(td, common_wall)
+
 def test_common_wall_move_right():
     common_wall = CommonWall(2330, 2310)
     common_wall.move_right(200)

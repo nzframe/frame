@@ -7,7 +7,7 @@ from typing import List, Callable
 from model.timber import Cutted2BY4, CuttedTimber, CuttedLintel
 from model.direction import Orientation
 import copy
-from utility.strategy import gap_strategy_avg, GAP_STRATEGY
+from utility.strategy import gap_strategy_default, GAP_STRATEGY
 
 from utility.draw import DrawIT
 
@@ -24,7 +24,7 @@ def add_lintel(door_width: float, door_height: float):
 def add_still():
     pass
 
-def add_top_cripple(door_width: float, door_height: float, floor_height: float, gap_stragety: GAP_STRATEGY = gap_strategy_avg):
+def add_top_cripple(door_width: float, door_height: float, floor_height: float, gap_stragety: GAP_STRATEGY = gap_strategy_default):
     top_cripples = []
     left_timber = Cutted2BY4(floor_height - door_height - CuttedLintel.HEIGHT, Orientation.VERTICAL)
     left_timber.move_up(door_height + Cutted2BY4.HEIGHT + CuttedLintel.HEIGHT)

@@ -3,7 +3,7 @@ from model.generic_wall import GenericWall
 from model.timber import Cutted2BY4, Orientation, distribute_timbers
 from typing import List, Callable
 import  copy
-from utility.strategy import gap_strategy_avg, GAP_STRATEGY
+from utility.strategy import gap_strategy_default, GAP_STRATEGY
 from more_itertools import pairwise
 
 
@@ -18,7 +18,7 @@ class CommonWallComponents:
 
 
 class CommonWall(GenericWall):
-    def __init__(self, wall_width: float, floor_height: float, stud_gap: float = STUD_GAP, strategy: GAP_STRATEGY = gap_strategy_avg):
+    def __init__(self, wall_width: float, floor_height: float, stud_gap: float = STUD_GAP, strategy: GAP_STRATEGY = gap_strategy_default):
         if wall_width <= Cutted2BY4.HEIGHT * 2:
             raise ValueError("Common Wall Width must be greater than 90")
         super().__init__()
@@ -107,7 +107,7 @@ class CommonWall(GenericWall):
             tmp_nogging = copy.copy(tmp_nogging)   
         return tmp_noggings      
             
-    def add_noggings(self, nogging_gap:float = NOGGING_GAP, gap_strategy: GAP_STRATEGY = gap_strategy_avg):
+    def add_noggings(self, nogging_gap:float = NOGGING_GAP, gap_strategy: GAP_STRATEGY = gap_strategy_default):
         studs = []
         studs.append(self.left_king_stud)
         studs.extend(self.components.studs)
