@@ -12,6 +12,7 @@ from utility.draw import DrawIT
 
 CRIPPLE_GAP: float = 355
 NOGGING_GAP: float = 800
+STUD_GAP: float = 355
 
 def add_lintel(lintel_height: float, window_width: float):
     timber = CuttedLintel(window_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
@@ -38,7 +39,7 @@ def add_bottom_jack_studs(window_width: float, still_height: float):
     right_timber.move_up(Cutted2BY4.HEIGHT)
     right_timber.move_right(window_width + Cutted2BY4.HEIGHT)
     
-    for middle_timber in distribute_timbers(left_timber, right_timber, CRIPPLE_GAP):
+    for middle_timber in distribute_timbers(left_timber, right_timber, STUD_GAP):
         jack_studs.append(middle_timber)
     
     # right jack stud needs to be added into list last
