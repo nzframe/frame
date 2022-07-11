@@ -1,4 +1,4 @@
-from model.window import Window, WindowComponents
+from model.window import Window
 from utility.draw.draw_window import draw_window
 import pytest 
 

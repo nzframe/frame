@@ -1,6 +1,6 @@
 from utility.space.rect import XYRectangle
 from model.timber import CuttedTimber
-from typing import Set
+
 
 class GenericWall:
     """ wall is a combination of Components, window and retailing studs and common structure. """
