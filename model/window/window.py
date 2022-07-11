@@ -10,8 +10,8 @@ from utility.strategy import GAP_STRATEGY, gap_strategy_default
 
 from utility.draw import DrawIT
 
-CRIPPLE_GAP: float = 200
-NOGGING_GAP: float = 250
+CRIPPLE_GAP: float = 355
+NOGGING_GAP: float = 800
 
 def add_lintel(lintel_height: float, window_width: float):
     timber = CuttedLintel(window_width + Cutted2BY4.HEIGHT * 2, Orientation.HORIZONTAL)
