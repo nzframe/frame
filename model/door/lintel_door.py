@@ -1,4 +1,3 @@
-from multiprocessing.sharedctypes import Value
 from model.generic_wall import GenericWall
 from dataclasses import dataclass
 from model.timber import CuttedTimber, distribute_timbers
@@ -6,10 +5,7 @@ from typing import List, Callable
 
 from model.timber import Cutted2BY4, CuttedTimber, CuttedLintel
 from model.direction import Orientation
-import copy
 from utility.strategy import gap_strategy_default, GAP_STRATEGY
-
-from utility.draw import DrawIT
 
 
 TRIPPLE_GAP: float = 400
@@ -20,9 +16,6 @@ def add_lintel(door_width: float, door_height: float):
     timber.move_up(door_height + Cutted2BY4.HEIGHT)
     timber.move_right(Cutted2BY4.HEIGHT)
     return timber
-
-def add_still():
-    pass
 
 def add_top_cripple(door_width: float, door_height: float, floor_height: float, gap_stragety: GAP_STRATEGY = gap_strategy_default):
     top_cripples = []
@@ -98,6 +91,7 @@ class LintelDoor(GenericWall):
     def __init__(self, door_width: float, door_height: float, floor_height: float):
         if door_width <= 0:
             raise ValueError("Lintel Door Width must be greater than 0")
+        super().__init__()            
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
@@ -155,26 +149,10 @@ class LintelDoor(GenericWall):
         timber.move_right(door_width + Cutted2BY4.HEIGHT * 3)
         self.right_king_stud = timber
 
-    def move_right(self, value: float):
+    def group(self):
+        super().group()
         door_cpnt: LintelDoorComponents = self.components
-        door_cpnt.left_trimmer_stud.move_right(value)
-        door_cpnt.right_trimmer_stud.move_right(value)
-        door_cpnt.lintel.move_right(value)
+        self.grouped.append(door_cpnt.lintel)
 
         for cripple in door_cpnt.top_cripples:
-            cripple.move_right(value)
-        super().move_right(value)
-
-        return self
-
-
-    def draw(self, td: DrawIT):    
-        door_cpnt: LintelDoorComponents = self.components
-        td.prepare(self.left_king_stud)
-        td.prepare(self.right_king_stud)
-        td.prepare(door_cpnt.left_trimmer_stud)
-        td.prepare(door_cpnt.right_trimmer_stud)
-        td.prepare(door_cpnt.lintel)
-
-        for cripple in door_cpnt.top_cripples:
-            td.prepare(cripple)
+            self.grouped.append(cripple)

@@ -8,8 +8,6 @@ from more_itertools import pairwise
 
 from utility.strategy import GAP_STRATEGY, gap_strategy_default
 
-from utility.draw import DrawIT
-
 CRIPPLE_GAP: float = 355
 NOGGING_GAP: float = 800
 STUD_GAP: float = 355
@@ -119,6 +117,7 @@ class Window(GenericWall):
     def __init__(self, lintel_height: float, till_height: float, window_width: float, floor_height: float):
         if window_width <= 90:
             raise ValueError("WindowDoor width must be greater than 91")
+        super().__init__()
         self.lintel_height: float = lintel_height
         self.till_height: float = till_height
         self.window_width: float = window_width
@@ -207,40 +206,20 @@ class Window(GenericWall):
         for left_stud, right_stud in pairwise(self.components.bottom_jack_studs):
             self.noggings.extend(self.__add_noggings(left_stud, right_stud, nogging_gap))
 
-    def move_right(self, value: float):
-        super().move_right(value)
-        components = self.components
-
-        components.lintel.move_right(value)
-        components.still.move_right(value)
-        components.left_trimmer_stud.move_right(value)
-        components.right_trimmer_stud.move_right(value)
-
-        for cripple in components.top_cripples:
-            cripple.move_right(value)
-
-        for jack_stud in components.bottom_jack_studs:
-            jack_stud.move_right(value)
-
-        for nogging in self.noggings:
-            nogging.move_right(value)
-        return self
-
-    def draw(self, td: DrawIT):    
+    def group(self):
+        super().group()
         componenet: WindowComponents = self.components
-        td.prepare(self.left_king_stud)
-        td.prepare(self.right_king_stud)
-        td.prepare(componenet.lintel)
-        td.prepare(componenet.still)
-        td.prepare(componenet.left_trimmer_stud)
-        td.prepare(componenet.right_trimmer_stud)
+        self.grouped.append(componenet.lintel)
+        self.grouped.append(componenet.still)
+        self.grouped.append(componenet.left_trimmer_stud)
+        self.grouped.append(componenet.right_trimmer_stud)
 
         for cripple in componenet.top_cripples:
-            td.prepare(cripple)
+            self.grouped.append(cripple)
 
         for jack_stud in componenet.bottom_jack_studs:
-            td.prepare(jack_stud)
+            self.grouped.append(jack_stud)
 
         for nogging in self.noggings:
-            td.prepare(nogging)
+            self.grouped.append(nogging)
 

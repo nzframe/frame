@@ -4,7 +4,6 @@ from typing import List, Callable
 
 from model.timber import Cutted2BY4, distribute_timbers
 from model.direction import Orientation 
-from utility.draw import DrawIT
 
 
 ##TODO Fix this hard code
@@ -66,6 +65,7 @@ class DryDoor(GenericWall):
     def __init__(self, door_width: float, door_height: float, floor_height: float):
         if door_width <= 2 * Cutted2BY4.HEIGHT:
             raise ValueError("Dry Door width must be greater than 91")
+        super().__init__()            
         self.door_width: float = door_width
         self.door_height: float = door_height
         self.floor_height: float = floor_height
@@ -123,21 +123,10 @@ class DryDoor(GenericWall):
         timber.move_right(door_width + Cutted2BY4.HEIGHT)
         self.right_king_stud = timber
 
-    def move_right(self, value: float):
-        super().move_right(value)
-        self.components.linter.move_right(value)
-
-        for cripple in self.components.top_cripples:
-            cripple.move_right(value)
-
-        return self
-    
-    def draw(self, td: DrawIT):    
+    def group(self):
+        super().group()
         door_cpnt: DryDoorComponents = self.components
-        td.prepare(self.left_king_stud)
-        td.prepare(self.right_king_stud)
-        td.prepare(door_cpnt.linter)
+        self.grouped.append(door_cpnt.linter)
 
         for cripple in door_cpnt.top_cripples:
-            td.prepare(cripple)
-
+            self.grouped.append(cripple)

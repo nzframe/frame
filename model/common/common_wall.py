@@ -7,8 +7,6 @@ from utility.strategy import gap_strategy_default, GAP_STRATEGY
 from more_itertools import pairwise
 
 
-from utility.draw import DrawIT
-
 STUD_GAP = 355
 NOGGING_GAP = 800
 
@@ -118,23 +116,12 @@ class CommonWall(GenericWall):
         for left_stud, right_stud in pairwise(studs):
             self.noggings.extend(self.__add_noggings(left_stud, right_stud, nogging_gap))
 
-    def move_right(self, value: float):
-        super().move_right(value)
+    def group(self):
+        super().group()
         for stud in self.components.studs:
-            stud.move_right(value)
+            self.grouped.append(stud)
 
         for nogging in self.noggings:
-            nogging.move_right(value)
+            self.grouped.append(nogging)
 
         return self
-
-    def draw(self, td: DrawIT):    
-        common_wall_cpnt: CommonWallComponents = self.components
-        td.prepare(self.left_king_stud)
-        td.prepare(self.right_king_stud)
-
-        for stud in common_wall_cpnt.studs:
-            td.prepare(stud)
-
-        for nogging in self.noggings:
-            td.prepare(nogging)

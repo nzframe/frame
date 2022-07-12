@@ -1,5 +1,6 @@
 from utility.space.rect import XYRectangle
 from model.timber import CuttedTimber
+from utility.draw import DrawIT
 
 
 class GenericWall:
@@ -12,6 +13,7 @@ class GenericWall:
         self.left_king_stud: CuttedTimber = None
         self.right_king_stud: CuttedTimber = None
         self.area: XYRectangle = None
+        self.grouped = []
 
     def register(self, cutted_timber: CuttedTimber):
         """ Each wall component consists of different timbers """
@@ -28,9 +30,32 @@ class GenericWall:
         self.area = XYRectangle(self.bottom_plate.a_cord, self.bottom_plate.b_cord, self.top_plate.c_cord, self.top_plate.d_cord)        
         return self.area
         
+
+    def prepare(self, td: DrawIT):
+        for ele in self.grouped:    
+            td.prepare(ele)
+        
+    
+    def export_data(self):
+        pass
+
     def move_right(self, value: float):
-        self.top_plate.move_right(value)
-        self.bottom_plate.move_right(value)
-        self.left_king_stud.move_right(value)
-        self.right_king_stud.move_right(value)
+        for ele in self.grouped:    
+            ele.move_right(value)
+
         return self
+
+
+    def transform(self):
+        pass
+
+    def group(self):
+        """ group all the timbers into one array (except the top_plate and bottom_plate, but still can use it by instance variable)
+            will be used later in transform, data export, draw later on. 
+        """        
+        #self.grouped.append(self.top_plate)
+        #self.grouped.append(self.bottom_plate)
+
+
+        self.grouped.append(self.left_king_stud)
+        self.grouped.append(self.right_king_stud)

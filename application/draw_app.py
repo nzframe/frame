@@ -11,7 +11,7 @@ class DrawAPP(App):
 
     def draw(self, td: DrawIT, plates):
         for instance in self.instances:
-            instance.draw(td)
+            instance.prepare(td)
         # draw plates
         for plate in plates:
             td.prepare(plate)
@@ -28,7 +28,10 @@ class DrawAPP(App):
         super().execute()
         # move first
         for instance in self.instances:
+            instance.group()
             instance.move_right(self.current_move)
+            instance.bottom_plate.move_right(self.current_move)
+            instance.top_plate.move_right(self.current_move)
             self.current_move = self.current_move + instance.get_area.b_cord.x - instance.get_area.a_cord.x
         
         # after move, then get the location and get the end point

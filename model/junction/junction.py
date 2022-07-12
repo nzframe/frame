@@ -5,7 +5,6 @@ from model.generic_wall import GenericWall
 from typing import List
 import copy
 from utility.strategy import gap_strategy_default, GAP_STRATEGY
-from utility.draw import DrawIT
 
 BLOCKER_SIZE = 250
 BLOCKER_GAP = 700
@@ -16,6 +15,7 @@ class JunctionComponents:
 
 class Junction(GenericWall):
     def __init__(self, floor_height: float, number_of_blocks: int = 2):
+        super().__init__()
         self.floor_height = floor_height
         self.number_of_blocks = number_of_blocks
         self.components: JunctionComponents = None
@@ -100,17 +100,9 @@ class Junction(GenericWall):
         timber.move_right(self.number_of_blocks*(Cutted2BY4.HEIGHT+1))
         self.right_king_stud = timber
 
-    def move_right(self, value: float):
-        super().move_right(value)
+    def group(self):
         components: JunctionComponents = self.components
         for component in components:
-            component.move_right(value)
-
-        return self
-
-    def draw(self, td: DrawIT):    
-        components: JunctionComponents = self.components
-        for component in components:
-            td.prepare(component)
+            self.grouped.append(component)
  
 

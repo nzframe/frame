@@ -4,8 +4,6 @@ from model.generic_wall import GenericWall
 from typing import List, Callable
 import copy
 
-from utility.draw import DrawIT
-
 @dataclass
 class LoadPointComponents:
     pieces: List[CuttedTimber] = field(default_factory=list)
@@ -28,6 +26,7 @@ def create_load_point(floor_height, number_of_stud):
 
 class LoadPoint(GenericWall):
     def __init__(self, floor_height: float, number_of_stud: int = 5):
+        super().__init__()
         self.floor_height = floor_height
         self.number_of_stud = number_of_stud
         self.components: LoadPointComponents = None
@@ -85,18 +84,6 @@ class LoadPoint(GenericWall):
         timber.move_right(Cutted2BY4.HEIGHT * self.number_of_stud - Cutted2BY4.HEIGHT)
         self.right_king_stud = timber
     
-    def move_right(self, value: float):
-        super().move_right(value)
-        components = self.components
-        for component in components:
-            component.move_right(value)
-
-        return self
-
-    def draw(self, td: DrawIT):    
-        td.prepare(self.left_king_stud)
-        td.prepare(self.right_king_stud)
-        components: LoadPointComponents = self.components
-        for component in components:
-            td.prepare(component)
-
+    def group(self):
+        super().group()
+        self.grouped.extend(self.components)
