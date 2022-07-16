@@ -12,8 +12,12 @@ class ExportAPP(App):
         
     def output_data(self, file_handler):
         for e in self.get_data():
-            for ele in e:
-                file_handler.write(str(ele))
+            x, y, z = e[0]
+            file_handler.write(f"{x},{y},{z}|")
+            x, y, z = e[1]
+            file_handler.write(f"{x},{y},{z}|")
+            file_handler.write(f"{e[2]}|")
+            file_handler.write(f"{e[3]}")
             file_handler.write("\n")
 
     def get_data(self):
