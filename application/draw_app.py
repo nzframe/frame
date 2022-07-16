@@ -2,8 +2,8 @@ from application.app import App
 from utility.draw import DrawIT
 
 class DrawAPP(App):
-    def __init__(self, file_path, png_path) -> None:
-        super().__init__(file_path)
+    def __init__(self, config_path, png_path) -> None:
+        super().__init__(config_path)
         self.td = DrawIT(png_path)
 
     def draw(self):
