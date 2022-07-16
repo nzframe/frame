@@ -1,6 +1,5 @@
 from utility.space.rect import XYRectangle
 from model.timber import CuttedTimber
-from utility.draw import DrawIT
 
 
 class GenericWall:
@@ -28,13 +27,7 @@ class GenericWall:
         if self.top_plate is None or self.bottom_plate is None:
             raise ValueError("top_plate and bottom_plate doesn't exist so can't build the area")
         self.area = XYRectangle(self.bottom_plate.a_cord, self.bottom_plate.b_cord, self.top_plate.c_cord, self.top_plate.d_cord)        
-        return self.area
-        
-
-    def prepare(self, td: DrawIT):
-        for ele in self.grouped:    
-            td.prepare(ele)
-        
+        return self.area        
     
     def export_data(self):
         pass
