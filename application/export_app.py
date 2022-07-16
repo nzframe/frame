@@ -1,20 +1,26 @@
 from application.app import App
-from utility.draw import DrawIT
+from pathlib import Path
 
-class DrawAPP(App):
-    def __init__(self, file_path) -> None:
-        super().__init__(file_path)
+class ExportAPP(App):
+    def __init__(self, config_path, data_folder) -> None:
+        super().__init__(config_path)
+        self.data_folder = data_folder
 
-    def draw(self, td: DrawIT):
-        for timber in self.timbers:
-            td.prepare(timber)
-
-        td.draw_it()
-
-    def execute(self, td):
+    def execute(self):
         super().execute()
-        # move first
-
-        #draw
-        self.draw(td)
+        self.open_file(self.output_data)
         
+    def output_data(self, file_handler):
+        for e in self.get_data():
+            for ele in e:
+                file_handler.write(str(ele))
+            file_handler.write("\n")
+
+    def get_data(self):
+        for timber in self.timbers:
+            yield timber.export()
+
+    def open_file(self, func):
+        file = Path(self.data_folder).absolute() / f"{self.wall_global_info.title}.txt" 
+        with open(file, "w") as f:
+            func(f)

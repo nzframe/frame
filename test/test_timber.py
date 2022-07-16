@@ -1,9 +1,9 @@
 import copy
 import pytest
-from model.timber import Cutted2BY4, distribute_timbers
+from model.timber import Cutted2BY4, distribute_timbers, mmtoft
 from model.direction import Orientation
 from utility.space.cord import XYCoordinate
-
+import model.timber
 
 def test_cutted_timber_default_value():
     door_width = 1830
@@ -50,3 +50,10 @@ def test_distrubute_cripples():
     end_timber.move_right(800)
 
     assert len([i for i in distribute_timbers(start_timber, end_timber, 300)]) == 2
+
+def test_timber_output(mocker):
+    a = Cutted2BY4(27, Orientation.HORIZONTAL)
+    mocker.patch.object(a, "a_cord", XYCoordinate(0,0))
+    mocker.patch.object(a, "b_cord", XYCoordinate(3,0))
+    mocker.patch.object(a, "d_cord", XYCoordinate(0,4))
+    assert a.export() == [(0,0,0), (mmtoft(3), 0, 0), 0, mmtoft(4)]

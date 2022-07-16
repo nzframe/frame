@@ -5,6 +5,9 @@ from model.direction import Orientation
 from utility.space.line import XYLine
 import copy
 
+def mmtoft(length_in_mm):
+    return 0.00328084 * length_in_mm
+
 
 @total_ordering
 class CuttedTimber(XYRectangle):
@@ -56,6 +59,20 @@ class CuttedTimber(XYRectangle):
             return self.d_cord < other.a_cord
         elif self_center.y == other_center.y:
             return self.b_cord < other.a_cord
+
+    def export(self):
+        start_point = self.a_cord
+        end_point = self.b_cord
+        base_offset = self.a_cord.y
+        height = self.d_cord.x - self.a_cord.x if self.d_cord.y == self.a_cord.y else self.d_cord.y - self.a_cord.y
+
+        return [ 
+            (mmtoft(start_point.x), 0, 0), 
+            (mmtoft(end_point.x), 0, 0),
+            mmtoft(base_offset),
+            mmtoft(height)
+        ]
+
 
 class Cutted2BY4(CuttedTimber):
     NAME: str = "TwoByFour"
