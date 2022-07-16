@@ -2,20 +2,19 @@ from application.app import App
 from utility.draw import DrawIT
 
 class DrawAPP(App):
-    def __init__(self, file_path, png_path) -> None:
+    def __init__(self, file_path) -> None:
         super().__init__(file_path)
-        self.td = DrawIT(png_path)
 
-    def draw(self):
+    def draw(self, td: DrawIT):
         for timber in self.timbers:
-            self.td.prepare(timber)
+            td.prepare(timber)
 
-        self.td.draw_it()
+        td.draw_it()
 
-    def execute(self):
+    def execute(self, td):
         super().execute()
         # move first
 
         #draw
-        self.draw()
+        self.draw(td)
         

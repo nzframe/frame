@@ -1,4 +1,5 @@
 from application.app import get_class_dict, get_wall_instance, App
+from pathlib import Path
 
 
 def test_func_params():
@@ -35,3 +36,11 @@ def test_default_app_execute():
     app = App("./config.yml")
     app.execute()
     assert len(app.instances) == 8
+
+def test_path_lib():
+    frame_photo_path = Path(__file__).parent / "frame.png" 
+    assert isinstance(frame_photo_path, Path)
+
+def test_path_to_str_converstion():
+    frame_photo_path = Path(__file__).parent / "frame.png"
+    assert str(frame_photo_path) == frame_photo_path.as_posix()
