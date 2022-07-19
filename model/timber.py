@@ -64,7 +64,7 @@ class CuttedTimber(XYRectangle):
         start_point = self.a_cord
         end_point = self.b_cord
         base_offset = self.a_cord.y
-        height = self.d_cord.x - self.a_cord.x if self.d_cord.y == self.a_cord.y else self.d_cord.y - self.a_cord.y
+        height = self.d_cord.y - self.a_cord.y
 
         return [ 
             (mmtoft(start_point.x), 0, 0), 
