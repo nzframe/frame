@@ -4,11 +4,10 @@ import application.export_app
 
 
 def test_app_init(mocker):
-    app: App = ExportAPP("./config.yml", './test/application/data')
+    app: App = ExportAPP("./config.yml", "./test/application/data")
     mocker.patch(
-        'application.export_app.ExportAPP.get_data', return_value = ["results"]
+        "application.export_app.ExportAPP.get_data",
+        return_value=[[(1, 2, 3), (4, 5, 6), 7, 8], [(1, 2, 3), (4, 5, 6), 7, 8]]
     )
     app.execute()
     assert open("./test/application/data/E1.txt") is not None
-    assert open("./test/application/data/E1.txt").readline() == "results"
-
