@@ -1,21 +1,14 @@
-from application.wall import Wall, WallInfo
 from utility.draw import DrawIT
 
 
-class DrawAPP(Wall):
-    def __init__(self, wall_info: WallInfo, detailed_info, png_path) -> None:
-        super().__init__(wall_info, detailed_info)
+class DrawAPP:
+    def __init__(self, png_path) -> None:
         self.td = DrawIT(png_path)
 
-    def draw(self):
-        for timber in self.timbers:
+    def prepare(self, wall):
+        for timber in wall.timbers:
             self.td.prepare(timber)
 
-        self.td.draw_it()
-
-    def execute(self):
-        super().execute()
-        # move first
-
+    def draw(self):
         # draw
-        self.draw()
+        self.td.draw_it()

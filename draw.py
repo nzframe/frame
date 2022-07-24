@@ -5,6 +5,7 @@ from application.load_config import (
     get_wall_global_info,
     get_wall_detailed_info,
 )
+from application.wall import Wall
 
 
 frame_photo_path = Path(__file__).parent / "frame.png"
@@ -18,8 +19,10 @@ detailed_info = get_wall_detailed_info(config_path, load_config_from_yaml)
 
 
 def main():
-    app = DrawAPP(wall_info, detailed_info, png_path)
-    app.execute()
+    wall = Wall(wall_info, detailed_info)
+    app = DrawAPP(png_path)
+    app.prepare(wall)
+    app.draw()
 
 
 if __name__ == "__main__":
