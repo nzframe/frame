@@ -1,17 +1,10 @@
 from dataclasses import dataclass
-import yaml
 from model.direction import Orientation
 from model.timber import Cutted2BY4
 import copy
 from typing import Callable
 
 CONFIG_LOADING_FUNC = Callable[[str], str]
-
-
-def load_config_from_yaml(file_path: str):
-    with open(file_path, "r") as stream:
-        rt = yaml.safe_load(stream)
-    return rt
 
 
 def get_class_dict():
@@ -48,17 +41,18 @@ class AppInfo:
 
 
 class App:
-    def __init__(self, file_path: str) -> None:
-        self.wall_global_info = self.__get_wall_global_info(
-            file_path, load_config_from_yaml
-        )
-        self.wall_detailed_info = self.__get_wall_detailed_info(
-            file_path, load_config_from_yaml
-        )
+    def __init__(self, file_path: str, load_config: CONFIG_LOADING_FUNC) -> None:
+        self.set_load_config(load_config)
+        self.wall_global_info = self.__get_wall_global_info(file_path)
+        self.wall_detailed_info = self.__get_wall_detailed_info(file_path)
 
         self.instances = []
         self.current_move = 0
         self.timbers = []
+        self.load_config: CONFIG_LOADING_FUNC = None
+
+    def set_load_config(self, load_config: CONFIG_LOADING_FUNC):
+        self.load_config = load_config
 
     def execute(self):
         self.init_each_instance()
@@ -88,16 +82,14 @@ class App:
             config["floor_height"] = self.wall_global_info.floor_height
             self.instances.append(get_wall_instance(type_name, config))
 
-    def __get_wall_global_info(self, file_path: str, load_config: CONFIG_LOADING_FUNC):
-        rt = load_config(file_path)
+    def __get_wall_global_info(self, file_path: str):
+        rt = self.load_config(file_path)
         title = rt["title"]
         floor_height = rt["floor_height"]
         return AppInfo(title, floor_height)
 
-    def __get_wall_detailed_info(
-        self, file_path: str, load_config: CONFIG_LOADING_FUNC
-    ):
-        rt = load_config(file_path)
+    def __get_wall_detailed_info(self, file_path: str):
+        rt = self.load_config(file_path)
         return rt["parts"]
 
     def get_start_point(self):
