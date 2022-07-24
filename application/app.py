@@ -3,35 +3,9 @@ from model.direction import Orientation
 from model.timber import Cutted2BY4
 import copy
 from typing import Callable
+from application.load_config import wall_factory
 
 CONFIG_LOADING_FUNC = Callable[[str], str]
-
-
-def get_class_dict():
-    import importlib
-
-    configs = {
-        "LintelDoor": "model.door",
-        "HeaderDoor": "model.door",
-        "DryDoor": "model.door",
-        "CommonWall": "model.common",
-        "Junction": "model.junction",
-        "Window": "model.window",
-        "LoadPoint": "model.load_point",
-    }
-    class_dict = {}
-    for class_name, module_name in configs.items():
-        class_dict[class_name] = getattr(
-            importlib.import_module(module_name), class_name
-        )
-    return class_dict
-
-
-def get_wall_instance(type_name, args):
-    class_dict = get_class_dict()
-    wall = class_dict[type_name](**args)
-
-    return wall
 
 
 @dataclass
@@ -80,7 +54,7 @@ class App:
         for config in self.wall_detailed_info:
             type_name = config.pop("type")
             config["floor_height"] = self.wall_global_info.floor_height
-            self.instances.append(get_wall_instance(type_name, config))
+            self.instances.append(wall_factory(type_name, config))
 
     def __get_wall_global_info(self, file_path: str):
         rt = self.load_config(file_path)
