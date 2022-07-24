@@ -1,6 +1,6 @@
 from application.draw_app import DrawAPP
 from pathlib import Path
-from application.load_config import (
+from application.wall import (
     load_config_from_yaml,
     get_wall_global_info,
     get_wall_detailed_info,
