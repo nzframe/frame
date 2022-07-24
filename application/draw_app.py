@@ -1,11 +1,10 @@
-from application.wall import Wall
+from application.wall import Wall, WallInfo
 from utility.draw import DrawIT
-from application.load_config import load_config_from_yaml
 
 
 class DrawAPP(Wall):
-    def __init__(self, config_path, png_path) -> None:
-        super().__init__(config_path, load_config_from_yaml)
+    def __init__(self, wall_info: WallInfo, detailed_info, png_path) -> None:
+        super().__init__(wall_info, detailed_info)
         self.td = DrawIT(png_path)
 
     def draw(self):

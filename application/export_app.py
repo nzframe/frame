@@ -1,11 +1,11 @@
 from application.wall import Wall
 from pathlib import Path
-from application.load_config import load_config_from_yaml
+from application.load_config import load_config_from_yaml, WallInfo
 
 
 class ExportAPP(Wall):
-    def __init__(self, config_path, data_folder) -> None:
-        super().__init__(config_path, load_config_from_yaml)
+    def __init__(self, wall_info: WallInfo, detailed_info, data_folder) -> None:
+        super().__init__(wall_info, detailed_info)
         self.data_folder = data_folder
 
     def execute(self):

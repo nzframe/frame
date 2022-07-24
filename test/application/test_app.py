@@ -1,5 +1,7 @@
-from application.wall import get_class_dict, wall_part_factory, Wall
+from application.wall import wall_part_factory, Wall
+from application.load_config import get_class_dict
 from pathlib import Path
+from application.load_config import WallInfo
 
 
 def test_func_params():
@@ -29,7 +31,10 @@ def test_get_wall_instance():
 
 
 def test_app_init():
-    app = Wall("./config.yml")
+    wall_info = WallInfo("E1", 2630)
+    detailed_info = [{"type": "CommonWall", "wall_width": 785}]
+
+    app = Wall(wall_info, detailed_info)
     assert app.wall_global_info.floor_height == 2630
     assert app.wall_global_info.title == "E1"
 
@@ -37,12 +42,6 @@ def test_app_init():
 
     assert app.wall_detailed_info[0]["type"] == "CommonWall"
     assert app.wall_detailed_info[0]["wall_width"] == 785
-
-
-def test_default_app_execute():
-    app = Wall("./config.yml")
-    app.execute()
-    assert len(app.instances) == 8
 
 
 def test_path_lib():

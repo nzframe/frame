@@ -1,32 +1,17 @@
-from dataclasses import dataclass
 from model.direction import Orientation
 from model.timber import Cutted2BY4
 import copy
-from typing import Callable
-from application.load_config import wall_part_factory
-
-CONFIG_LOADING_FUNC = Callable[[str], str]
-
-
-@dataclass
-class WallInfo:
-    title: str
-    floor_height: float
+from application.load_config import wall_part_factory, WallInfo
 
 
 class Wall:
-    def __init__(self, file_path: str, load_config: CONFIG_LOADING_FUNC) -> None:
-        self.set_load_config(load_config)
-        self.wall_global_info = self.__get_wall_global_info(file_path)
-        self.wall_detailed_info = self.__get_wall_detailed_info(file_path)
+    def __init__(self, wall_info: WallInfo, detailed_info) -> None:
+        self.wall_global_info = wall_info
+        self.wall_detailed_info = detailed_info
 
         self.instances = []
         self.current_move = 0
         self.timbers = []
-        self.load_config: CONFIG_LOADING_FUNC = None
-
-    def set_load_config(self, load_config: CONFIG_LOADING_FUNC):
-        self.load_config = load_config
 
     def execute(self):
         self.init_each_instance()
@@ -55,16 +40,6 @@ class Wall:
             type_name = config.pop("type")
             config["floor_height"] = self.wall_global_info.floor_height
             self.instances.append(wall_part_factory(type_name, config))
-
-    def __get_wall_global_info(self, file_path: str):
-        rt = self.load_config(file_path)
-        title = rt["title"]
-        floor_height = rt["floor_height"]
-        return WallInfo(title, floor_height)
-
-    def __get_wall_detailed_info(self, file_path: str):
-        rt = self.load_config(file_path)
-        return rt["parts"]
 
     def get_start_point(self):
         return self.instances[0].get_area.a_cord.x
