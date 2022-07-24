@@ -39,4 +39,4 @@ class ExportAPP:
 
     def prepare(self, wall):
         for timber in wall.timbers:
-            self.rt.append(timber.export())
+            self.rt.append(timber.export_revit())

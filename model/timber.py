@@ -5,13 +5,15 @@ from model.direction import Orientation
 from utility.space.line import XYLine
 import copy
 
+
 def mmtoft(length_in_mm):
     return 0.00328084 * length_in_mm
 
 
 @total_ordering
 class CuttedTimber(XYRectangle):
-    """ cutted timber used to represent the materials used in door, window and retaining studs"""
+    """cutted timber used to represent the materials used in door, window and retaining studs"""
+
     def __init__(self, length: float, orientation: Orientation):
         super().__init__()
         if length < 0:
@@ -30,12 +32,11 @@ class CuttedTimber(XYRectangle):
             cd_line: XYLine = XYLine(self.c_cord, self.d_cord)
             da_line: XYLine = XYLine(self.d_cord, self.a_cord)
 
-
         elif self.orientation == Orientation.HORIZONTAL:
             self.a_cord = XYCoordinate(0, 0)
             self.b_cord = XYCoordinate(self.length, 0)
             self.c_cord = XYCoordinate(self.length, self.HEIGHT)
-            self.d_cord = XYCoordinate(0, self.HEIGHT) 
+            self.d_cord = XYCoordinate(0, self.HEIGHT)
 
             ab_line: XYLine = XYLine(self.a_cord, self.b_cord)
             bc_line: XYLine = XYLine(self.b_cord, self.c_cord)
@@ -44,11 +45,11 @@ class CuttedTimber(XYRectangle):
 
     def __repr__(self) -> str:
         return super().__repr__()
-    
+
     def __lt__(self, other):
         if not hasattr(self, "orientation") or not hasattr(other, "orientation"):
             raise ArithmeticError("Timber can't compare in this space")
-        
+
         if self.orientation != other.orientation:
             raise ArithmeticError("Timber can't compare in this space")
 
@@ -60,17 +61,39 @@ class CuttedTimber(XYRectangle):
         elif self_center.y == other_center.y:
             return self.b_cord < other.a_cord
 
-    def export(self):
+    def export_revit(self):
+        """export creation data in Revit approach
+
+        Returns:
+            _type_: _description_
+        """
         start_point = self.a_cord
         end_point = self.b_cord
         base_offset = self.a_cord.y
         height = self.d_cord.y - self.a_cord.y
 
-        return [ 
-            (mmtoft(start_point.x), 0, 0), 
+        return [
+            (mmtoft(start_point.x), 0, 0),
             (mmtoft(end_point.x), 0, 0),
             mmtoft(base_offset),
-            mmtoft(height)
+            mmtoft(height),
+        ]
+
+    def export_drawing(self):
+        """export creation data in Revit approach
+
+        Returns:
+            _type_: _description_
+        """
+        start_point = self.a_cord
+        end_point = self.b_cord
+        base_offset = self.a_cord.y
+        height = self.d_cord.y - self.a_cord.y
+
+        return [
+            (self.a_cord.x, self.a_cord.y),
+            self.b_cord.x - self.a_cord.x,
+            self.d_cord.y - self.a_cord.y,
         ]
 
 
@@ -79,17 +102,25 @@ class Cutted2BY4(CuttedTimber):
     HEIGHT: float = 45
     WIDTH: float = 90
 
+
 class CuttedLintel(CuttedTimber):
     NAME: str = "Lintel"
     HEIGHT: float = 240
-    WIDTH: float = 90    
+    WIDTH: float = 90
+
 
 class CuttedHeader(CuttedTimber):
     NAME: str = "Header"
     HEIGHT: float = 90
-    WIDTH: float = 90    
+    WIDTH: float = 90
 
-def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap: float, is_blocker: bool = False):
+
+def distribute_timbers(
+    begin_timber: CuttedTimber,
+    end_timber: CuttedTimber,
+    gap: float,
+    is_blocker: bool = False,
+):
     middle_timber = copy.copy(begin_timber)
     while True:
         if is_blocker:
@@ -98,7 +129,6 @@ def distribute_timbers(begin_timber: CuttedTimber, end_timber: CuttedTimber, gap
             middle_timber.move_right(gap)
         else:
             middle_timber.move_up(gap)
-
 
         if middle_timber < end_timber:
             yield middle_timber
