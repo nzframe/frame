@@ -1,12 +1,6 @@
 from application.app import App
 from pathlib import Path
-import yaml
-
-
-def load_config_from_yaml(file_path: str):
-    with open(file_path, "r") as stream:
-        rt = yaml.safe_load(stream)
-    return rt
+from application.load_config import load_config_from_yaml
 
 
 class ExportAPP(App):
