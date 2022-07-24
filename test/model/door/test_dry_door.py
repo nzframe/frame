@@ -4,7 +4,7 @@ from utility.draw.draw_for_test import draw_component
 
 
 def test_draw_dry_door():
-    door = DryDoor(2000, 2170, 2630)
+    door = DryDoor(2630, 2000, 2170)
     door.group()
     from utility.draw import DrawIT
     from pathlib import Path
@@ -14,7 +14,7 @@ def test_draw_dry_door():
     draw_component(td, door)
 
 def test_draw_dry_door_move_right():
-    door = DryDoor(800, 2170, 2630)
+    door = DryDoor(2630, 800, 2170)
     door.group()
     door.move_right(400)
     door.bottom_plate.move_right(400)
@@ -28,4 +28,4 @@ def test_draw_dry_door_move_right():
 
 def test_draw_dry_door_init():
     with pytest.raises(ValueError):
-        door = DryDoor(90, 2170, 2630)
+        door = DryDoor(2630, 90, 2170)

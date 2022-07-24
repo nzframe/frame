@@ -2,7 +2,7 @@ from model.door import LintelDoor
 from utility.draw.draw_for_test import draw_component
 
 def test_draw_lintel_door():
-    door = LintelDoor(1830, 2170, 2630)
+    door = LintelDoor(2630, 1830, 2170)
     door.group()
     from utility.draw import DrawIT
     from pathlib import Path
@@ -12,7 +12,7 @@ def test_draw_lintel_door():
     draw_component(td, door)
 
 def test_draw_lintel_door_move():
-    door = LintelDoor(1830, 2170, 2630)
+    door = LintelDoor(2630, 1830, 2170)
     door.group()
     from utility.draw import DrawIT
     from pathlib import Path

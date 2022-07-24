@@ -114,7 +114,7 @@ def create_window(lintel_height: float, still_height: float, window_width: float
 
 
 class Window(GenericWall):
-    def __init__(self, lintel_height: float, till_height: float, window_width: float, floor_height: float):
+    def __init__(self, floor_height: float, lintel_height: float, till_height: float, window_width: float):
         if window_width <= 90:
             raise ValueError("WindowDoor width must be greater than 91")
         super().__init__()

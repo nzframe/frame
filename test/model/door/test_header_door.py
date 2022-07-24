@@ -5,7 +5,7 @@ import pytest
 
 
 def test_draw_header_door():
-    door = HeaderDoor(930, 2170, 2630)
+    door = HeaderDoor(2630, 930, 2170)
     door.group()
     from utility.draw import DrawIT
     from pathlib import Path
@@ -15,7 +15,7 @@ def test_draw_header_door():
     draw_component(td, door)
 
 def test_draw_header_door_move_right():
-    door = HeaderDoor(930, 2170, 2630)
+    door = HeaderDoor(2630, 930, 2170)
     door.group()
     door.move_right(300)
     door.bottom_plate.move_right(300)
@@ -29,4 +29,4 @@ def test_draw_header_door_move_right():
 
 def test_draw_header_door_init():
     with pytest.raises(ValueError):
-        HeaderDoor(90, 2170, 2630)
+        HeaderDoor(2630, 90, 2170)

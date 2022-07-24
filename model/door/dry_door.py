@@ -62,7 +62,7 @@ class DryDoor(GenericWall):
         ___________
     """ 
 
-    def __init__(self, door_width: float, door_height: float, floor_height: float):
+    def __init__(self, floor_height: float, door_width: float, door_height: float):
         if door_width <= 2 * Cutted2BY4.HEIGHT:
             raise ValueError("Dry Door width must be greater than 91")
         super().__init__()            

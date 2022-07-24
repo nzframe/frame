@@ -4,7 +4,7 @@ import pytest
 
 
 def test_draw_window_door():
-    window = Window(2170, 1095, 1300, 2630)
+    window = Window(2630, 2170, 1095, 1300)
     window.group()
     from utility.draw import DrawIT
     from pathlib import Path
@@ -19,7 +19,7 @@ def test_pairwise():
     assert [(x, y) for x, y in pairwise(a)] == [(1, 2), (2, 3)]
 
 def test_draw_window_door_move_right():
-    window = Window(2170, 1095, 630, 2630)
+    window = Window(2630, 2170, 1095, 630)
     window.group()
     window.move_right(300)
     window.bottom_plate.move_right(300)
@@ -33,4 +33,4 @@ def test_draw_window_door_move_right():
 
 def test_draw_window_door_init_exception():
     with pytest.raises(ValueError):
-        window = Window(2170, 1095, 90, 2630)
+        window = Window(2630, 2170, 1095, 90)
