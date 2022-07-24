@@ -3,7 +3,7 @@ from model.direction import Orientation
 from model.timber import Cutted2BY4
 import copy
 from typing import Callable
-from application.load_config import wall_factory
+from application.load_config import wall_part_factory
 
 CONFIG_LOADING_FUNC = Callable[[str], str]
 
@@ -54,7 +54,7 @@ class App:
         for config in self.wall_detailed_info:
             type_name = config.pop("type")
             config["floor_height"] = self.wall_global_info.floor_height
-            self.instances.append(wall_factory(type_name, config))
+            self.instances.append(wall_part_factory(type_name, config))
 
     def __get_wall_global_info(self, file_path: str):
         rt = self.load_config(file_path)

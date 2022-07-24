@@ -1,4 +1,4 @@
-from application.app import get_class_dict, wall_factory, App
+from application.app import get_class_dict, wall_part_factory, App
 from pathlib import Path
 
 
@@ -24,7 +24,7 @@ def test_function_pass():
 
 def test_get_wall_instance():
     config = {"wall_width": 785, "floor_height": 200}
-    instance = wall_factory("CommonWall", config)
+    instance = wall_part_factory("CommonWall", config)
     assert instance is not None
 
 

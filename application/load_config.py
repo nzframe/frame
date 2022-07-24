@@ -27,7 +27,7 @@ def get_class_dict():
     return class_dict
 
 
-def wall_factory(type_name, args):
+def wall_part_factory(type_name, args):
     class_dict = get_class_dict()
     wall = class_dict[type_name](**args)
 
