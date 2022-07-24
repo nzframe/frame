@@ -9,12 +9,12 @@ CONFIG_LOADING_FUNC = Callable[[str], str]
 
 
 @dataclass
-class AppInfo:
+class WallInfo:
     title: str
     floor_height: float
 
 
-class App:
+class Wall:
     def __init__(self, file_path: str, load_config: CONFIG_LOADING_FUNC) -> None:
         self.set_load_config(load_config)
         self.wall_global_info = self.__get_wall_global_info(file_path)
@@ -60,7 +60,7 @@ class App:
         rt = self.load_config(file_path)
         title = rt["title"]
         floor_height = rt["floor_height"]
-        return AppInfo(title, floor_height)
+        return WallInfo(title, floor_height)
 
     def __get_wall_detailed_info(self, file_path: str):
         rt = self.load_config(file_path)

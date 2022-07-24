@@ -1,4 +1,4 @@
-from application.app import get_class_dict, wall_part_factory, App
+from application.wall import get_class_dict, wall_part_factory, Wall
 from pathlib import Path
 
 
@@ -29,7 +29,7 @@ def test_get_wall_instance():
 
 
 def test_app_init():
-    app = App("./config.yml")
+    app = Wall("./config.yml")
     assert app.wall_global_info.floor_height == 2630
     assert app.wall_global_info.title == "E1"
 
@@ -40,7 +40,7 @@ def test_app_init():
 
 
 def test_default_app_execute():
-    app = App("./config.yml")
+    app = Wall("./config.yml")
     app.execute()
     assert len(app.instances) == 8
 

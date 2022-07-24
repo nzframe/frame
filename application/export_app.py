@@ -1,9 +1,9 @@
-from application.app import App
+from application.wall import Wall
 from pathlib import Path
 from application.load_config import load_config_from_yaml
 
 
-class ExportAPP(App):
+class ExportAPP(Wall):
     def __init__(self, config_path, data_folder) -> None:
         super().__init__(config_path, load_config_from_yaml)
         self.data_folder = data_folder
