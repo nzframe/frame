@@ -1,5 +1,4 @@
 from pathlib import Path
-from application.wall import load_config_from_yaml, WallInfo
 
 
 class ExportAPP:

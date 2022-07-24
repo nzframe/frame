@@ -1,7 +1,7 @@
-from application.wall import wall_part_factory, Wall
-from application.wall import get_class_dict
+from model.wall import wall_part_factory, Wall
+from model.wall import get_class_dict
 from pathlib import Path
-from application.wall import WallInfo
+from model.wall import WallInfo
 
 
 def test_func_params():

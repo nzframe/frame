@@ -1,5 +1,5 @@
 from application.export_app import ExportAPP
-from application.wall import Wall, WallInfo
+from model.wall import Wall, WallInfo
 
 
 def test_app_init(mocker):

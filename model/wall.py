@@ -2,8 +2,6 @@ from model.direction import Orientation
 from model.timber import Cutted2BY4
 import copy
 from dataclasses import dataclass
-from typing import Callable
-import yaml
 
 
 def get_class_dict():
@@ -33,31 +31,10 @@ def wall_part_factory(type_name, args):
     return wall
 
 
-CONFIG_LOADING_FUNC = Callable[[str], str]
-
-
-def load_config_from_yaml(file_path: str):
-    with open(file_path, "r") as stream:
-        rt = yaml.safe_load(stream)
-    return rt
-
-
 @dataclass
 class WallInfo:
     title: str
     floor_height: float
-
-
-def get_wall_global_info(config_path: str, load_config: CONFIG_LOADING_FUNC):
-    rt = load_config(config_path)
-    title = rt["title"]
-    floor_height = rt["floor_height"]
-    return WallInfo(title, floor_height)
-
-
-def get_wall_detailed_info(config_path: str, load_config: CONFIG_LOADING_FUNC):
-    rt = load_config(config_path)
-    return rt["parts"]
 
 
 class Wall:
