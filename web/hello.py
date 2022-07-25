@@ -1,6 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-
+import json
 app = Flask(__name__)
 CORS(app)
 
@@ -11,5 +11,24 @@ def hello_world():
         lines = fd.read().splitlines()
 
     response = jsonify({"data": lines})
-    response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
     return response
+
+
+@app.route("/json", methods=["POST"])
+def hello_json():
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.json
+        return json
+    else:
+        return 'Content-Type not supported!'
+
+@app.route("/wall", methods=["POST"])
+def hello_wall():
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        rt = request.json
+        aDict = json.loads(rt)
+        return aDict[0]["type"]
+    else:
+        return 'Content-Type not supported!'
